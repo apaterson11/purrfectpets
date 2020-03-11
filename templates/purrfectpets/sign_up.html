@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Purrfect Pets - Sign Up</title>
+    </head>
+    
+    <body>
+        {% if registered %}
+            <h3>You're already signed up!</h3>
+            <a href="{% url 'purrfectpets:home' %}">Return to the homepage.</a><br />
+        {% else %}
+            <h3>Welcome New Member! Please enter your account details.</h3>
+            <form id="sign_up_form" method="post" action="{% url 'purrfectpets:sign_up' %}">
+                {% csrf_token %}
+                <br />
+                Username: <input type="text" name="username" value="" size="50" />
+                <br />
+                Email: <input type="email" name="email" value="" size="50" />
+                <br />
+                Password: <input type="password" name="password" value="" size="50" />
+                <br />
+                <input type="submit" value="Sign Up" />
+                <br />
+                OR <br />
+                <a href="#" class="fb btn">
+                  <i class="facebook-login"></i> Sign up with Facebook
+                </a>
+            </form>
+        {% endif %}
+</html>
+
+
+

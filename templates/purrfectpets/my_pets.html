@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Purrfect Pets - My Pets</title>
+    </head>
+        
+            
+    <body>
+        <h3>My Pets</h3>
+        {% if pets %}
+            <table style = "width: 50%">
+                <tr>
+                    <th>Pet Name</th>
+                    <th>Pet Type</th>
+                </tr>
+                {% for p in pets %}
+                    <tr>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.type }}</td>
+                        <td><a href="{% url 'purrfectpets:add_picture' %}">Add Picture</a>
+                    </tr>
+                {% endfor %}
+            </table>
+    </body>
+</html>
+
+
+
