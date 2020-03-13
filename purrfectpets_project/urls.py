@@ -1,13 +1,16 @@
+
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from purrfectpets_project import views
 from django.conf import settings
 
-app_name = 'purrfectpets'
+
+app_name = 'purrfect_pets'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('contact_us/', views.contact_us, name = 'contact_us'),
     path('aboutus/', views.aboutus, name="aboutus"),
     path('popular_pets/', views.popular_pets, name="popular_pets"),
     path('categories/', views.categories, name="categories"),

@@ -15,6 +15,7 @@ Including another URLconf
      path('purrfectpets/', include('purrfectpets.urls')),
 """
 from django.contrib import admin
+<<<<<<< HEAD
 from django.urls import path
 from django.urls import include
 from purrfectpets_project import views
@@ -24,5 +25,15 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name='home'),
     path('purrfectpets/', include('purrfectpets_project.urls')),
+=======
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from purrfect_pets import views
+
+urlpatterns = [
+    path('', views.home, name = 'home'),
+    path('purrfect_pets/', include('purrfect_pets.urls')),
+>>>>>>> 097bf1ff361fc8ba751b2c7dd8ba53b5a376bd11
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Purrfect Pets - My Account</title>
+    </head>
+        
+            
+    <body>
+        <h3>Your Account</h3><br>
+        Username: {{ user.username }}<br>
+        Email: {{ user.email }}<br>
+        Number of Pets: {{ user.numberofpets }}<br>
+        
+        <div class = "button">
+        <a href="{% url 'purrfectpets:my_pets' %}">My Pets</a>
+        </div>
+        
+        <div class = "button">
+        <a href="{% url 'purrfectpets:add_pet' %}">Add Pet</a>
+        </div>
+    </body>
+</html>
+
+
+
