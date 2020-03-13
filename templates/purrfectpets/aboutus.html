@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Purrfect Pets</title>
+        <div>
+            <a href="/purrfectpets/login">Login</a>
+            <a href="/purrfectpets/signUp">New member? Sign Up</a>
+        </div>
+    </head>
+    <body>
+        <h1>Purrfect Pets | About Us</h1>
+        <div>
+            <a href="/purrfectpets/">Home</a>
+            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
+            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
+        </div>
+        <div>
+            <h4>We are a small group of Compsci students who have designed this site to allow pet owners to share their pets with others.</h4>
+        </div>
+    </body>
+    <footer>
+        <div>
+            <a href="/purrfectpets/contact_us">Contact Us</a>
+            <a href="{% url 'purrfectpets:aboutus' %}">About Us</a>
+        </div>
+    </footer>
+</html>
