@@ -2,9 +2,17 @@
 <html>
     <head>
         <title>Purrfect Pets - Sign Up</title>
+        <div>
+            <a href="{% url 'purrfectpets:login' %}">Already have an account? Login</a>
+        </div>
     </head>
     
     <body>
+        <div>
+            <a href="/purrfectpets/">Home</a>
+            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
+            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
+        </div>
         {% if registered %}
             <h3>You're already signed up!</h3>
             <a href="{% url 'purrfectpets:home' %}">Return to the homepage.</a><br />
@@ -27,6 +35,8 @@
                 </a>
             </form>
         {% endif %}
+    </body>
+
 </html>
 
 

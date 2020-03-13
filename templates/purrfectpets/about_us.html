@@ -6,8 +6,8 @@
     <head>
         <title>Purrfect Pets</title>
         <div>
-            <a href="/purrfectpets/login">Login</a>
-            <a href="/purrfectpets/signUp">New member? Sign Up</a>
+            <a href="{% url 'purrfectpets:login' %}">Login</a>
+            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
         </div>
     </head>
     <body>
@@ -23,8 +23,8 @@
     </body>
     <footer>
         <div>
-            <a href="/purrfectpets/contact_us">Contact Us</a>
-            <a href="{% url 'purrfectpets:aboutus' %}">About Us</a>
+            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
+            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
         </div>
     </footer>
 </html>

@@ -2,77 +2,70 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
-from purrfect_pets import Category, Page
-from purrfect_pets import CategoryForm, PageForm
-from purrfect_pets.forms import UserForm, UserProfileForm
+#from purrfectpets_project import Category, Page
+#from purrfectpets_project import CategoryForm, PageForm
+#from purrfectpets_project.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 def home(request):
 	context_dict = {}	
-	context_dict['categories'] = category_list
-	context_dict['pages'] = page_list
-	
-	return render(request, 'purrfect_pets/home.html', context=context_dict)
-
+	#context_dict['categories'] = category_list
+	#context_dict['pages'] = page_list
+	return render(request, 'purrfectpets/home.html', context=context_dict)
 
 def about_us(request):
-	
 	context_dict = {}
-	return render(request, 'purrfect_pets/about_us.html', context=context_dict)
-	
+	return render(request, 'purrfectpets/about_us.html', context=context_dict)
 	
 def contact_us(request):
-	
 	context_dict = {}
-	return render(request, 'purrfect_pets/contact_us.html', context=context_dict)
+	return render(request, 'purrfectpets/contact_us.html', context=context_dict)
 	
 def popular_pets(request):
-	
 	context_dict = {}
-	return render(request, 'purrfect_pets/popular_pets.html', context=context_dict)
+	return render(request, 'purrfectpets/popular_pets.html', context=context_dict)
 	
 def categories(request):
-	
 	context_dict = {}
-	return render(request, 'purrfect_pets/categories.html', context=context_dict)
+	return render(request, 'purrfectpets/categories.html', context=context_dict)
 	
-	
-def dog(request):
-	
+def dogs(request):
 	context_dict = {}
-	return render(request, 'purrfect_pets/categories/dog.html', context=context_dict)
+	return render(request, 'purrfectpets/dogs.html', context=context_dict)
 	
-	
-def cat(request):
-	
+def cats(request):
 	context_dict = {}
-	return render(request, 'purrfect_pets/categories/cat.html', context=context_dict)
+	return render(request, 'purrfectpets/cats.html', context=context_dict)
 	
 def fish(request):
+	context_dict = {}
+	return render(request, 'purrfectpets/fish.html', context=context_dict)
+	
+def rodents(request):
 	
 	context_dict = {}
-	return render(request, 'purrfect_pets/categories/fish.html', context=context_dict)
-	
-def rodent(request):
-	
-	context_dict = {}
-	return render(request, 'purrfect_pets/categories.rodent.html', context=context_dict)
+	return render(request, 'purrfectpets/rodents.html', context=context_dict)
 
 def reptiles(request):
-
     return render(request, 'purrfectpets/reptiles.html')
 	
 def other(request):
-	
 	context_dict = {}
-	return render(request, 'purrfect_pets/categories/other.html', context=context_dict)
+	return render(request, 'purrfectpets/other.html', context=context_dict)
+
+@login_required
+def my_account(request):
+    return render(request, 'purrfectpets/my_account.html')
+
+def my_pets(request):
+    return render(request, 'purrfectpets/my_pets.html')
 	
 
 	
 
-	@login_required
+@login_required
 def pet_page(request, pet_name_slug):
     context_dict = {}
     try:
@@ -82,7 +75,7 @@ def pet_page(request, pet_name_slug):
     except pet.DoesNotExist:
         context_dict['pet'] = None
        
-    return render(request, 'rango/pet_page.html', context = context_dict)
+    return render(request, 'purrfectpets/pet_page.html', context = context_dict)
 
 @login_required	
 def add_category(request):
@@ -99,7 +92,8 @@ def add_category(request):
 	
 	
 @login_required	
-def add_photo(request, pet_name_slug):
+def add_picture(request, pet_name_slug):
+    return  render(request, 'purrfectpets/add_picture.html', {'form': form})
 	
 
 @login_required
@@ -121,12 +115,13 @@ def add_pet(request):
                 pet.category = category
                 pet.awws = 0
                 page.save()
-                return redirect(reverse('purrfect_pets:pet_page', kwargs = {'category_name_slug': category_name_slug}))
+                return redirect(reverse('purrfectpets:pet_page', kwargs = {'category_name_slug': category_name_slug}))
         else:
             print(form.errors)
     context_dict = {'form': form, 'category': category}
-    return render(request, 'purrfect_pets/add_pet.html', context = context_dict)
+    return render(request, 'purrfectpets/add_pet.html', context = context_dict)
 
+"""
 def sign_up(request):
 	registered = False
 	
@@ -150,7 +145,10 @@ def sign_up(request):
 	else:
 		user_form = UserForm()
 		profile_form = UserProfileForm()
-	return render(request, 'purrfect_pets/sign_up.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+	return render(request, 'purrfectpets/sign_up.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+"""
+def sign_up(request):
+    return render(request, 'purrfectpets/sign_up.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -169,14 +167,14 @@ def user_login(request):
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'purrfect_pets/login.html')
+        return render(request, 'purrfectpets/login.html')
 
 @login_required 
 def restricted(request): 
-	return render(request, 'purrfect_pets/restricted.html')
+	return render(request, 'purrfectpets/restricted.html')
 
 @login_required 
 def user_logout(request): 
 	logout(request) 
-	return redirect(reverse('purrfect_pets:home'))
->>>>>>> 097bf1ff361fc8ba751b2c7dd8ba53b5a376bd11
+	return redirect(reverse('purrfectpets/home.html'))
+
