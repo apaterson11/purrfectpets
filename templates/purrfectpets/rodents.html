@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Popular Pets</title>
+        <div>
+            <a href="/purrfectpets/login">Login</a>
+            <a href="/purrffectpets/signUp">New member? Sign Up</a>
+        </div>
+    </head>
+    <body>
+        <h1>Purrfect Pets | Rodents</h1>
+        <h4>Welcome to the Purrfect Rodents page</h4>
+        <div>
+            <a href="/purrfectpets/">Home</a>
+            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
+            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
+        </div>
+        <div>
+            
+        </div>
+    </body>
+    <footer>
+        <div>
+            <a href="/purrfectpets/contact_us">Contact Us</a>
+            <a href="{% url 'purrfectpets:aboutus' %}">About Us</a>
+        </div>
+    </footer>
+</html>

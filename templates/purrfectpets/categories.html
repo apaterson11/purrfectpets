@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Categories</title>
+        <div>
+            <a href="/purrfectpets/login">Login</a>
+            <a href="/purrffectpets/signUp">New member? Sign Up</a>
+        </div>
+    </head>
+    <body>
+        <h1>Purrfect Pets | Categories</h1>
+        <div>
+            <a href="/purrfectpets/">Home</a>
+            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
+            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
+        </div>
+        <div>
+            <table style = "width: 80%">
+                <tr>
+                    <td>
+                        <th><h3><a href="{% url 'purrfectpets:cats' %}">Cats</a></h3></th>
+                        <th><h3><a href="{% url 'purrfectpets:dogs' %}">Dogs</a></h3></th>
+                        <th><h3><a href="{% url 'purrfectpets:fish' %}">Fish</a></h3></th>
+                        <th><h3><a href="{% url 'purrfectpets:reptiles' %}">Reptiles</a></h3></th>
+                        <th><h3><a href="{% url 'purrfectpets:rodents' %}">Rodents</a></h3></th>
+                        <th><h3><a href="{% url 'purrfectpets:other' %}">Other</a></h3></th>
+                    </td>
+                </tr>
+                    <tr>
+                        <img src="/static/images/Cat.jpg" width=400px height=250px alt="Category: Cat">
+                        <img src="/static/images/dog.jpg" width=400px height=250px alt="Category: Dog"/>
+                        <img src="/static/images/Fish.jpeg" width=400px height=250px alt="Category: Fish"/>
+                        <img src="/static/images/Reptile.jpg" width=400px height=250px alt="Category: Reptile"/>
+                        <img src="/static/images/Rodents.jpg" width=400px height=250px alt="Category: Rodents"/>
+                        <img src="/static/images/Tarantula.jpg" width=400px height=250px alt="Category: Other"/>
+                    </tr>
+            </table>
+        </div>
+    </body>
+    <footer>
+        <div>
+            <a href="/purrfectpets/contact_us">Contact Us</a>
+            <a href="{% url 'purrfectpets:aboutus' %}">About Us</a>
+        </div>
+    </footer>
+</html>
