@@ -17,7 +17,7 @@ class General_set_up_test(TestCase):
     """
     def setUp(self):
         self.project_base_dir = os.getcwd()
-        self.app_dir = os.path.join(self.project_base_dir, 'purrfectpets_projects')
+        self.app_dir = os.path.join(self.project_base_dir, 'purrfectpets_project')
     
     def test_project_created(self):
         """
