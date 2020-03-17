@@ -1,31 +1,57 @@
 <!DOCTYPE html> 
 
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Purrfect Pets</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
+
+{% block title_block %}
+    Purrfect Pets
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                     <h2>Most Popular Pets</h2>
+                     <p class="card-text">
+                    {% if categories %}
+                    <ul class="list-group">
+                    {% for category in categories %}
+                        <li class="list-group-item">
+                        <a href="{% url 'rango:show_category' category.slug %}">
+                        {{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    {% else %}
+                    <strong>There are no Pets present.</strong>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
         </div>
-    </head>
-    <body>
-        <h1>Welcome to Purrfect Pets</h1>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
+        <div class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h2>Most Popular Categories</h2>
+                    <p class="card-text">
+                    {% if pages %}
+                    <ul class="list-group">
+                    {% for page in pages %}
+                        <li class="list-group-item">
+                        <a href="{{ page.url }}">{{ page.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    {% else %}
+                    <strong>There are no Categories present.</strong>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
         </div>
-        <div>
-            <strong>Most Popular Pets</strong><br />
-            <strong>Most Popular Categories</strong><br />
-        </div>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
+    </div>
+  </div>
+{% endblock %}

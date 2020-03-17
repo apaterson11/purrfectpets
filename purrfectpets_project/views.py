@@ -13,7 +13,7 @@ def home(request):
 	context_dict = {}	
 	#context_dict['categories'] = category_list
 	#context_dict['pages'] = page_list
-	return render(request, 'purrfectpets/base.html', context=context_dict)
+	return render(request, 'purrfectpets/home.html', context=context_dict)
 
 def about_us(request):
 	context_dict = {}
