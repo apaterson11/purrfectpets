@@ -1,31 +1,17 @@
-<!DOCTYPE html> 
-
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Popular Pets</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
+{% block title_block %}
+	Reptiles
+{% endblock %}
+        
+            
+ {% block body_block %}
     <body>
         <h1>Purrfect Pets | Reptiles</h1>
         <h4>Welcome to the Purrfect Reptiles page</h4>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
+       
         <div>
             
         </div>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
+    {% endblock %}

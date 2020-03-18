@@ -1,22 +1,11 @@
-<!DOCTYPE HTML>
-
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Purrfect Pets - Contact Us</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
-    
-    <body>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
+{% block title_block %}
+	Contact Us
+{% endblock %}
+
+{% block body_block %}
         <h1>Any questions?</h1>
         <h5>Want to get in touch? Feel free to contact any of us using the following details.</h5>
         <h4>Developers</h4>
@@ -29,14 +18,6 @@
         </ul>
         <h4>Our HQ</h4>
         <p>62 West Wallaby Street,<br>Wigan,<br>Lancashire</p>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
-
+    {% endblock %}
 
 

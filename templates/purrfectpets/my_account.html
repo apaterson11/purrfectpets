@@ -1,10 +1,12 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Purrfect Pets - My Account</title>
-    </head>
-          
-    <body>
+{% extends 'purrfectpets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	My Account
+{% endblock %}
+        
+            
+ {% block body_block %}
         <h3>Your Account</h3><br>
         Username: {{ user.username }}<br>
         Email: {{ user.email }}<br>
@@ -17,8 +19,6 @@
         <div class = "button">
         <a href="{% url 'purrfectpets:add_pet' %}">Add Pet</a>
         </div>
-    </body>
-</html>
-
+   {% endblock %}
 
 
