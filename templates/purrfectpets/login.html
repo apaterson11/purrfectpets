@@ -1,17 +1,12 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Purrfect Pets - Sign In</title>
-        <div>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
-    <body>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
+{% extends 'purrfectpets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Login
+{% endblock %}
+        
+            
+ {% block body_block %}
         <h3>Welcome back! Please enter your account details.</h3>
         <form id="login_form" method="post" action="{% url 'purrfectpets:login' %}">
             {% csrf_token %}
@@ -29,8 +24,7 @@
             </a>
         </form>
         <h4>Not a member of Purrfect Pets? Sign up <a href="{% url 'purrfectpets:sign_up' %}">Here</a></h4>
-    </body>
-</html>
+    {% endblock %}
 
 
 
