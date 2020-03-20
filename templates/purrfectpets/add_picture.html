@@ -1,11 +1,11 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Purrfect Pets - Add Picture</title>
-    </head>
-        
-            
-    <body>
+{% extends 'purrfectpets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Add Picture
+{% endblock %}
+              
+    {% block body_block %}
         <h3>Add a Picture</h3>
         <div>
             <form id ="add_picture_form" method="post" action="/login/my_account/{{ pet.slug }}/add_picture">
@@ -22,8 +22,7 @@
                 <input type="submit" name="submit" value="Add Picture" />
             </form>
         </div>
-    </body>
-</html>
+    {% endblock %}
 
 
 

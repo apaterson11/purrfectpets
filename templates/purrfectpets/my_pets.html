@@ -1,11 +1,12 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Purrfect Pets - My Pets</title>
-    </head>
+{% extends 'purrfectpets/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	My Pets
+{% endblock %}
         
             
-    <body>
+ {% block body_block %}
         <h3>My Pets</h3>
         {% if pets %}
             <table style = "width: 50%">
@@ -21,8 +22,7 @@
                     </tr>
                 {% endfor %}
             </table>
-    </body>
-</html>
+	{% endblock %}
 
 
 
