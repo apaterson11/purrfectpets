@@ -1,49 +1,32 @@
 <!DOCTYPE html> 
-
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Categories</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
-    <body>
-        <h1>Purrfect Pets | Categories</h1>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
-        <div>
-            <table style = "width: 80%">
+{% block body_block %}
+
+<title>Purrfect Pets | Categories</title>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <p class="lead font-weight-normal">Purrfect Pets | Categories</p>
+      <a class="btn btn-outline-secondary" href="{% url 'purrfectpets:categories' %}">Categories</a>
+    </div>
+    <div>
+        <table style = "width: 80%">
                 <tr>
-                    <td>
-                        <th><h3><a href="{% url 'purrfectpets:cats' %}">Cats</a></h3></th>
-                        <th><h3><a href="{% url 'purrfectpets:dogs' %}">Dogs</a></h3></th>
-                        <th><h3><a href="{% url 'purrfectpets:fish' %}">Fish</a></h3></th>
-                        <th><h3><a href="{% url 'purrfectpets:reptiles' %}">Reptiles</a></h3></th>
-                        <th><h3><a href="{% url 'purrfectpets:rodents' %}">Rodents</a></h3></th>
-                        <th><h3><a href="{% url 'purrfectpets:other' %}">Other</a></h3></th>
-                    </td>
+                    <a href="{% url 'purrfectpets:cats' %}"><img alt="Category: Cat" src="/static/images/Cat.jpg" width="400" height="250"></a>
+                    <a href="{% url 'purrfectpets:dogs' %}"><img alt="Category: Dog" src="/static/images/dog.jpg" width="400" height="250"></a>
+                    <a href="{% url 'purrfectpets:fish' %}"><img alt="Category: Fish" src="/static/images/Fish.jpeg" width="400" height="250"></a>
+                    <a href="{% url 'purrfectpets:reptiles' %}"><img alt="Category: Reptiles" src="/static/images/Reptile.jpg" width="400" height="250"></a>
+                    <a href="{% url 'purrfectpets:rodents' %}"><img alt="Category: Rodents" src="/static/images/Rodents.jpg" width="400" height="250"></a>
+                    <a href="{% url 'purrfectpets:other' %}"><img alt="Category: Tarantula" src="/static/images/Tarantula.jpg" width="400" height="250"></a>
                 </tr>
-                    <tr>
-                        <img src="/static/images/Cat.jpg" width=400px height=250px alt="Category: Cat">
-                        <img src="/static/images/dog.jpg" width=400px height=250px alt="Category: Dog"/>
-                        <img src="/static/images/Fish.jpeg" width=400px height=250px alt="Category: Fish"/>
-                        <img src="/static/images/Reptile.jpg" width=400px height=250px alt="Category: Reptile"/>
-                        <img src="/static/images/Rodents.jpg" width=400px height=250px alt="Category: Rodents"/>
-                        <img src="/static/images/Tarantula.jpg" width=400px height=250px alt="Category: Other"/>
-                    </tr>
-            </table>
-        </div>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
+        </table>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+  
+<
+
+{% endblock %}

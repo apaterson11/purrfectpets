@@ -1,31 +1,21 @@
 <!DOCTYPE html> 
-
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Popular Pets</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
-    <body>
-        <h1>Purrfect Pets | Other Pets</h1>
-        <h4>Welcome to the Purrfect Pets Other page</h4>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
-        <div>
-            
-        </div>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
+{% block title_block %}
+    <title>Purrfect Pets | Other</title>
+{% endblock %}
+
+{% block body_block %}  
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <p class="lead font-weight-normal"> 
+        <h1>Purrfect Pets | Other</h1>
+        <h4>Welcome to the Puurfect pets Other page</h4>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+
+{% endblock %}

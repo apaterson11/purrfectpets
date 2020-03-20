@@ -1,22 +1,16 @@
 <!DOCTYPE HTML>
-
+{% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Purrfect Pets - Contact Us</title>
-        <div>
-            <a href="{% url 'purrfectpets:login' %}">Login</a>
-            <a href="{% url 'purrfectpets:sign_up' %}">New member? Sign Up</a>
-        </div>
-    </head>
+{% block title_block %}
+    <title>Purrfect Pets - Contact Us</title>
+{% endblock %}
+
+{% block body_block %}  
     
-    <body>
-        <div>
-            <a href="/purrfectpets/">Home</a>
-            <a href="{% url 'purrfectpets:categories' %}">Categories</a>
-            <a href="{% url 'purrfectpets:popular_pets' %}">Popular pets</a>
-        </div>
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <p class="lead font-weight-normal"> 
         <h1>Any questions?</h1>
         <h5>Want to get in touch? Feel free to contact any of us using the following details.</h5>
         <h4>Developers</h4>
@@ -28,15 +22,14 @@
             <li>Henry Speir: 2297552S@student.gla.ac.uk</li>
         </ul>
         <h4>Our HQ</h4>
-        <p>62 West Wallaby Street,<br>Wigan,<br>Lancashire</p>
-    </body>
-    <footer>
-        <div>
-            <a href="{% url 'purrfectpets:contact_us' %}">Contact Us</a>
-            <a href="{% url 'purrfectpets:about_us' %}">About Us</a>
-        </div>
-    </footer>
-</html>
+        <p>62 West Wallaby Street,<br>Wigan,<br>Lancashire</p></p>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+
+{% endblock %}
+   
 
 
 
