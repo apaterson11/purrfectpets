@@ -19,17 +19,19 @@ class Pet(models.Model):
     breed = models.CharField(max_length=MAX_LENGTH)
     bio = models.TextField(max_length=1000)
     
+    views = models.IntegerField
+    
     types = [
         ('DO', 'Dog'),
         ('CA', 'Cat'),
         ('FI', 'Fish'),
         ('RE', 'Reptile'),
         ('RO', 'Rodent'),
-        ('OT', 'Oter'),
+        ('OT', 'Other'),
     ]
     animalType =  models.CharField(max_length=2,choices= types, default = 'OT')
     
-    awwSenders = models.ManyToManyField(UserProfile, related_name="awwSenders",)
+    awwSenders = models.ManyToManyField(UserProfile, related_name="awwSenders",blank = True)
     
     awwCount = models.IntegerField(default=0)
 
