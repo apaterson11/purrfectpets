@@ -3,50 +3,133 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purrfectpets.settings')
 
 import django
 django.setup()
-from purrfectpets_project.models import Dog, Cat, Turtle
+from purrfectpets_project.models import Pet, PetPhoto, Category, Comment
+from django.contrib.auth.models import User
+from random import randint
 
 def populate():
-    python_pages = [
-        {'title':'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/', 'views':500, 'likes':250},
-        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/', 'views':5000, 'likes':2500},
-        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/', 'views':10, 'likes':1}]
+    users = [               #list of users
+        {'user':'Alex', 'email':'apaterson11.ap11@gmail.com', 'password':'password', 'first_name':'Alex', 'last_name':'Paterson'},
+        {'user':'Sarah', 'email':'sarah@gmail.com', 'password':'password', 'first_name':'Sarah', 'last_name':'Paterson'},
+        {'user':'Andrew', 'email':'andrew@gmail.com', 'password':'password', 'first_name':'Andrew', 'last_name':'Paterson'},
+        {'user':'Jake', 'email':'jake@gmail.com', 'password':'password', 'first_name':'Jake', 'last_name':'Paterson'},
+        {'user':'Joe', 'email':'joe@gmail.com', 'password':'password', 'first_name':'Joe', 'last_name':'Paterson'},
+        {'user':'Beth', 'email':'beth@gmail.com', 'password':'password', 'first_name':'Beth', 'last_name':'Langlands'},
+        ]
         
-    django_pages = [
-        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/', 'views':5, 'likes':5},
-        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/', 'views':50, 'likes':49},
-        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/', 'views':50000, 'likes':2500}]
+    for user in users:      #adds users
+        add_user(user['user'], user['email'],  user['password'], user['first_name'], user['last_name'])
         
-    other_pages = [
-        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/', 'views':42, 'likes':10},
-        {'title':'Flask', 'url':'http://flask.pocoo.org', 'views':16, 'likes':10}]
-        
-    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64}, 'Django': {'pages': django_pages, 'views': 64, 'likes': 32}, 'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
+    for user in User.objects.all():         #prints users
+        print(user)
+
+    #lists of dictionaries of animals
+    dogs = [
+        {'animalType':'DO', 'name': 'Alex', 'owner': User.objects.get(username='Beth'), 'breed': 'Shih Tzu', 'awwCount':6, 'bio':'This dog belongs to Bradley Cooper.'},
+        ]
+    cats = [
+        {'animalType':'CA', 'name': 'Henry', 'owner': User.objects.get(username='Joe'), 'breed': 'Tabby', 'awwCount':5, 'bio':'Bad cat.'},
+        ]
+    fish = [
+        {'animalType':'FI', 'name': 'Robert', 'owner': User.objects.get(username='Jake'), 'breed': 'Clown Fish', 'awwCount':4, 'bio':'I cannot find him please help me.'},
+        ]
+    reptiles = [
+        {'animalType':'RE', 'name': 'Anna', 'owner': User.objects.get(username='Andrew'), 'breed': 'Horn tailed firewhizzer', 'awwCount':3, 'bio':'Weird.'},
+        ]
+    rodents = [
+        {'animalType':'RO', 'name': 'Ryan', 'owner': User.objects.get(username='Sarah'), 'breed': 'RAT', 'awwCount':2, 'bio':'What a lovely rat.'},
+        ]
+    other = [
+        {'animalType':'OT', 'name': 'Bird', 'owner': User.objects.get(username='Alex'), 'breed': 'Parakeet', 'awwCount':1, 'bio':'Bird.'},
+        ]
+    
+    #list of categories
+    cats = {'dogs': {'category': dogs, 'views': 128},
+            'cats': {'category': cats, 'views': 64}, 
+            'fish': {'category': fish, 'views': 32},
+            'reptiles': {'category': reptiles, 'views': 1},
+            'rodents': {'category': rodents, 'views': 500},
+            'other': {'category': other, 'views': 0},
+            }
     
     #the code below goes through the cats dictionary, then adds each dictionary and then adds all associated pages for that category
-    for cat, cat_data in cats.items():
-        c = add_cat(cat, cat_data['views'], cat_data['likes'])
-        for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'],  p['views'], ['likes'])
+    
+    for cat, cat_data in cats.items():       
+        c = add_cat(cat, cat_data['views'])      
+        for p in cat_data['category']:
+            add_pet(c, p['animalType'], p['name'], p['owner'], p['breed'], p['awwCount'], p['bio'], users)
             
+
     # print out the categories we have added
     for c in Category.objects.all():
-        for p in Page.objects.filter(category=c):
+        for p in Pet.objects.filter(category=c):
             print(f'- {c}: {p}')
-            
-def add_pet(cat, title, url, views, likes):
-    p = Page.objects.get_or_create(category=cat, title=title)[0]
-    p.url=url
-    p.views=views
-    p.likes=likes
+    
+    #list of comments
+    comments = [
+        {'commentMaker':User.objects.get(username='Alex'), 'commentAbout':Pet.objects.get(name='Alex'), 'timeDate':'2017-02-14', 'comment':'Nice!'},
+        {'commentMaker':User.objects.get(username='Sarah'), 'commentAbout':Pet.objects.get(name='Henry'), 'timeDate':'2020-03-28', 'comment':'Cute dog!'},
+        {'commentMaker':User.objects.get(username='Andrew'), 'commentAbout':Pet.objects.get(name='Anna'), 'timeDate':'2016-02-13', 'comment':'Lovely content thanks for sharing.'},
+        {'commentMaker':User.objects.get(username='Joe'), 'commentAbout':Pet.objects.get(name='Ryan'), 'timeDate':'2020-02-14', 'comment':'WHere am I?'},
+        {'commentMaker':User.objects.get(username='Jake'), 'commentAbout':Pet.objects.get(name='Robert'), 'timeDate':'2020-01-29', 'comment':'AAAAAAAAAAAAAAAAAAAAAAAaa'},
+        {'commentMaker':User.objects.get(username='Beth'), 'commentAbout':Pet.objects.get(name='Bird'), 'timeDate':'2018-02-14', 'comment':'haha thanks very cool'},
+        ]
+        
+    for dict in comments:
+        add_comment(dict['commentMaker'], dict['commentAbout'], dict['timeDate'], dict['comment']) 
+        
+    for comment in Comment.objects.all():
+        print(comment)
+        
+        
+    ###########BROKEN - PET PHOTOS - WTF?####################    
+    #pet_photos = [
+        #{'pet':Pet.objects.get(name='Alex'), 'photo': <img alt="alex" src="/static/images/alex.jpg" width="400" height="250">},
+        #]
+        
+def add_cat(name, views):
+    cat = Category.objects.get_or_create(name=name)[0]
+    cat.views = views
+    cat.save()
+    return cat
+    
+def add_pet(c, animalType, name, owner, breed, awwCount, bio, users):
+    p = Pet.objects.get_or_create(category=c, name=name, owner=owner)[0]
+    p.animalType = animalType
+    p.breed=breed
+    
+    names = [li['user'] for li in users]   
+    for i in range(0, awwCount):
+        sender = User.objects.get(username=names[i])
+        p.awwSenders.add(sender)
+    
+    print(type(owner))
+    p.awwSenders.add(owner)
+    p.awwCount=awwCount
+    p.bio=bio
     p.save()
     return p
     
-def add_picture(name, views, likes):
-    c = Category.objects.get_or_create(name=name)[0]
-    c.views = views
-    c.likes = likes
-    c.save()
-    return c
+def add_pet_photo(pet, photo):
+    p_p = PetPhoto.objects.get_or_create(pet=pet)[0]
+    p_p.photo=photo
+    p_p.save()
+    return p
+    
+def add_comment(commentMaker, commentAbout, timeDate, comment):
+    com = Comment.objects.get_or_create(comment=comment)[0]
+    com.commentMaker=commentMaker
+    com.commentAbout=commentAbout
+    com.timeDate=timeDate
+    com.save()
+    return com
+    
+def add_user(user, email, password, first_name, last_name):
+    u = User.objects.create_user(user, email, password)
+    u.first_name = first_name
+    u.last_name = last_name
+    u.save()
+    return u
     
 if __name__ == '__main__':
     print('Starting Rango population script...')
