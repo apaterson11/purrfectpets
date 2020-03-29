@@ -45,18 +45,18 @@ def populate():
         ]
     
     #list of categories
-    cats = {'dogs': {'category': dogs, 'views': 128},
-            'cats': {'category': cats, 'views': 64}, 
-            'fish': {'category': fish, 'views': 32},
-            'reptiles': {'category': reptiles, 'views': 1},
-            'rodents': {'category': rodents, 'views': 500},
-            'other': {'category': other, 'views': 0},
+    cats = {'dogs': {'category': dogs, 'views': 128, 'animalType':'DO'},
+            'cats': {'category': cats, 'views': 64, 'animalType':'CA'}, 
+            'fish': {'category': fish, 'views': 32, 'animalType':'FI'},
+            'reptiles': {'category': reptiles, 'views': 1, 'animalType':'RE'},
+            'rodents': {'category': rodents, 'views': 500, 'animalType':'RO'},
+            'other': {'category': other, 'views': 0, 'animalType':'OT'},
             }
     
     #the code below goes through the cats dictionary, then adds each dictionary and then adds all associated pages for that category
     
     for cat, cat_data in cats.items():       
-        c = add_cat(cat, cat_data['views'])      
+        c = add_cat(cat, cat_data['views'], cat_data['animalType'])      
         for p in cat_data['category']:
             add_pet(c, p['animalType'], p['name'], p['owner'], p['breed'], p['awwCount'], p['bio'], users)
             
@@ -81,8 +81,16 @@ def populate():
         
     for comment in Comment.objects.all():
         print(comment)
+          
+    #pet_photos = [
+     #   {'pet':Pet.objects.get(name='Alex'), 'img_address': "/static/images/alex.jpg"},
+      #  {'pet':Pet.objects.get(name='Bird'), 'img_address': "/static/images/bird.jpg"},
+    #    {'pet':Pet.objects.get(name='Robert'), 'img_address': "/static/images/robert.jpg"},
+     #   {'pet':Pet.objects.get(name='Ryan'), 'img_address': "/static/images/ryan.jpg"},
+      #  {'pet':Pet.objects.get(name='Henry'), 'img_address': "/static/images/henry.jpg"},
+       # {'pet':Pet.objects.get(name='Anna'), 'img_address': "/static/images/anna.jpg"},
+        #]
         
-           
     pet_photos = [
         {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("WIN_20190605_15_21_54_Pro.jpg",'rb'))},
         {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("WIN_20190605_15_21_46_Pro.jpg",'rb'))},
@@ -92,8 +100,13 @@ def populate():
     for photo in pet_photos:
         add_pet_photo(photo['pet'], photo['photo'])
         
-def add_cat(name, views):
+#def add_cat(name, views):
+    #for item in pet_photos:                                            #NOT WORKING
+    #    add_pet_photo(item['pet'], item['img_address'])
+        
+def add_cat(name, views, animalType):
     cat = Category.objects.get_or_create(name=name)[0]
+    cat.animalType = animalType
     cat.views = views
     cat.save()
     return cat
@@ -108,16 +121,15 @@ def add_pet(c, animalType, name, owner, breed, awwCount, bio, users):
         sender = User.objects.get(username=names[i])
         p.awwSenders.add(sender)
     
-    print(type(owner))
     p.awwSenders.add(owner)
     p.awwCount=awwCount
     p.bio=bio
     p.save()
     return p
     
-def add_pet_photo(pet, photo):
-    p_p = PetPhoto.objects.get_or_create(pet=pet)[0]
-    p_p.photo=photo
+def add_pet_photo(pet, img_address):
+    p_p = PetPhoto.objects.get_or_create(photo=photo)[0]
+    p_p.pet=pet
     p_p.save()
     return p_p
     
