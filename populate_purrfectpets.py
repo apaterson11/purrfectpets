@@ -75,35 +75,34 @@ def populate():
         {'commentMaker':User.objects.get(username='Jake'), 'commentAbout':Pet.objects.get(name='Robert'), 'timeDate':'2020-01-29', 'comment':'AAAAAAAAAAAAAAAAAAAAAAAaa'},
         {'commentMaker':User.objects.get(username='Beth'), 'commentAbout':Pet.objects.get(name='Bird'), 'timeDate':'2018-02-14', 'comment':'haha thanks very cool'},
         ]
-        
+    
+    #adds all comments
     for dict in comments:
         add_comment(dict['commentMaker'], dict['commentAbout'], dict['timeDate'], dict['comment']) 
-        
+    
+    #prints all comments
     for comment in Comment.objects.all():
         print(comment)
-          
-    #pet_photos = [
-     #   {'pet':Pet.objects.get(name='Alex'), 'img_address': "/static/images/alex.jpg"},
-      #  {'pet':Pet.objects.get(name='Bird'), 'img_address': "/static/images/bird.jpg"},
-    #    {'pet':Pet.objects.get(name='Robert'), 'img_address': "/static/images/robert.jpg"},
-     #   {'pet':Pet.objects.get(name='Ryan'), 'img_address': "/static/images/ryan.jpg"},
-      #  {'pet':Pet.objects.get(name='Henry'), 'img_address': "/static/images/henry.jpg"},
-       # {'pet':Pet.objects.get(name='Anna'), 'img_address': "/static/images/anna.jpg"},
-        #]
-        
+    
+    #creates pet photo objects
     pet_photos = [
-        {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("WIN_20190605_15_21_54_Pro.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("WIN_20190605_15_21_46_Pro.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("WIN_20180325_09_48_36_Pro.jpg",'rb'))}
+        {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("received_629499717852434.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("Snapchat-4381385.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-9130677.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-32105991.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-50224335.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-59374287.jpg",'rb'))},
         ]
     
+    #adds all pet photos
     for photo in pet_photos:
         add_pet_photo(photo['pet'], photo['photo'])
         
-#def add_cat(name, views):
-    #for item in pet_photos:                                            #NOT WORKING
-    #    add_pet_photo(item['pet'], item['img_address'])
+    #prints all photos
+    for photo in PetPhoto.objects.all():
+        print(photo)
         
+#method that adds categories
 def add_cat(name, views, animalType):
     cat = Category.objects.get_or_create(name=name)[0]
     cat.animalType = animalType
@@ -111,12 +110,13 @@ def add_cat(name, views, animalType):
     cat.save()
     return cat
     
+#method that adds pets
 def add_pet(c, animalType, name, owner, breed, awwCount, bio, users):
     p = Pet.objects.get_or_create(category=c, name=name, owner=owner)[0]
     p.animalType = animalType
     p.breed=breed
     
-    names = [li['user'] for li in users]   
+    names = [li['user'] for li in users]                          #iterates through users and makes them awwSenders depending on awwCount
     for i in range(0, awwCount):
         sender = User.objects.get(username=names[i])
         p.awwSenders.add(sender)
@@ -127,12 +127,14 @@ def add_pet(c, animalType, name, owner, breed, awwCount, bio, users):
     p.save()
     return p
     
-def add_pet_photo(pet, img_address):
+#method that adds pet photos
+def add_pet_photo(pet, photo):
     p_p = PetPhoto.objects.get_or_create(photo=photo)[0]
     p_p.pet=pet
     p_p.save()
     return p_p
-    
+   
+#method that adds comments
 def add_comment(commentMaker, commentAbout, timeDate, comment):
     com = Comment.objects.get_or_create(comment=comment)[0]
     com.commentMaker=commentMaker
@@ -140,7 +142,8 @@ def add_comment(commentMaker, commentAbout, timeDate, comment):
     com.timeDate=timeDate 
     com.save()
     return com
-    
+ 
+#method that adds users 
 def add_user(user, email, password, first_name, last_name):
     u = User.objects.create_user(user, email, password)
     u.first_name = first_name
