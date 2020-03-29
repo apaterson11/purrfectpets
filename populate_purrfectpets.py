@@ -6,6 +6,7 @@ django.setup()
 from purrfectpets_project.models import Pet, PetPhoto, Category, Comment
 from django.contrib.auth.models import User
 from random import randint
+from django.core.files import File
 
 def populate():
     users = [               #list of users
@@ -81,11 +82,15 @@ def populate():
     for comment in Comment.objects.all():
         print(comment)
         
-        
-    ###########BROKEN - PET PHOTOS - WTF?####################    
-    #pet_photos = [
-        #{'pet':Pet.objects.get(name='Alex'), 'photo': <img alt="alex" src="/static/images/alex.jpg" width="400" height="250">},
-        #]
+           
+    pet_photos = [
+        {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("WIN_20190605_15_21_54_Pro.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("WIN_20190605_15_21_46_Pro.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("WIN_20180325_09_48_36_Pro.jpg",'rb'))}
+        ]
+    
+    for photo in pet_photos:
+        add_pet_photo(photo['pet'], photo['photo'])
         
 def add_cat(name, views):
     cat = Category.objects.get_or_create(name=name)[0]
@@ -114,13 +119,13 @@ def add_pet_photo(pet, photo):
     p_p = PetPhoto.objects.get_or_create(pet=pet)[0]
     p_p.photo=photo
     p_p.save()
-    return p
+    return p_p
     
 def add_comment(commentMaker, commentAbout, timeDate, comment):
     com = Comment.objects.get_or_create(comment=comment)[0]
     com.commentMaker=commentMaker
     com.commentAbout=commentAbout
-    com.timeDate=timeDate
+    com.timeDate=timeDate 
     com.save()
     return com
     

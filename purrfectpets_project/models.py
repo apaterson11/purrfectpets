@@ -69,8 +69,8 @@ class Pet(models.Model):
 class PetPhoto(models.Model):
 
     pet = models.ForeignKey(Pet, on_delete = models.CASCADE, related_name="pet", parent_link = True)
-
-    photo = models.ImageField()
+    
+    photo = models.ImageField(upload_to = 'uploads/')
 
 
 class Comment(models.Model):

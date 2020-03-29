@@ -107,11 +107,11 @@
           
           {% if user.is_authenticated %}
              
-            <li><a href="{% url 'purrfectpets_project:my_account'%}"><span class="glyphicon glyphicon-user"></span>My Account  |</a></li>
+            <li><a href="{% url 'purrfectpets_project:my_account'%}"><span class="glyphicon glyphicon-user"></span>My Account  |  </a></li>
             <li><a  href="{% url 'purrfectpets_project:logout' %}"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
            
           {% else%} 
-            <li><a  href="{% url 'purrfectpets_project:login' %}"><span class="glyphicon glyphicon-user"></span>Login  |</a></li>
+            <li><a  href="{% url 'purrfectpets_project:login' %}"><span class="glyphicon glyphicon-user"></span>Login  |   </a></li>
             <li><a  href="{% url 'purrfectpets_project:sign_up' %}"><span class="glyphicon glyphicon-log-in"></span>  New member? Sign Up</a></li>
           {% endif %}
           
