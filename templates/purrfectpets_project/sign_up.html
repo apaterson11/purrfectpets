@@ -1,4 +1,4 @@
-{% extends 'purrfectpets/base.html' %}
+{% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -9,11 +9,12 @@
  {% block body_block %}
         {% if registered %}
             <h3>You're already signed up!</h3>
-            <a href="{% url 'purrfectpets:home' %}">Return to the homepage.</a><br />
+            <a href="{% url 'purrfectpets_project:home' %}">Return to the homepage.</a><br />
         {% else %}
             <h3>Welcome New Member! Please enter your account details.</h3>
-            <form id="sign_up_form" method="post" action="{% url 'purrfectpets:sign_up' %}">
+            <form id="sign_up_form" method="post" action="{% url 'purrfectpets_project:sign_up' %}">
                 {% csrf_token %}
+                
                 <br />
                 Username: <input type="text" name="username" value="" size="50" />
                 <br />

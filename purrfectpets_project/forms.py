@@ -3,11 +3,11 @@ from purrfectpets_project.models import Pet, Comment, UserProfile
 from django.contrib.auth.models import User
 
 class PetForm(forms.ModelForm):
-    owner = forms.ForeignKey(widget=forms.HiddenInput(), intial=owner)
+    #owner = forms.ForeignKey(widget=forms.HiddenInput(), intial=owner)
     name = forms.CharField(max_length=Pet.MAX_LENGTH, help_text="Please enter your pet's name.")
     animalType = forms.CharField(max_length=Pet.MAX_LENGTH, help_text="Please enter the type of animal your pet is.")
     breed = forms.CharField(max_length=Pet.MAX_LENGTH, help_text="Please enter the breed of your pet.")
-    bio = forms.TextField(max_length=1000, help_text="Tell us about your pet!")
+    #bio = forms.TextField(max_length=1000, help_text="Tell us about your pet!")
     photos = []
     
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -29,10 +29,10 @@ class PetForm(forms.ModelForm):
         fields = ('owner','name','animalType','breed','bio',)
         
 class CommentForm(forms.ModelForm):
-    commentMaker = forms.ForeignKey(widget=forms.HiddenInput())           #don't know what to put here?
-    commentAbout = forms.ForeignKey(widget=forms.HiddenInput())
+    #commentMaker = forms.ForeignKey(widget=forms.HiddenInput())           #don't know what to put here?
+    #commentAbout = forms.ForeignKey(widget=forms.HiddenInput())
     timeDate = forms.DateTimeField(widget=forms.HiddenInput())
-    comment = forms.TextField(max_length=1000, help_text="What do you think?")
+    #comment = forms.TextField(max_length=1000, help_text="What do you think?")
         
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
