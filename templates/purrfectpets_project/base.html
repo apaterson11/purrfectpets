@@ -100,7 +100,7 @@
 <body>
 
   <!-- links to other templates -->
-
+  
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
   
@@ -121,8 +121,8 @@
             <li><a  href="{% url 'purrfectpets_project:logout' %}"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
            
           {% else%} 
-            <li><a  href="{% url 'purrfectpets_project:login' %}"><span class="glyphicon glyphicon-user"></span>Login  |   </a></li>
-            <li><a  href="{% url 'purrfectpets_project:sign_up' %}"><span class="glyphicon glyphicon-log-in"></span>  New member? Sign Up</a></li>
+            <li><a  href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-user"></span>Login  |   </a></li>
+            <li><a  href="{% url 'registration_register' %}"><span class="glyphicon glyphicon-log-in"></span>  New member? Sign Up</a></li>
           {% endif %}
           
           
