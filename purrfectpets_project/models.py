@@ -5,10 +5,8 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    NAME_MAX_LENGTH = 128
-    name = models.CharField(max_length=NAME_MAX_LENGTH)
     views = models.IntegerField(default=0)
-    slug = models.SlugField()
+    slug = models.SlugField(blank = True)
     
     types = [
         ('DO', 'Dog'),
@@ -19,28 +17,24 @@ class Category(models.Model):
         ('OT', 'Other'),
     ]
     
-    animalType = models.CharField(max_length=2, choices=types, default = 'OT')
+    animalType = models.CharField(max_length=2, choices=types, primary_key = True, default = 'OT')
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.animalType)
+        for t in self.types:
+            if t[0] == self.animalType:
+                name = t[1]
+        self.slug = slugify(name)
         super(Category, self).save(*args, **kwargs)
     
     class Meta:
         verbose_name_plural = 'Categories'
     
     def __str__(self):
-        return self.name
+        return self.slug
         
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)     #line is required, links UserProfile to a User model instance
-    
-    email = models.CharField(unique=True,max_length=128, null=True)
-    
-    def __str__(self):
-        return self.user.username
  
 class Pet(models.Model):            
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default='', null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default='OT', null=True)
     MAX_LENGTH = 128
     owner = models.ForeignKey(User,on_delete=models.CASCADE, related_name="owner", null=True)
     name = models.CharField(max_length=MAX_LENGTH, null=True)
@@ -48,16 +42,6 @@ class Pet(models.Model):
     bio = models.TextField(max_length=1000, null=True)
     
     views = models.IntegerField
-    
-    types = [
-        ('DO', 'Dog'),
-        ('CA', 'Cat'),
-        ('FI', 'Fish'),
-        ('RE', 'Reptile'),
-        ('RO', 'Rodent'),
-        ('OT', 'Other'),
-    ]
-    animalType =  models.CharField(max_length=2, choices=types, default = 'OT')
     
     awwSenders = models.ManyToManyField(User, related_name="awwSenders",blank = True)
     

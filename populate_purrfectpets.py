@@ -56,9 +56,9 @@ def populate():
     #the code below goes through the cats dictionary, then adds each dictionary and then adds all associated pages for that category
     
     for cat, cat_data in cats.items():       
-        c = add_cat(cat, cat_data['views'], cat_data['animalType'])      
+        c = add_cat(cat_data['views'], cat_data['animalType'])      
         for p in cat_data['category']:
-            add_pet(c, p['animalType'], p['name'], p['owner'], p['breed'], p['awwCount'], p['bio'], users)
+            add_pet(c, p['name'], p['owner'], p['breed'], p['awwCount'], p['bio'], users)
             
 
     # print out the categories we have added
@@ -85,35 +85,33 @@ def populate():
         print(comment)
     
     #creates pet photo objects
-    pet_photos = [
-        {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("received_629499717852434.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("Snapchat-4381385.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-9130677.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-32105991.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-50224335.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-59374287.jpg",'rb'))},
-        ]
+   # pet_photos = [
+    #    {'pet':Pet.objects.get(name='Alex'), 'photo': File(open("received_629499717852434.jpg",'rb'))},
+     #   {'pet':Pet.objects.get(name='Henry'), 'photo': File(open("Snapchat-4381385.jpg",'rb'))},
+      #  {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-9130677.jpg",'rb'))},
+       # {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-32105991.jpg",'rb'))},
+       # {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-50224335.jpg",'rb'))},
+       # {'pet':Pet.objects.get(name='Ryan'), 'photo': File(open("Snapchat-59374287.jpg",'rb'))},
+       # ]
     
     #adds all pet photos
-    for photo in pet_photos:
-        add_pet_photo(photo['pet'], photo['photo'])
+  #  for photo in pet_photos:
+   #     add_pet_photo(photo['pet'], photo['photo'])
         
     #prints all photos
-    for photo in PetPhoto.objects.all():
-        print(photo)
+   # for photo in PetPhoto.objects.all():
+    #    print(photo)
         
 #method that adds categories
-def add_cat(name, views, animalType):
-    cat = Category.objects.get_or_create(name=name)[0]
-    cat.animalType = animalType
+def add_cat(views, animalType):
+    cat = Category.objects.get_or_create(animalType=animalType)[0]
     cat.views = views
     cat.save()
     return cat
     
 #method that adds pets
-def add_pet(c, animalType, name, owner, breed, awwCount, bio, users):
+def add_pet(c,  name, owner, breed, awwCount, bio, users):
     p = Pet.objects.get_or_create(category=c, name=name, owner=owner)[0]
-    p.animalType = animalType
     p.breed=breed
     
     names = [li['user'] for li in users]                          #iterates through users and makes them awwSenders depending on awwCount
