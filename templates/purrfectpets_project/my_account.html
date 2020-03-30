@@ -4,21 +4,29 @@
 {% block title_block %}
 	My Account
 {% endblock %}
-        
-            
+<style>   
+.body {
+     background:#e6e6e6  ;
+     color: #0000;
+     min-height: 100vh;
+   }
+</style> 
  {% block body_block %}
-        <h3>Your Account</h3><br>
-        Username: {{ user.username }}<br>
-        Email: {{ user.email }}<br>
-        Number of Pets: {{ user.numberofpets }}<br>
-        
-        <div class = "button">
-        <a href="{% url 'purrfectpets_project:my_pets' %}">My Pets</a>
-        </div>
-        
-        <div class = "button">
-        <a href="{% url 'purrfectpets_project:add_pet' %}">Add Pet</a>
-        </div>
+     <h3>My Account</h3><br>
+     <div class="container">
+          <div class="center">
+               <h1>My Account</h1>
+               <div class="card" style="width:400px">
+                    <img class="card-img-top" src="/static/images/PurrfectPets Logo.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                    <h4 class="card-title">Username: {{ user.username }}<br></h4>
+                    <p class="card-text">Email: {{ user.email }}<br></p>
+                    <p class="card-text">Number of Pets: {{ user.numberofpets }}<br><br></p>
+                    <a href="{% url 'purrfectpets_project:my_pets' %}" class="btn btn-primary">My Pets</a>
+                    <a href="{% url 'purrfectpets_project:add_pet' %}" class="btn btn-primary">Add Pet</a>
+               </div>
+          </div> 
+     </div>
    {% endblock %}
 
 
