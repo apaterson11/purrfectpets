@@ -2,13 +2,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-from purrfectpets_project import Category, Page, Pet, PetPhoto, Comment
-from purrfectpets_project import CategoryForm, PageForm
 from purrfectpets_project.forms import UserForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from purrfectpets_project.models import Post, Category
+from .models import Post, Category, Category, Pet, PetPhoto, Comment
 from django.views import generic
 from .forms import CommentForm
 
