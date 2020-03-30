@@ -25,7 +25,11 @@ class Category(models.Model):
         for t in self.types:
             if t[0] == self.animalType:
                 name = t[1]
-        self.slug = slugify(name)
+        print(name)
+        if name == 'fish' or name == 'other':
+            self.slug = slugify(name)
+        else:
+            self.slug = slugify(name + 's')
         super(Category, self).save(*args, **kwargs)
     
     class Meta:
@@ -113,8 +117,8 @@ class Post(models.Model):
     """
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    user = models.CharField(max_length=250)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", null=True)
     email = models.EmailField()
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -124,7 +128,7 @@ class Comment(models.Model):
         self.approved = True
         self.save()
 
-    def __str__(self):
-        return self.user
+    #def __str__(self):             #cannot return as User must be a User object
+        #return self.user
 
     

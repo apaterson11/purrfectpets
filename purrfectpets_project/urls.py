@@ -15,6 +15,7 @@ urlpatterns = [
     path('about_us/', views.about_us, name="about_us"),
     path('popular_pets/', views.popular_pets, name="popular_pets"),
     path('categories/', views.categories, name="categories"),
+    #path('category/<slug:category_name_slug>/',views.show_category, name='show_category'),
     path('dogs/', views.dogs, name="dogs"),
     path('cats/', views.cats, name="cats"),
     path('fish/', views.fish, name="fish"),

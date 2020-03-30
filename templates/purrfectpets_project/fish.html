@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-{% extends 'purrfectpets/base.html' %}
+{% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -13,6 +13,19 @@
       <p class="lead font-weight-normal"> 
         <h1>Purrfect Pets | Fish</h1>
         <h4>Welcome to the Puurfect Fish page</h4>
+        
+        {% if pets %}
+        <ul class="list-group">
+        {% for pet in pets %}
+            <li class="list-group-item">
+            <a href="{{ pet.url }}">{{ pet.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no pets up yet! Post some yourself!</strong>
+        {% endif %}
+    
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>

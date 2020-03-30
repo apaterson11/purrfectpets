@@ -12,10 +12,12 @@ from .forms import CommentForm
 
 
 def home(request):
-	context_dict = {}	
-	#context_dict['categories'] = category_list
-	#context_dict['pages'] = page_list
-	return render(request, 'purrfectpets_project/home.html', context=context_dict)
+    context_dict = {}	
+    category_list = Category.objects.order_by('-views')[:3]
+    pet_list = Pet.objects.order_by('-awwCount')[:3]
+    context_dict['categories'] = category_list
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/home.html', context=context_dict)
 
 def about_us(request):
 	context_dict = {}
@@ -35,28 +37,46 @@ def categories(request):
 	return render(request, 'purrfectpets_project/categories.html', context=context_dict)
 	
 def dogs(request):
-	context_dict = {}
-	return render(request, 'purrfectpets_project/dogs.html', context=context_dict)
+    context_dict = {}
+    category = Category.objects.get(animalType='DO')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/dogs.html', context=context_dict)
 	
 def cats(request):
-	context_dict = {}
-	return render(request, 'purrfectpets_project/cats.html', context=context_dict)
+    context_dict = {}
+    category = Category.objects.get(animalType='CA')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/cats.html', context=context_dict)
 	
 def fish(request):
-	context_dict = {}
-	return render(request, 'purrfectpets_project/fish.html', context=context_dict)
+    context_dict = {}
+    category = Category.objects.get(animalType='FI')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/fish.html', context=context_dict)
 	
 def rodents(request):
-	
-	context_dict = {}
-	return render(request, 'purrfectpets_project/rodents.html', context=context_dict)
+    context_dict = {}
+    category = Category.objects.get(animalType='RO')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/rodents.html', context=context_dict)
 
 def reptiles(request):
-    return render(request, 'purrfectpets_project/reptiles.html')
+    context_dict = {}
+    category = Category.objects.get(animalType='RE')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/reptiles.html', context=context_dict)
 	
 def other(request):
-	context_dict = {}
-	return render(request, 'purrfectpets_project/other.html', context=context_dict)
+    context_dict = {}
+    category = Category.objects.get(animalType='OT')
+    pet_list = Pet.objects.filter(category=category)
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/other.html', context=context_dict)
 
 @login_required
 def my_account(request):
@@ -111,6 +131,21 @@ def add_pet(request):
     context_dict = {'form': form, 'category': category}
     return render(request, 'purrfectpets/add_pet.html', context = context_dict)
 
+def show_category(request, category_name_slug):
+    context_dict = {} #create a context dictionary whch we can pass to the template rendering engine
+    try: #attempt to find a category name slug with the given name
+        category = Category.objects.get(slug=category_name_slug)
+        
+        pets = Pet.objects.filter(category=category)  #retrieve all associated pages, filter() will return a list of page objects or an empty list
+        
+        context_dict['pets'] = pets  #add results list to template context under pages
+        context_dict['category'] = category     #and under category
+    
+    except Category.DoesNotExist: #if try fails, display no category message
+        context_dict['category'] = None
+        context_dict['pets'] = None
+    
+    return render(request, 'purrfectpets_project/categories.html', context=context_dict)
 
 def sign_up(request):
 	registered = False
