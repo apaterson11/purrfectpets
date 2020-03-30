@@ -6,7 +6,7 @@ from purrfectpets_project.forms import UserForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from .models import Post, Category, Category, Pet, PetPhoto, Comment
+from .models import Post, Category, Pet, PetPhoto, Comment
 from django.views import generic
 from .forms import CommentForm
 
@@ -139,7 +139,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('purrfectpets_project:home'))
+                return redirect(reverse('purrfectpets_project:my_account'))
             else:
                 return HttpResponse("Your Purrfect Pets account is disabled.")
         else:
