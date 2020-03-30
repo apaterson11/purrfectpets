@@ -16,6 +16,21 @@
       <p class="lead font-weight-normal"> 
         <h1>Purrfect Pets | Dogs</h1>
         <h4>Welcome to the Puurfect dogs page</h4>
+
+        
+
+        <form method='POST'>
+          {% csrf_token %}
+          {{ form.as_P}}
+          {% for field in form.visible_fields %}
+              {{ field.errors }}
+              {{ field.help_text }}
+              {{ field }}
+          {% endfor %}
+        <input type="submit" name="submit" value="submit comment" />
+        </form>
+
+        
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>

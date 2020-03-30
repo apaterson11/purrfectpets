@@ -14,19 +14,14 @@
       <a class="btn btn-outline-secondary" href="{% url 'purrfectpets:categories' %}">Categories</a>
     </div>
     <div>
-        <img src="/static/images/Cat.jpg" width=400px height=250px alt="Category: Cat"/>
-        <img src="/static/images/dog.jpg" width=400px height=250px alt="Category: Dog"/>
-        <img src="/static/images/Fish.jpeg" width=400px height=250px alt="Category: Fish"/>
-        <a href="{% url 'purrfectpets:list_of_post' %}">List of Post</a>
 
+        <h1>Add new comment</h1>
+        <form method='POST'>
+            {% csrf token %}
+            {{ form.as_P}}
+            <button type='submit'>Submit</button>
+        </form>
 
-        {% for posts in post %}
-          {{ posts.title }}
-          {{ posts.content}}
-          {{ posts.body}}
-          <p>Written by {{posts.author}} on {{posts.published}}</p>
-        {% endfor %}
-        
 
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
@@ -35,5 +30,3 @@
   
 
 {% endblock %}
-
-

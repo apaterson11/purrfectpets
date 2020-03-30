@@ -60,7 +60,7 @@
 
       body {
         background:#e6e6e6  ;
-        color: #e600e6;
+        color: #cc00cc;
         min-height: 100vh;
       }
 
@@ -74,13 +74,23 @@
         color: #bfbfbf;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+      img {
+        padding:1px;
+        border:1px solid #021a40;
+      }
+      
+        .zoom:hover {
+          transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 
 
-      }
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+
+
+        }
     </style>
 
     <!-- Custom styles for this template -->
@@ -90,24 +100,36 @@
 
 <body>
 
-      <!-- links to other templates -->
+  <!-- links to other templates -->
 
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-  
-            <!-- Logo Image -->
-            <img src="/static/images/Purrfect Pets.png" width="45" alt="Purrfect Pets" >
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+
+        <!-- Logo Image -->
+        
+
+  <a href="{% url 'purrfectpets_project:home' %}"><img alt="Purrfect Pets" src="/static/images/PurrfectPets.png" width="45" ></a>
+
+      <a class="py-3 d-none d-md-inline-block" href="/purrfectpets_project/">Home</a>
+      <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets_project:categories' %}">Categories</a>
+      <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets_project:popular_pets' %}">Popular Pets</a>
       
-          <a class="py-3 d-none d-md-inline-block" href="/purrfectpets/">Home</a>
-          <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets:categories' %}">Categories</a>
-          <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets:popular_pets' %}">Popular Pets</a>
-          
-          <ul class="nav navbar-nav navbar-right">
-            <li><a  href="{% url 'purrfectpets:login' %}"><span class="glyphicon glyphicon-user"></span>Login  |</a></li>
-            <li><a  href="{% url 'purrfectpets:sign_up' %}"><span class="glyphicon glyphicon-log-in"></span>  New member? Sign Up</a></li>
-          </ul>
-        </div>
-      </nav>
+      <ul class="nav navbar-nav navbar-right">
+      
+      {% if user.is_authenticated %}
+        
+        <li><a href="{% url 'purrfectpets_project:my_account'%}"><span class="glyphicon glyphicon-user"></span>My Account  |  </a></li>
+        <li><a  href="{% url 'purrfectpets_project:logout' %}"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
+      
+      {% else%} 
+        <li><a  href="{% url 'purrfectpets_project:login' %}"><span class="glyphicon glyphicon-user"></span>Login  |   </a></li>
+        <li><a  href="{% url 'purrfectpets_project:sign_up' %}"><span class="glyphicon glyphicon-log-in"></span>  New member? Sign Up</a></li>
+      {% endif %}
+      
+      
+      </ul>
+    </div>
+  </nav>
 
       
  
@@ -117,21 +139,21 @@
   {% block body_block %}{% endblock %}
 
 
-<footer class="container py-5">
+  <footer class="container py-5">
     <div class="row">
       <div class="col-12 col-md">
   
           <!-- Logo Image -->
-          <img src="/static/images/Purrfect Pets.png" width="45" alt="" >
+          <img src="/static/images/PurrfectPets.png" width="45" alt="" >
           <!-- Logo Text -->
           <span class="text-uppercase font-weight-bold">Purrfect Pets</span>
 
       </div>
       <div class="col-6 col-md">
-        <a class="text-muted" href="{% url 'purrfectpets:contact_us' %}"><h5>Contact Us</h5></a>
+        <a class="text-muted" href="{% url 'purrfectpets_project:contact_us' %}"><h5>Contact Us</h5></a>
       </div>
       <div class="col-6 col-md">
-        <a class="text-muted" href="{% url 'purrfectpets:about_us' %}"><h5>About Us</h5></a>
+        <a class="text-muted" href="{% url 'purrfectpets_project:about_us' %}"><h5>About Us</h5></a>
       </div>
     </div>
 </footer>
