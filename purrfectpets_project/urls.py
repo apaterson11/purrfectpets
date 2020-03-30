@@ -21,8 +21,8 @@ urlpatterns = [
     path('reptiles/', views.reptiles, name="reptiles"),
     path('rodents/', views.rodents, name="rodents"),
     path('other/', views.other, name="other"),
-    path('sign_up/', views.sign_up, name='sign_up'), 
-	path('login/', views.user_login, name='login'),
+    #path('sign_up/', views.sign_up, name='sign_up'), 
+	#path('login/', views.user_login, name='login'),
 	path('my_account/', views.my_account, name='my_account'),
 	path('my_pets/', views.my_pets, name='my_pets'),
 	path('login/my_account/my_pets/<slug:pet_name>/', views.pet_page, name = 'pet_page'),
@@ -30,8 +30,8 @@ urlpatterns = [
 	path('login/my_account/add_pet/', views.add_pet, name = 'add_pet'),
 	path('logout/', views.user_logout, name = 'logout'),
 
-    url(r'^(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
-    url(r'^templates/(?P<category_slug>[-\w]+)/$', views.list_of_post_by_category, name='list_of_post_by_category'),
-    url(r'^$', views.list_of_post, name='list_of_post')
+    #url(r'^(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
+    #url(r'^templates/(?P<category_slug>[-\w]+)/$', views.list_of_post_by_category, name='list_of_post_by_category'),
+    #url(r'^$', views.list_of_post, name='list_of_post')
     #url(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment')
 ]

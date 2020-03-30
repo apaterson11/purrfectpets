@@ -139,7 +139,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('purrfectpets_project:home'))
+                return redirect(reverse('purrfectpets_project:my_account'))
             else:
                 return HttpResponse("Your Purrfect Pets account is disabled.")
         else:

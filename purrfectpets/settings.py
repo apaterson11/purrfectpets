@@ -40,9 +40,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'purrfectpets_project'
+    'purrfectpets_project',
+    'registration',
 ]
 
+# Django registration redux
+
+# Can users currently register
+REGISTRATION_OPEN = True
+
+# Will users automatically log in after registering
+REGISTRATION_AUTO_LOGIN= True
+
+LOGIN_REDIRECT_URL = 'purrfectpets_project:my_account'
+
+LOGIN_URL = 'auth_login'
 
 
 MIDDLEWARE = [
@@ -96,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS':{'min_length':6,}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -104,6 +117,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher']
 
 
 # Internationalization
