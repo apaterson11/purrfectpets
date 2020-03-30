@@ -1,4 +1,4 @@
-{% extends 'rango/base.html' %}
+{% extends 'purrfectpets/base.html' %}
 {% block title_block %}
 Login
 {% endblock %}
@@ -22,8 +22,14 @@ Login
             value="Submit">Sign in</button>
     </form>
     </div>
+ <br />
+ OR 
+ <br />
+ <a href="#" class="fb btn">
+    <i class="facebook-login"></i> Login with Facebook</a>
+
 <p>
-    Not registered?
+    Not a member of Purrfect Pets?
     <a href="{% url 'registration_register' %}">Register here!</a>
 </p>
 {% endblock %}

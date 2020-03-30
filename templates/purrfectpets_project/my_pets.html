@@ -1,4 +1,4 @@
-{% extends 'purrfectpets/base.html' %}
+{% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -18,11 +18,12 @@
                     <tr>
                         <td>{{ p.name }}</td>
                         <td>{{ p.type }}</td>
-                        <td><a href="{% url 'purrfectpets:add_picture' %}">Add Picture</a>
+                        <td><a href="{% url 'purrfectpets_project:add_picture' %}">Add Picture</a>
                     </tr>
                 {% endfor %}
             </table>
-	{% endblock %}
+        {% endif %}
+{% endblock %}
 
 
 

@@ -28,7 +28,6 @@ urlpatterns = [
 	path('login/my_account/my_pets/<slug:pet_name>/', views.pet_page, name = 'pet_page'),
 	path('login/my_account/my_pets/<slug:pet_name>/add_picture/', views.add_picture, name = 'add_picture'),
 	path('login/my_account/add_pet/', views.add_pet, name = 'add_pet'),
-	path('restricted/', views.restricted, name='restricted'),
 	path('logout/', views.user_logout, name = 'logout'),
 
     url(r'^(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),

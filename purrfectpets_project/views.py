@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-from purrfectpets_project import Category, Page
+from purrfectpets_project import Category, Page, Pet, PetPhoto, Comment
 from purrfectpets_project import CategoryForm, PageForm
-from purrfectpets_project.forms import UserForm, UserProfileForm
+from purrfectpets_project.forms import UserForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -119,22 +119,17 @@ def sign_up(request):
 	
 	if request.method == 'POST':
 		user_form = UserForm(request.POST)
-		profile_form = UserProfileForm(request.POST)
 		
-		if user_form.is_valid() and profile_form.is_valid():
+		if user_form.is_valid():
 			user = user_form.save()
 			user.set_password(user.password)
 			user.save()
-			profile = profile_form.save(commit=False)
-			profile.user = user
-			profile.save()
 			registered = True
 		else:
-			print(user_form.errors, profile_form.errors)
+			print(user_form.errors)
 	else:
 		user_form = UserForm()
-		profile_form = UserProfileForm()
-	return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+	return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
 
 def user_login(request):
     if request.method == 'POST':

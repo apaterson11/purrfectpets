@@ -1,5 +1,5 @@
 from django.contrib import admin
-from purrfectpets_project.models import UserProfile, Pet, Post, Category, Comment, PetPhoto
+from purrfectpets_project.models import Pet, Post, Category, Comment, PetPhoto
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -22,6 +22,5 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Comment, CommentAdmin)
 
 
-admin.site.register(UserProfile)
 admin.site.register(Pet)
 admin.site.register(PetPhoto)

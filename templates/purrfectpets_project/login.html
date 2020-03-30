@@ -1,4 +1,4 @@
-{% extends 'purrfectpets/base.html' %}
+{% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -8,7 +8,7 @@
             
  {% block body_block %}
         <h3>Welcome back! Please enter your account details.</h3>
-        <form id="login_form" method="post" action="{% url 'purrfectpets:login' %}">
+        <form id="login_form" method="post" action="{% url 'purrfectpets_project:login' %}">
             {% csrf_token %}
             <br />
             Username: <input type="text" name="username" value="" size="50" />
@@ -23,7 +23,8 @@
               <i class="facebook-login"></i> Login with Facebook
             </a>
         </form>
-        <h4>Not a member of Purrfect Pets? Sign up <a href="{% url 'purrfectpets:sign_up' %}">Here</a></h4>
+        <h5>Not a member of Purrfect Pets? </br>
+		<a href="{% url 'purrfectpets_project:sign_up' %}">Sign up Here</a></h4>
     {% endblock %}
 
 
