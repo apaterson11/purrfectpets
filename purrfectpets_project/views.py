@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from purrfectpets_project.forms import UserForm
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Post, Category, Pet, PetPhoto, Comment
@@ -130,6 +131,18 @@ def add_pet(request):
             print(form.errors)
     context_dict = {'form': form, 'category': category}
     return render(request, 'purrfectpets/add_pet.html', context = context_dict)
+
+
+@login_required
+def delete_account(request, user_id):
+    user = get_object_or_404(User, id = user_id)
+    if request.method == "POST":
+        user.delete()
+        return redirect("/purrfectpets_project/")
+
+    context_dict = {}
+
+    return render(request, "purrfectpets_project/delete_account.html", context_dict)
 
 def show_category(request, category_name_slug):
     context_dict = {} #create a context dictionary whch we can pass to the template rendering engine

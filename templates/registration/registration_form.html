@@ -1,11 +1,7 @@
 {% extends 'purrfectpets_project/base.html' %}
 
-{% block title_block %}
-    Sign Up
-{% endblock %}
-
 {% block body_block %}
-
+    <title>Purrfect Pets | Sign Up</title>
 	{% if registered %}
 		<h3>You're already signed up! </h3>
 		<a href="{% url 'purrfectpets:home' %}">Return to the homepage.</a><br />
