@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'purrfectpets_project',
     'registration',
+    'crispy_forms',
+    'django_summernote',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Django registration redux
 
