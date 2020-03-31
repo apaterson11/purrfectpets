@@ -34,7 +34,7 @@
                     {% endfor %}
                     </ul>
                     {% else %}
-                    <strong>There are no pets up yet! Post some yourself!.</strong>
+                    <strong>There are no pets up yet! Post some yourself!</strong>
                     {% endif %}
                     </p>
                 </div>
@@ -43,7 +43,9 @@
         <div class="col-md-6">
             <div class="card mb-6">
                 <div class="card-body">
-                    <h2>Our Most <strong>Aww</strong>some Animals</h2>
+					
+					<a href="{% url 'purrfectpets_project:popular_pets' %}"> <h2>Our Most <strong>Aww</strong>some Animals</h2></a>
+                    
                     <p class="card-text">
                     {% if pets %}
                     <ul class="list-group">
