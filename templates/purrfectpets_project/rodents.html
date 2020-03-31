@@ -2,17 +2,13 @@
 {% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    <title>Purrfect Pets | Rodents</title>
-{% endblock %}
-
 {% block body_block %}  
-
+<title>Purrfect Pets | Rodents</title>
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
       <p class="lead font-weight-normal"> 
         <h1>Purrfect Pets | Rodents</h1>
-        <h4>Welcome to the Puurfect Rodents page</h4>
+        <h4>Welcome to the Purrfect Rodents page</h4>
     </div>
     
     {% if pets %}
@@ -24,7 +20,7 @@
         {% endfor %}
         </ul>
     {% else %}
-        <strong>There are no pets up yet! Post some yourself!</strong>
+        <strong>There are no rodents up yet! Post some yourself!</strong>
     {% endif %}
     
     <div class="product-device shadow-sm d-none d-md-block"></div>

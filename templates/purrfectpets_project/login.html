@@ -1,12 +1,8 @@
 {% extends 'purrfectpets_project/base.html' %}
-{% load staticfiles %}
-
-{% block title_block %}
-	Login
-{% endblock %}
-        
+{% load staticfiles %}        
             
  {% block body_block %}
+        <title>Purrfect Pets | Login</title>
         <h3>Welcome back! Please enter your account details.</h3>
         <form id="login_form" method="post" action="{% url 'purrfectpets_project:login' %}">
             {% csrf_token %}
