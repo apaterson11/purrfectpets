@@ -36,4 +36,6 @@ urlpatterns = [
     #url(r'^templates/(?P<category_slug>[-\w]+)/$', views.list_of_post_by_category, name='list_of_post_by_category'),
     #url(r'^$', views.list_of_post, name='list_of_post')
     #url(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment')
+
+    
 ]

@@ -40,7 +40,7 @@ class UserForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('user','email','body')
+        fields = ('name','email','body')
 
 
 
