@@ -1,17 +1,11 @@
 {% extends 'purrfectpets_project/base.html' %}
 
-
-
-
-{% block title_block %}
-    Purrfect Pets
-{% endblock %}
-
 {% block body_block %}
+<title>Purrfect Pets | Home</title>
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <h1 class="display-4 font-weight-normal">Purrfect Pets</h1>
-      <p class="lead font-weight-normal">Welcome click the link below to view our pets</p>
+      <a href="{% url 'purrfectpets_project:home' %}"><img alt="Purrfect Pets" src="/static/images/purrfect-pets-logo-black.png" width="300" height="150" ></a>
+      <p class="lead font-weight-normal">Welcome! Click the link below to see some Purrfect Pets.</p>
       <a class="btn btn-outline-secondary" href="{% url 'purrfectpets_project:categories' %}">Categories</a>
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
@@ -34,7 +28,7 @@
                     {% endfor %}
                     </ul>
                     {% else %}
-                    <strong>There are no pets up yet! Post some yourself!.</strong>
+                    <strong>There are no pets up yet! Post some yourself!</strong>
                     {% endif %}
                     </p>
                 </div>
@@ -43,7 +37,9 @@
         <div class="col-md-6">
             <div class="card mb-6">
                 <div class="card-body">
-                    <h2>Our Most <strong>Aww</strong>some Animals</h2>
+					
+					<a href="{% url 'purrfectpets_project:popular_pets' %}"> <h2>Our Most <strong>Aww</strong>some Animals</h2></a>
+                    
                     <p class="card-text">
                     {% if pets %}
                     <ul class="list-group">
