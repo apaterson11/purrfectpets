@@ -218,11 +218,11 @@ class PetList(generic.ListView):
 
 def post_detail(request, slug):
 	template_name = 'post_detail.html'
-	post = get_object_or_404(Post, slug=slug)
+	pet = get_object_or_404(Post, slug=slug)
 	comments = post.comments.order_by("-created_on")
 	new_comment = None
 
-	context = {'post': post}
+	context = {'pet': pet}
 
 	if request.method == "POST":
 		comment_form = CommentForm(data=request.POST)
@@ -238,7 +238,7 @@ def post_detail(request, slug):
 		request, 
 		template_name, 
 		{
-			"post": post, 
+			"pet": pet, 
 			"comments": comments, 
 			"new_comment": new_comment, 
 			"comment_form": comment_form,
