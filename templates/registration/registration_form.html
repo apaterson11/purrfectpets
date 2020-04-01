@@ -1,4 +1,6 @@
 {% extends 'purrfectpets_project/base.html' %}
+{% load staticfiles %}
+
 
 {% block body_block %}
     <title>Purrfect Pets | Sign Up</title>
@@ -16,7 +18,8 @@
 		<div class="row">
 		<div class="form-group" >
 		<h3>Welcome New Member! Please enter your account details.</h3>
-		<form role="form" method="post" action=".">
+
+		<form role="form" method="post" action="." >
 			{% csrf_token %}
 			<div class="form-group">
 			<p class="required"><label class="required" for="id_username">
@@ -37,6 +40,7 @@
 				Password:</label>
 			<input class="form-control" id="id_password1" name="password1"
 				type="password" />
+				Required. Password must be at least 8 characters long
 			</p>
 			<p class="required">
 			<label class="required" for="id_password2">
@@ -49,11 +53,6 @@
 			</p>
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
-			<br />OR<br />
-			<a href="#" class="fb btn">
-                  <i class="facebook-login"></i> Sign up with Facebook
-            </a>
-			
 		</form>
 		</div>
 	</div>
