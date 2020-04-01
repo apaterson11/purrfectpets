@@ -3,19 +3,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from purrfectpets_project.forms import UserForm, PetForm, EditAccountForm
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Category, Pet, PetPhoto, Comment, User
 from django.views import generic
 from .forms import CommentForm
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib import messages
 
 
 def home(request):
     context_dict = {}	
     category_list = Category.objects.order_by('-views')[:3]
     pet_list = Pet.objects.order_by('-awwCount')[:3]
+
     context_dict['categories'] = category_list
     context_dict['pets'] = pet_list
     return render(request, 'purrfectpets_project/home.html', context=context_dict)
@@ -111,14 +113,24 @@ def pet_page(request, username, pet_name_slug):
         pet = Pet.objects.get(owner = user, slug = pet_name_slug)
         
         context_dict['pet'] = pet
-    except pet.DoesNotExist:
+    except:
         context_dict['pet'] = None
 
     try:
-        photos = PetPhoto.object.get(pet = pet)
+        photos = PetPhoto.objects.filter(pet=pet)
         context_dict['photos'] = photos
-    except:
+    except Exception as e:
+        print(e)
         context_dict['photos'] = None
+
+    try:
+        comments =Comment.objects.filer(pet = pet)
+        context_dict['comments'] = commments
+    except:
+        context_dict['comments'] = None
+         
+
+    print(context_dict)
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
 	
 	
@@ -145,7 +157,7 @@ def add_pet(request):
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
     
 @login_required
-def edit_account(request, username):
+def edit_account(request):
     if request.method == "POST":
         form = EditAccountForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -153,12 +165,45 @@ def edit_account(request, username):
             user.set_password(user.password)
             return redirect('/purrfectpets_project/my_account/')
         else:
-            print(form.errors)
+            return redirect('/purrfectpets_project/edit_account')
     else:
         form = EditAccountForm(instance=request.user)
         args = {'form': form}
         return render(request, 'purrfectpets_project/edit_account.html', args)
     
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/purrfectpets_project/my_account/')
+        else:
+            messages.error(request, "Error, please try again!")
+            return redirect('/purrfectpets_project/edit_account/change_password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        args = {'form': form}
+        return render(request, 'purrfectpets_project/change_password.html', args)
+    
+@login_required
+def add_comment(request):
+	form = CommentForm()
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=True)
+			comment.name = User.objects.get(username=request.user.username)
+			comment.save()
+			return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
+	else:
+		print(form.errors)
+
+	template = 'purrfectpets_project/add_comment.html'
+	context_dict = {'form': form}
+	return render(request, template, context_dict)
+
 
 
 @login_required
@@ -281,24 +326,6 @@ def post_detail(request, slug):
 			"comment_form": comment_form,
 		},
 	)
-
-"""
-def add_comment(request, slug):
-	post = get_object_or_404(Post, slug=slug)
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.post = post 
-			comment.save()
-			return redirect('purrfectpets_project:post_detail', slug=post.slug)
-	else:
-		form = CommentForm()
-
-	template = 'purrfectpets_project/add_comment.html'
-	context = {'form': form}
-	return render(request, template, context)
-"""
 
 
 

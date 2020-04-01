@@ -1,7 +1,54 @@
 {% extends 'purrfectpets_project/base.html' %}
-{% load staticfiles %}        
+{% load staticfiles %}  
+{% load crispy_forms_tags %}      
             
  {% block body_block %}
-        <title>Purrfect Pets | My Pets</title>
-        <h3>{{ pet.name }}</h3>
+        <title>Purrfect Pets | Pet Page</title>
+
+        <div class="container">
+            <div class="center">
+                 <div class="card" style="width:400px">
+                      <div class="card-body">
+                      <h4 class="card-title"><br>Name: {{ pet.name}}</h4>
+                      <p class="card-text">Breed: {{ pet.breed }}</p>
+                      <p class="card-text">Bio: {{ pet.bio }}<br></p>
+                      <p class="card-text">Number of awws: {{ pet.awwCount }}<br><br></p>
+                      <p class="card-text">Number of views: {{pet.views}}</p>
+
+                    {% for photo in photos %}
+                         <img src="/media/{{photo.photo}}" alt="{{photo.id}}"/>
+                    {% endfor %}
+
+                    {% for comment in comments %}
+                         <p>{{ comment.body }}</p>
+                        <p>Written by {{ comment.name }} on {{ comment.created }}</p>
+                    {% empty %}
+                        <p>There is no comments</p>
+                    {% endfor %}
+
+                    
+                    <h3>Add new comment</h3>
+                    <div>
+                         <form id ="comment_form" method="post" action="/purrfectpets_project/add_comment/">
+                              {{ comment_form | crispy }}
+                             {% csrf_token %}
+                             {% csrf_token %}
+                             {% for hidden in form.hidden_fields %}
+                                 {{hidden}}
+                             {% endfor %}
+                             {% for field in form.visible_fields %}
+                                 {{ field.errors }}
+                                 {{ field.help_text }}
+                                 {{ field }}
+                             {% endfor %}
+                             
+                             <input type="submit" name="submit" value="Add comment" />
+                         </form>
+                     </div>
+                   
+
+
+                 </div>
+            </div> 
+       </div>
 {% endblock %}

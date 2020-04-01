@@ -27,13 +27,12 @@ class PetForm(forms.ModelForm):
         fields = ('name','category','breed','bio',)
         
 class EditAccountForm(forms.ModelForm):
-    username = forms.CharField(max_length=150, help_text="Please enter your preferred username.")
-    email = forms.EmailField(max_length=320, help_text="Please enter your preferred email.")
-    password = forms.CharField(widget=forms.PasswordInput, help_text="Please enter your preferred password.")
+    username = forms.CharField(max_length=150, help_text="Edit the text to change your username.")
+    email = forms.EmailField(max_length=320, help_text="Edit the text to change your email.")
     
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('username', 'email')
         
  
 class UserForm(forms.ModelForm):
