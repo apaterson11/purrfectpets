@@ -17,7 +17,6 @@ def home(request):
     context_dict = {}	
     category_list = Category.objects.order_by('-views')[:3]
     pet_list = Pet.objects.order_by('-awwCount')[:3]
-
     context_dict['categories'] = category_list
     context_dict['pets'] = pet_list
     return render(request, 'purrfectpets_project/home.html', context=context_dict)
@@ -31,9 +30,10 @@ def contact_us(request):
 	return render(request, 'purrfectpets_project/contact_us.html', context=context_dict)
 	
 def popular_pets(request):
-	pet = Pet.objects.all()
-	context = {'pet': pet}
-	return render(request, 'purrfectpets_project/popular_pets.html', context)
+    context_dict = {}
+    pet_list = Pet.objects.order_by('-awwCount')[:10]
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
 	
 def categories(request):
 	context_dict = {}
