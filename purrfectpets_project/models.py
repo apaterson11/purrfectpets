@@ -56,7 +56,7 @@ class Pet(models.Model):
 
     slug = models.SlugField(max_length = MAX_LENGTH, unique = True)
 
-    views = models.IntegerField
+    views = models.IntegerField(default=0)
     
     awwSenders = models.ManyToManyField(User, related_name="awwSenders",blank = True)
     

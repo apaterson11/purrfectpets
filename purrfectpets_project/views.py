@@ -15,6 +15,7 @@ def home(request):
     context_dict = {}	
     category_list = Category.objects.order_by('-views')[:3]
     pet_list = Pet.objects.order_by('-awwCount')[:3]
+
     context_dict['categories'] = category_list
     context_dict['pets'] = pet_list
     return render(request, 'purrfectpets_project/home.html', context=context_dict)
@@ -110,14 +111,24 @@ def pet_page(request, username, pet_name_slug):
         pet = Pet.objects.get(owner = user, slug = pet_name_slug)
         
         context_dict['pet'] = pet
-    except pet.DoesNotExist:
+    except:
         context_dict['pet'] = None
 
     try:
-        photos = PetPhoto.object.get(pet = pet)
+        photos = PetPhoto.objects.filter(pet=pet)
         context_dict['photos'] = photos
-    except:
+    except Exception as e:
+        print(e)
         context_dict['photos'] = None
+
+    try:
+        comments =Comment.objects.filer(pet = pet)
+        context_dict['comments'] = commments
+    except:
+        context_dict['comments'] = None
+         
+
+    print(context_dict)
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
 	
 	
