@@ -16,18 +16,25 @@
                         <table style = "width: 50%">
                             <tr>
                                 <th>Pet Name</th>
-                                <th>Pet Type</th>
-                            </tr>
+								<th>Pet Type</th>
+								<th>Pet Breed</th>
+								<th>Aww Count</th>
+								<th>Pet Bio</th>
+								<th>Pet Picture</th>
+								<th>Date Added</th>
                             {% for p in pets %}
                                 <tr>
                                     <td><a href="{% url 'purrfectpets_project:pet_page' user.username p.slug %}">{{ p.name }}</a></td>
                                     <td>{{ p.category }}</td>
+									<td>{{ p.breed }}</td>
+									<td>{{ p.awwCount}}</td>
+									<td>{{ p.bio }} </td>
+									<td><img src="{{ MEDIA_URL }}{{photo.photo}}"" alt="{{ p.name }} has no  Pictures"/></td>
+									<td>{{ p.created_on }}</td>
                                 </tr>
                             {% endfor %}
                         </table>
                     {% endif %}
         </div>
 {% endblock %}
-
-
 
