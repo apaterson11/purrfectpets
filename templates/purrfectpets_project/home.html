@@ -45,9 +45,9 @@
                     <p class="card-text">
                     {% if pets %}
                     <ul class="list-group">
-                    {% for pet in pets %}
+                    {% for p in pets %}
                         <li class="list-group-item">
-                        <a href="{{ pet.url }}">{{ pet.name }}</a>
+                        <a href="{% url 'purrfectpets_project:pet_page' p.owner.username p.slug %}">{{ p.name }}</a>
                         </li>
                     {% endfor %}
                     </ul>

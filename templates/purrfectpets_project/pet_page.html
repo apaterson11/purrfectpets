@@ -2,6 +2,24 @@
 {% load staticfiles %}        
             
  {% block body_block %}
-        <title>Purrfect Pets | My Pets</title>
-        <h3>{{ pet.name }}</h3>
+        <title>Purrfect Pets | Pet Page</title>
+
+        <div class="container">
+            <div class="center">
+                 <div class="card" style="width:400px">
+                      <div class="card-body">
+                      <h4 class="card-title"><br>Name: {{ pet.name}}</h4>
+                      <p class="card-text">Breed: {{ pet.breed }}</p>
+                      <p class="card-text">Bio: {{ pet.bio }}<br></p>
+                      <p class="card-text">Number of awws: {{ pet.awwCount }}<br><br></p>
+                      <p class="card-text">Number of views: {{pet.views}}</p>
+
+                    {% for photo in photos %}
+                         <img src="/media/{{photo.photo}}" alt="{{photo.id}}"/>
+                    {% endfor %}
+
+
+                 </div>
+            </div> 
+       </div>
 {% endblock %}
