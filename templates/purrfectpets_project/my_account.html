@@ -14,13 +14,16 @@
           <div class="center">
                <h1>My Account</h1>
                <div class="card" style="width:400px">
-                    <img class="card-img-top" src="/static/images/PurrfectPets Logo.png" alt="Card image" style="width:100%">
+                    
                     <div class="card-body">
                     <h4 class="card-title">Username: {{ user.username }}<br></h4>
                     <p class="card-text">Email: {{ user.email }}<br></p>
                     <p class="card-text">Number of Pets: {{ user.numberofpets }}<br><br></p>
                     <a href="{% url 'purrfectpets_project:my_pets' %}" class="btn btn-primary">My Pets</a>
                     <a href="{% url 'purrfectpets_project:add_pet' %}" class="btn btn-primary">Add Pet</a>
+                    <div class="card-body">
+                         <a href="{% url 'purrfectpets_project:delete_account' user.id %}" class="btn btn-primary">Delete Account</a>
+                    </div>
                </div>
           </div> 
      </div>

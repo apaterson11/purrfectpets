@@ -1,5 +1,6 @@
 from django.contrib import admin
-from purrfectpets_project.models import Pet, Post, Category, Comment, PetPhoto
+from purrfectpets_project.models import Pet, Category, Comment, PetPhoto
+from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -8,18 +9,19 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
-    list_filter = ('status',)
-    search_fields = ['title', 'content']
-    prepopulated_fields = {'slug': ('title',)}
 
-admin.site.register(Post, PostAdmin)
-
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email', 'approved')
+    list_display = ('name', 'body', 'pet', 'created_on')
+    list_filter = ('active', 'created_on')
+    search_fields = ('name', 'email', 'body')
+    actions = ['approve_comments']
 
-admin.site.register(Comment, CommentAdmin)
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)
+
+
+#admin.site.register(Comment, CommentAdmin)
 
 
 admin.site.register(Pet)

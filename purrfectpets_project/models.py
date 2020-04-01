@@ -52,12 +52,16 @@ class Pet(models.Model):
     name = models.CharField(max_length=MAX_LENGTH, null=True)
     breed = models.CharField(max_length=MAX_LENGTH, null=True)
     bio = models.TextField(max_length=1000, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     
     views = models.IntegerField
     
     awwSenders = models.ManyToManyField(User, related_name="awwSenders",blank = True)
     
     awwCount = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-created_on']
 
     def __str__(self):
         return self.name
@@ -68,67 +72,18 @@ class PetPhoto(models.Model):
     
     photo = models.ImageField(upload_to = 'uploads/', null=True)
 
-
-#Comment Section
-
-#Category
-"""
-class Category(models.Model):
-    name = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique=True)
-
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
-
-    def get_absoulte_url(self):
-        return reverse('purrfectpets:list_of_post_by_category', args=[self.slug])
-
-    def __str__(self):
-        return self.name
-"""
-
-#Post
-class Post(models.Model):
-    STATUS_CHOICES = (
-        (0,'Draft'),
-        (1,'Publish')
-    )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=250, unique=True)
-    slug = models.SlugField(max_length=250, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
-    content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    published = models.DateTimeField(default=timezone.now)
-    updated = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
-
-    def get_absoulte_url(self):
-        return reverse('purrfectpets:post_detail', args=[self.slug])
-
-    def __str__(self): 
-        return self.title
-
-    """
-    class Meta:
-        ordering = ['-created_on']
-    """
-
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user", null=True)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
 
-    def approved(self):
-        self.approved = True
-        self.save()
+    class Meta:
+        ordering = ["created_on"]
 
-    #def __str__(self):             #cannot return as User must be a User object
-        #return self.user
+    def __str__(self):
+        return "Comment {} by {}".format(self.body, self.name)
 
     

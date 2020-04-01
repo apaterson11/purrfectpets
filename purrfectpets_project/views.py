@@ -2,11 +2,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
+<<<<<<< HEAD
 from purrfectpets_project.forms import UserForm, PetForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Post, Category, Pet, PetPhoto, Comment, User
+=======
+from purrfectpets_project.forms import UserForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from .models import Category, Pet, PetPhoto, Comment
+>>>>>>> a57734088504a8c3f9b834f1b00d02af4312b94f
 from django.views import generic
 from .forms import CommentForm
 
@@ -123,6 +132,18 @@ def add_pet(request):
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
 
+
+@login_required
+def delete_account(request, user_id):
+    user = get_object_or_404(User, id = user_id)
+    if request.method == "POST":
+        user.delete()
+        return redirect("/purrfectpets_project/")
+
+    context_dict = {}
+
+    return render(request, "purrfectpets_project/delete_account.html", context_dict)
+
 def show_category(request, category_name_slug):
     context_dict = {} #create a context dictionary whch we can pass to the template rendering engine
     try: #attempt to find a category name slug with the given name
@@ -181,7 +202,7 @@ def user_logout(request):
 	logout(request) 
 	return redirect(reverse('purrfectpets_project:home'))
 
-
+"""
 def list_of_post_by_category(request, category_slug):
 	categories = Category.objects.all()
 	post = Post.objects.filter(status=1)
@@ -198,14 +219,42 @@ def list_of_post(request):
 	post = Post.objects.filter(status=1)
 	context = {'post': post}
 	return render(request, 'purrfectpets_project/list_of_post.html', context)
+"""
+
+class PetList(generic.ListView):
+	queryset = Pet.objects.filter(category = "DO").order_by("-created_on")
+	template_name= "dogs.html"
 
 def post_detail(request, slug):
-
+	template_name = 'post_detail.html'
 	post = get_object_or_404(Post, slug=slug)
+	comments = post.comments.order_by("-created_on")
+	new_comment = None
+
 	context = {'post': post}
 
-	return render(request, 'purrfectpets_project/post_detail.html', context)
+	if request.method == "POST":
+		comment_form = CommentForm(data=request.POST)
+		if comment_form.is_valid():
 
+			new_comment = comment_form.save(commit=False)
+			new_comment.post = post
+			new_comment.save()
+	else:
+		comment_form = CommentForm()
+
+	return render(
+		request, 
+		template_name, 
+		{
+			"post": post, 
+			"comments": comments, 
+			"new_comment": new_comment, 
+			"comment_form": comment_form,
+		},
+	)
+
+"""
 def add_comment(request, slug):
 	post = get_object_or_404(Post, slug=slug)
 	if request.method == 'POST':
@@ -221,6 +270,7 @@ def add_comment(request, slug):
 	template = 'purrfectpets_project/add_comment.html'
 	context = {'form': form}
 	return render(request, template, context)
+"""
 
 
 
