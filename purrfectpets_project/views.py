@@ -2,13 +2,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-from purrfectpets_project.forms import UserForm, PetForm
+from purrfectpets_project.forms import UserForm, PetForm, EditAccountForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Category, Pet, PetPhoto, Comment, User
 from django.views import generic
 from .forms import CommentForm
+from django.contrib.auth.forms import UserChangeForm
 
 
 def home(request):
@@ -142,6 +143,22 @@ def add_pet(request):
             print(form.errors)
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
+    
+@login_required
+def edit_account(request, username):
+    if request.method == "POST":
+        form = EditAccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            user.set_password(user.password)
+            return redirect('/purrfectpets_project/my_account/')
+        else:
+            print(form.errors)
+    else:
+        form = EditAccountForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'purrfectpets_project/edit_account.html', args)
+    
 
 
 @login_required

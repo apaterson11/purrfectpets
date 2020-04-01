@@ -25,6 +25,16 @@ class PetForm(forms.ModelForm):
     class Meta:         #provides additional info on the form
         model = Pet
         fields = ('name','category','breed','bio',)
+        
+class EditAccountForm(forms.ModelForm):
+    username = forms.CharField(max_length=150, help_text="Please enter your preferred username.")
+    email = forms.EmailField(max_length=320, help_text="Please enter your preferred email.")
+    password = forms.CharField(widget=forms.PasswordInput, help_text="Please enter your preferred password.")
+    
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+        
  
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
