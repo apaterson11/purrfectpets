@@ -91,16 +91,12 @@
 						<a class="nav-link" href="{% url 'purrfectpets_project:categories' %}">Categories</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{% url 'purrfectpets_project:popular_pets' %}">Popular Pets</a>
+						<a class="nav-link" href="{% url 'purrfectpets_project:popular_pets' %}">Awwsome Animals</a>
 					</li>
 			
 				</ul>
 			</div>
-			<!--
-          <a class="py-3 d-none d-md-inline-block" href="/purrfectpets_project/">Home</a>
-          <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets_project:categories' %}">Categories</a>
-          <a class="py-3 d-none d-md-inline-block" href="{% url 'purrfectpets_project:popular_pets' %}">Popular Pets</a>
-          -->
+			
           <ul class="nav navbar-nav navbar-right">
           
           {% if user.is_authenticated %}
