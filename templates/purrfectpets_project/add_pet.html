@@ -1,15 +1,11 @@
 {% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
-
-{% block title_block %}
-	Add Pet
-{% endblock %}
-        
             
 {% block body_block %}
+        <title>Purrfect Pets | Add Pet</title>
         <h3>Add a Pet</h3>
         <div>
-            <form id ="add_pet_form" method="post" action="/login/my_account/add_pet">
+            <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/">
                 {% csrf_token %}
                 {% csrf_token %}
                 {% for hidden in form.hidden_fields %}
@@ -20,6 +16,7 @@
                     {{ field.help_text }}
                     {{ field }}
                 {% endfor %}
+                
                 <input type="submit" name="submit" value="Add Pet" />
             </form>
         </div>

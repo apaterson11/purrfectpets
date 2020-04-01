@@ -2,11 +2,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-from purrfectpets_project.forms import UserForm
+from purrfectpets_project.forms import UserForm, PetForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from .models import Post, Category, Pet, PetPhoto, Comment
+from .models import Post, Category, Pet, PetPhoto, Comment, User
 from django.views import generic
 from .forms import CommentForm
 
@@ -108,28 +108,20 @@ def add_picture(request, pet_name_slug):
 
 @login_required
 def add_pet(request):
-    try:
-        pet = Pet.objects.get(slug = category_name_slug)
-    except Category.DoesNotExist:
-        category = None
-
-    if category is None:
-        return redirect('/purrfectpets_project/')
-
     form = PetForm()
     if request.method == 'POST':
         form = PetForm(request.POST)
         if form.is_valid():
-            if category:
-                pet = form.save(commit = False)
-                pet.category = category
+                pet = form.save(commit = True)
                 pet.awws = 0
-                page.save()
-                return redirect(reverse('purrfectpets_project:pet_page', kwargs = {'category_name_slug': category_name_slug}))
+                pet.owner = User.objects.get(username=request.user.username)
+                #pet.category = Category.objects.get(name='dogs')
+                pet.save()
+                return redirect('/purrfectpets_project/my_pets/')
         else:
             print(form.errors)
-    context_dict = {'form': form, 'category': category}
-    return render(request, 'purrfectpets/add_pet.html', context = context_dict)
+    context_dict = {'form': form}
+    return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
 
 def show_category(request, category_name_slug):
     context_dict = {} #create a context dictionary whch we can pass to the template rendering engine
