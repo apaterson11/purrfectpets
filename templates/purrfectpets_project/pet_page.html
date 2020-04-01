@@ -12,12 +12,15 @@
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
                       <p class="card-text">Number of awws: {{ pet.awwCount }}<br><br></p>
-                      <p class="card-text">Number of views: {{pet.views}}</p>
+                      <p class="card-text">Number of views: {{ pet.views }}</p>
 
                     {% for photo in photos %}
                          <img src="/media/{{photo.photo}}" alt="{{photo.id}}"/>
                     {% endfor %}
 
+                    {% for comment in comments %}
+                         <p class="card-text">{{ comment.name}}: {{comment.body}}</p><br>
+                    {% endfor %}
 
                  </div>
             </div> 

@@ -100,8 +100,6 @@ def my_pets(request,username):
 	
 
 	
-
-@login_required
 def pet_page(request, username, pet_name_slug):
     context_dict = {}
 
@@ -122,8 +120,8 @@ def pet_page(request, username, pet_name_slug):
         context_dict['photos'] = None
 
     try:
-        comments =Comment.objects.filer(pet = pet)
-        context_dict['comments'] = commments
+        comments = Comment.objects.filter(pet = pet)
+        context_dict['comments'] = comments
     except:
         context_dict['comments'] = None
          
