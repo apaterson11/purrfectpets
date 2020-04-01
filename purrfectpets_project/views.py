@@ -145,7 +145,7 @@ def add_pet(request):
                 pet.owner = User.objects.get(username=request.user.username)
                 #pet.category = Category.objects.get(name='dogs')
                 pet.save()
-                return redirect('/purrfectpets_project/my_pets/')
+                return redirect('/purrfectpets_project/my_pets/' + request.user.username)
         else:
             print(form.errors)
     context_dict = {'form': form}
@@ -184,20 +184,21 @@ def change_password(request):
     
 @login_required
 def add_comment(request):
-	form = CommentForm()
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=True)
-			comment.name = User.objects.get(username=request.user.username)
-			comment.save()
-			return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
-	else:
-		print(form.errors)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=True)
+            comment.name = User.objects.get(username=request.user.username)
+            comment.save()
+            return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
+        else:
+            print(form.errors)
 
-	template = 'purrfectpets_project/add_comment.html'
-	context_dict = {'form': form}
-	return render(request, template, context_dict)
+    else:
+        template = 'purrfectpets_project/add_comment.html'
+        context_dict = {'form': form}
+        return render(request, template, context_dict)
 
 
 
