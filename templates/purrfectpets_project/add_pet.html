@@ -2,23 +2,29 @@
 {% load staticfiles %}
             
 {% block body_block %}
-        <title>Purrfect Pets | Add Pet</title>
-        <h3>Add a Pet</h3>
-        <div>
-            <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/">
-                {% csrf_token %}
-                {% csrf_token %}
-                {% for hidden in form.hidden_fields %}
-                    {{hidden}}
-                {% endfor %}
-                {% for field in form.visible_fields %}
-                    {{ field.errors }}
-                    {{ field.help_text }}
-                    {{ field }}
-                {% endfor %}
-                
-                <input type="submit" name="submit" value="Add Pet" />
-            </form>
+        
+
+        <title>Purrfect Pets | Home</title>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  "></div>
+           
+                <title>Purrfect Pets | Add Pet</title>
+                <h3>Add a Pet</h3>
+                <div>
+                    <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/">
+                        {% csrf_token %}
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                            {{hidden}}
+                        {% endfor %}
+                        {% for field in form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                        {% endfor %}
+                        
+                        <input type="submit" name="submit" value="Add Pet" />
+                    </form>
+                </div>
         </div>
 {% endblock %}
 
