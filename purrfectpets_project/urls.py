@@ -27,6 +27,7 @@ urlpatterns = [
 	path('pet_page/<slug:username>/<slug:pet_name_slug>/', views.pet_page, name = 'pet_page'),
 	#path('login/my_account/my_pets/<slug:pet_name>/add_picture/', views.add_picture, name = 'add_picture'),
 	path('login/my_account/add_pet/', views.add_pet, name = 'add_pet'),
+    path('login/my_account/add_comment/', views.add_comment, name = 'add_comment'),
 	path('logout/', views.user_logout, name = 'logout'),
     path('delete_account/<slug:username>/', views.delete_account, name='delete_account')
 

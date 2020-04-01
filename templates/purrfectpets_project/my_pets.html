@@ -2,22 +2,31 @@
 {% load staticfiles %}        
             
  {% block body_block %}
-        <title>Purrfect Pets | My Pets</title>
-        <h3>My Pets</h3>
-        {% if pets %}
-            <table style = "width: 50%">
-                <tr>
-                    <th>Pet Name</th>
-                    <th>Pet Type</th>
-                </tr>
-                {% for p in pets %}
-                    <tr>
-                        <td><a href="{% url 'purrfectpets_project:pet_page' user.username p.slug %}">{{ p.name }}</a></td>
-                        <td>{{ p.category }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
+
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+                
+            <div class="col-md-5 p-lg-5 mx-auto my-5">
+        
+                <div class="jumbotron text-center">
+                    <title>Purrfect Pets | My Pets</title>
+                </div>
+            </div>
+                    <h3>My Pets</h3>
+                    {% if pets %}
+                        <table style = "width: 50%">
+                            <tr>
+                                <th>Pet Name</th>
+                                <th>Pet Type</th>
+                            </tr>
+                            {% for p in pets %}
+                                <tr>
+                                    <td><a href="{% url 'purrfectpets_project:pet_page' user.username p.slug %}">{{ p.name }}</a></td>
+                                    <td>{{ p.category }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+        </div>
 {% endblock %}
 
 
