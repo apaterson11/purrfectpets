@@ -3,6 +3,7 @@
 
 {% extends 'purrfectpets/base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block body_block %}
 
@@ -16,10 +17,10 @@
     <div>
 
         <h1>Add new comment</h1>
-        <form method='POST'>
-            {% csrf token %}
-            {{ form.as_P}}
-            <button type='submit'>Submit</button>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form | crispy }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
         </form>
 
 
