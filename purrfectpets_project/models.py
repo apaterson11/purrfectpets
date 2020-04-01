@@ -53,7 +53,9 @@ class Pet(models.Model):
     breed = models.CharField(max_length=MAX_LENGTH, null=True)
     bio = models.TextField(max_length=1000, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    
+
+    slug = models.SlugField(max_length = MAX_LENGTH, unique = True)
+
     views = models.IntegerField
     
     awwSenders = models.ManyToManyField(User, related_name="awwSenders",blank = True)
@@ -65,6 +67,10 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Pet, self).save(*args, **kwargs)
 
 class PetPhoto(models.Model):
 

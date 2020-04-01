@@ -82,8 +82,22 @@ def other(request):
 def my_account(request):
     return render(request, 'purrfectpets_project/my_account.html')
 
-def my_pets(request):
-    return render(request, 'purrfectpets_project/my_pets.html')
+@login_required
+def my_pets(request,username):
+    
+    user = User.objects.get(username = username)
+
+    try:
+        pets = Pet.objects.get(owner = user)
+    except:
+        pets = None
+
+    if type(pets) != type(list):
+        pets = [pets]
+
+    context_dict = {'pets':pets}
+
+    return render(request, 'purrfectpets_project/my_pets.html', context=context_dict)
 	
 
 	
@@ -97,13 +111,18 @@ def pet_page(request, pet_name_slug):
         context_dict['pet'] = pet
     except pet.DoesNotExist:
         context_dict['pet'] = None
-       
+
+    try:
+        photos = PetPhoto.object.get(pet = pet)
+        context_dict['photos'] = photos
+    except:
+        context_dict['photos'] = None
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
 	
 	
-@login_required	
-def add_picture(request, pet_name_slug):
-    return  render(request, 'purrfectpets_project/add_picture.html', {'form': form})
+#@login_required	
+#def add_picture(request, pet_name_slug):
+#    return  render(request, 'purrfectpets_project/add_picture.html', {'form': form})
 	
 
 @login_required
@@ -125,13 +144,13 @@ def add_pet(request):
 
 
 @login_required
-def delete_account(request, user_id):
-    user = get_object_or_404(User, id = user_id)
+def delete_account(request, username):
+    user = get_object_or_404(User, username = username)
     if request.method == "POST":
         user.delete()
         return redirect("/purrfectpets_project/")
 
-    context_dict = {}
+    context_dict = {'username':user.username}
 
     return render(request, "purrfectpets_project/delete_account.html", context_dict)
 

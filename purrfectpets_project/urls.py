@@ -25,12 +25,12 @@ urlpatterns = [
     #path('sign_up/', views.sign_up, name='sign_up'), 
 	#path('login/', views.user_login, name='login'),
 	path('my_account/', views.my_account, name='my_account'),
-	path('my_pets/', views.my_pets, name='my_pets'),
-	path('login/my_account/my_pets/<slug:pet_name>/', views.pet_page, name = 'pet_page'),
-	path('login/my_account/my_pets/<slug:pet_name>/add_picture/', views.add_picture, name = 'add_picture'),
+	path('my_pets/<slug:username>/', views.my_pets, name='my_pets'),
+	path('my_pets/<slug:pet_name_slug>/', views.pet_page, name = 'pet_page'),
+	#path('login/my_account/my_pets/<slug:pet_name>/add_picture/', views.add_picture, name = 'add_picture'),
 	path('login/my_account/add_pet/', views.add_pet, name = 'add_pet'),
 	path('logout/', views.user_logout, name = 'logout'),
-    path('delete_account/<int:user_id>/', views.delete_account, name='delete_account')
+    path('delete_account/<slug:username>/', views.delete_account, name='delete_account')
 
     #url(r'^(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
     #url(r'^templates/(?P<category_slug>[-\w]+)/$', views.list_of_post_by_category, name='list_of_post_by_category'),

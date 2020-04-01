@@ -12,9 +12,8 @@
                 </tr>
                 {% for p in pets %}
                     <tr>
-                        <td>{{ p.name }}</td>
-                        <td>{{ p.type }}</td>
-                        <td><a href="{% url 'purrfectpets_project:add_picture' %}">Add Picture</a>
+                        <td><a href="{% url 'purrfectpets_project:pet_page' p.slug %}">{{ p.name }}</a></td>
+                        <td>{{ p.category }}</td>
                     </tr>
                 {% endfor %}
             </table>
