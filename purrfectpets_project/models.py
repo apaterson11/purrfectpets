@@ -74,7 +74,7 @@ class PetPhoto(models.Model):
 
 class Comment(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=80)
+    name = models.ForeignKey(User,on_delete=models.CASCADE, related_name="commenter", null=True)
     email = models.EmailField()
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)

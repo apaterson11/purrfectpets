@@ -2,20 +2,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
-<<<<<<< HEAD
 from purrfectpets_project.forms import UserForm, PetForm
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from .models import Post, Category, Pet, PetPhoto, Comment, User
-=======
-from purrfectpets_project.forms import UserForm
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from datetime import datetime
-from .models import Category, Pet, PetPhoto, Comment
->>>>>>> a57734088504a8c3f9b834f1b00d02af4312b94f
+from .models import Category, Pet, PetPhoto, Comment, User
 from django.views import generic
 from .forms import CommentForm
 
@@ -37,8 +28,8 @@ def contact_us(request):
 	return render(request, 'purrfectpets_project/contact_us.html', context=context_dict)
 	
 def popular_pets(request):
-	post = Post.objects.all()
-	context = {'post': post}
+	pet = Pet.objects.all()
+	context = {'pet': pet}
 	return render(request, 'purrfectpets_project/popular_pets.html', context)
 	
 def categories(request):
