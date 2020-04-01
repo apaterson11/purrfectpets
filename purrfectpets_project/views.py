@@ -152,6 +152,24 @@ def add_pet(request):
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
 
+@login_required
+def add_comment(request):
+	form = CommentForm()
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=True)
+			comment.name = User.objects.get(username=request.user.username)
+			comment.save()
+			return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
+	else:
+		print(form.errors)
+
+	template = 'purrfectpets_project/add_comment.html'
+	context_dict = {'form': form}
+	return render(request, template, context_dict)
+
+
 
 @login_required
 def delete_account(request, username):
@@ -273,24 +291,6 @@ def post_detail(request, slug):
 			"comment_form": comment_form,
 		},
 	)
-
-"""
-def add_comment(request, slug):
-	post = get_object_or_404(Post, slug=slug)
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.post = post 
-			comment.save()
-			return redirect('purrfectpets_project:post_detail', slug=post.slug)
-	else:
-		form = CommentForm()
-
-	template = 'purrfectpets_project/add_comment.html'
-	context = {'form': form}
-	return render(request, template, context)
-"""
 
 
 
