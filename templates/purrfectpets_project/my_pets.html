@@ -12,7 +12,7 @@
                 </tr>
                 {% for p in pets %}
                     <tr>
-                        <td><a href="{% url 'purrfectpets_project:pet_page' p.slug %}">{{ p.name }}</a></td>
+                        <td><a href="{% url 'purrfectpets_project:pet_page' user.username p.slug %}">{{ p.name }}</a></td>
                         <td>{{ p.category }}</td>
                     </tr>
                 {% endfor %}

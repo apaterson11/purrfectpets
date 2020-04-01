@@ -88,12 +88,10 @@ def my_pets(request,username):
     user = User.objects.get(username = username)
 
     try:
-        pets = Pet.objects.get(owner = user)
+        pets = Pet.objects.filter(owner = user)
     except:
         pets = None
 
-    if type(pets) != type(list):
-        pets = [pets]
 
     context_dict = {'pets':pets}
 
@@ -103,10 +101,13 @@ def my_pets(request,username):
 	
 
 @login_required
-def pet_page(request, pet_name_slug):
+def pet_page(request, username, pet_name_slug):
     context_dict = {}
+
+    user = User.objects.get(username=username)
+
     try:
-        pet = Pet.objects.get(slug = pet_name_slug)
+        pet = Pet.objects.get(owner = user, slug = pet_name_slug)
         
         context_dict['pet'] = pet
     except pet.DoesNotExist:
