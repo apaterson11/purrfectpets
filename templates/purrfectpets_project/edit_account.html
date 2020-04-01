@@ -7,21 +7,32 @@
         
             
  {% block body_block %}
-            <h3>Please enter your new details.</h3>
-            <form id="edit_account_form" method="post" action="{% url 'purrfectpets_project:edit_account' %}">
-                {% csrf_token %}
-                {% for hidden in form.hidden_fields %}
-                    {{hidden}}
-                {% endfor %}
-                {% for field in form.visible_fields %}
-                    {{ field.errors }}
-                    {{ field.help_text }}
-                    {{ field }}
-                {% endfor %}
-                <input type="submit" value="Submit" />
-                <br>
-                <a href="{% url 'purrfectpets_project:change_password' %}">Click here to change password.</a>
+    <div class="container">
+        <div class="center">
+             <h1>My Account</h1>
+             <div class="card" style="width:400px">
+                <h3>Please enter your new details.</h3>
+                <form id="edit_account_form" method="post" action="{% url 'purrfectpets_project:edit_account' %}">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{hidden}}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        <br>
+                        {{ field }}
+                        <br>
+                    {% endfor %}
+                    <br>
+                    <input type="submit" value="Submit" />
+                    <br>
+                    <a href="{% url 'purrfectpets_project:change_password' %}">Click here to change password.</a>
+                </form>
             </form>
+            </div>
+        </div> 
+    </div>
  {% endblock %}
 
 
