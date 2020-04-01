@@ -90,20 +90,11 @@ def my_account(request):
 def my_pets(request,username):
 	context_dict = {}
 	try:
-
 		owner = User.objects.get(username = username)
 		pets = Pet.objects.filter(owner = owner)
 		context_dict['pets'] = pets
 	except Pet.DoesNotExist:
 		context_dict['pets'] = None
-
-		
-	try:
-		photos = PetPhoto.objects.filter(pet=pets)
-		context_dict['photos'] = photos
-	except Exception as e:
-		print(e)
-		context_dict['photos'] = None
 	return render(request, 'purrfectpets_project/my_pets.html', context = context_dict)
 	
 
