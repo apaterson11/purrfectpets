@@ -83,20 +83,26 @@ def other(request):
 def my_account(request):
     return render(request, 'purrfectpets_project/my_account.html')
 
+
 @login_required
 def my_pets(request,username):
-    
-    user = User.objects.get(username = username)
+	context_dict = {}
+	try:
 
-    try:
-        pets = Pet.objects.filter(owner = user)
-    except:
-        pets = None
+		owner = User.objects.get(username = username)
+		pets = Pet.objects.filter(owner = owner)
+		context_dict['pets'] = pets
+	except Pet.DoesNotExist:
+		context_dict['pets'] = None
 
-
-    context_dict = {'pets':pets}
-
-    return render(request, 'purrfectpets_project/my_pets.html', context=context_dict)
+		
+	try:
+		photos = PetPhoto.objects.filter(pet=pets)
+		context_dict['photos'] = photos
+	except Exception as e:
+		print(e)
+		context_dict['photos'] = None
+	return render(request, 'purrfectpets_project/my_pets.html', context = context_dict)
 	
 
 	
