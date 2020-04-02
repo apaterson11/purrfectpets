@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'purrfectpets_project',
     'registration',
     'crispy_forms',
-    'django_summernote',
-    'django_feather',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
