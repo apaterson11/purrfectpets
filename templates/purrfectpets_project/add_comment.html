@@ -11,7 +11,7 @@
          <div class="col-md-5 p-lg-5 mx-auto my-5">
            
                 <div class="jumbotron text-center">
-				<p class="lead font-weight-normal">Purrfect Pets | Add Comment</p>
+				<p class="lead font-weight-normal">Add Comment for {{pet.name}}</p>
 				</div>
 		</div>
 		<div>
@@ -20,10 +20,6 @@
                 <div>
                     <form id ="add_comment_form" method="post" >
                         {% csrf_token %}
-                        {% csrf_token %}
-                        {% for hidden in form.hidden_fields %}
-                            {{hidden}}
-                        {% endfor %}
                         {% for field in form.visible_fields %}
                             {{ field.errors }}
                             {{ field.help_text }}

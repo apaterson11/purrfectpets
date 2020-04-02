@@ -242,21 +242,27 @@ def change_password(request):
         return render(request, 'purrfectpets_project/change_password.html', args)
     
 @login_required
-def add_comment(request):
+def add_comment(request, username, pet_name_slug):
     form = CommentForm()
+
+    owner = User.objects.get(username=username)
+
+    pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
+            comment.pet = pet
             comment.save()
-            return redirect('/purrfectpets_project/my_pets/' + request.user.username) # not sure what this should be 
+            return redirect('/purrfectpets_project/pet_page/'+owner.username+"/"+pet.slug+"/") # not sure what this should be 
         else:
             print(form.errors)
-    else:
-        form = CommentForm()
-        context_dict = {'form': form}
-        return render(request, 'purrfectpets_project/add_comment.html', context_dict)
+    
+
+    context_dict = {'form': form, 'pet':pet}
+    return render(request, 'purrfectpets_project/add_comment.html', context_dict)
 
 
 @login_required

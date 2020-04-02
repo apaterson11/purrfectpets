@@ -63,7 +63,7 @@
 					</div>
 
 
-                    <a href="{% url 'purrfectpets_project:add_comment' %}" class="btn btn-primary">Add Comment</a>
+                    <a href="{% url 'purrfectpets_project:add_comment' pet.owner.username pet.slug %}" class="btn btn-primary">Add Comment</a>
 
                   
                          </div>
