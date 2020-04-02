@@ -31,7 +31,7 @@
 			<ul class= "list-group-items">
 			{% for p in pets %}
 				<li class="list_group_item">
-				<a href="{% url 'purrfectpets_project: pet_page' p.owner.username p.slug %}">{{ p.name }}</a>
+				<a href="{% url 'purrfectpets_project:pet_page' p.owner.username p.slug %}">{{ p.name }}</a>
 				</li>
 			{% endfor %}
 			</ul>

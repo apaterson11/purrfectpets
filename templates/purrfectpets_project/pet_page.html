@@ -10,6 +10,10 @@
                  <div class="card" style="width:400px">
                       <div class="card-body">
                       <h4 class="card-title"><br>Name: {{ pet.name}}</h4>
+					    {% for photo in photos %}
+					
+                         <img src="/media/{{photo.photo}}" alt="{{photo.id}}" width="110" height="200"/>
+						{% endfor %}
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
                       <div>
@@ -19,9 +23,7 @@
                             {% endif %}
                        </div>
 
-                    {% for photo in photos %}
-                         <img src="/media/{{photo.photo}}" alt="{{photo.id}}"/>
-                    {% endfor %}
+                   
 
                     {% if comments %}
                          {% for comment in comments%}
