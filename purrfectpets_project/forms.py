@@ -1,5 +1,5 @@
 from django import forms
-from purrfectpets_project.models import Pet, Comment, Category
+from purrfectpets_project.models import Pet, Comment, Category, PetPhoto
 from django.contrib.auth.models import User
 
 
@@ -41,6 +41,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
         
+class PetPhotoForm(forms.ModelForm):
+    photo = forms.ImageField()
+    class Meta:
+        model = PetPhoto
+        fields = ('photo',)
 
 class CommentForm(forms.ModelForm):
     body = forms.CharField()
