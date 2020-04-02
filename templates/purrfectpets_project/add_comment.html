@@ -18,7 +18,7 @@
 
                 <h3>Add Comment</h3>
                 <div>
-                    <form id ="add_comment_form" method="post" action="/purrfectpets_project/login/my_account/add_comment/">
+                    <form id ="add_comment_form" method="post" >
                         {% csrf_token %}
                         {% csrf_token %}
                         {% for hidden in form.hidden_fields %}

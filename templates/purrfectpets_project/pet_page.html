@@ -48,14 +48,14 @@
 						{% if comments %}
 							 {% for comment in comments%}
 							 <p class="card-text">{{ comment.name}}: {{comment.body}}</p><br>
-							<p>Written by {{ comment.name }} on {{ comment.created_on }}</p>
+                                   <p>Written by {{ comment.name }} on {{ comment.created_on }}</p>
+                                   <hr>
 							{% endfor %}
 						{% else %}
 							<p>There are no comments</p>
 						{% endif %}
 					</div>
 
-                    <hr>
 
                     <a href="{% url 'purrfectpets_project:add_comment' %}" class="btn btn-primary">Add Comment</a>
 

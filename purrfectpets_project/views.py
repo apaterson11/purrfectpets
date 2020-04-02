@@ -212,17 +212,15 @@ def add_comment(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-			#comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
+            comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
             comment.save()
-            return redirect('pet_page/<slug:username>/<slug:pet_name_slug>/') # not sure what this should be 
+            return redirect('/purrfectpets_project/my_pets/' + request.user.username) # not sure what this should be 
         else:
-            return redirect('purrfectpets_project:add_comment')
-
+            print(form.errors)
     else:
         form = CommentForm()
-        args = {'form': form}
-        return render(request, 'purrfectpets_project:add_comment', args)
-
+        context_dict = {'form': form}
+        return render(request, 'purrfectpets_project/add_comment.html', context_dict)
 
 
 @login_required
@@ -317,6 +315,7 @@ class PetList(generic.ListView):
 	queryset = Pet.objects.filter(category = "DO").order_by("-created_on")
 	template_name= "dogs.html"
 
+"""
 def post_detail(request, slug):
 	template_name = 'post_detail.html'
 	pet = get_object_or_404(Post, slug=slug)
@@ -345,6 +344,7 @@ def post_detail(request, slug):
 			"comment_form": comment_form,
 		},
 	)
+"""
 
 
 
