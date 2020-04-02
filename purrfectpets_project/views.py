@@ -124,15 +124,19 @@ def pet_page(request, username, pet_name_slug):
         context_dict['comments'] = comments
     except:
         context_dict['comments'] = None
-         
 
-    print(context_dict)
+    context_dict['admirers'] = pet.awwSenders.all()
+    print(context_dict)         
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
-    
+
+
 class awwPet(View):
+
     @method_decorator(login_required)
     def get(self, request):
+        print('in get')
         pet_id = request.GET['pet_id']
+        user_id = request.GET['user_id']
         try:
             pet = Pet.objects.get(id=int(pet_id))
             
@@ -142,6 +146,8 @@ class awwPet(View):
             return HttpResponse(-1)
             
         pet.awwCount = pet.awwCount + 1
+        pet.awwSenders.add(User.objects.get(id=int(user_id)))
+
         pet.save()
         
         return HttpResponse(pet.awwCount)

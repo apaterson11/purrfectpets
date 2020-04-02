@@ -19,7 +19,9 @@
                       <div>
                             <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
                             {% if user.is_authenticated %}
-                            <button id="like_btn" data-petid="{{ pet.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
+                            {% if user not in admirers %}
+                            <button id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class="btn btn-primary btn-sm" type="button"><span data-feather="heart"></span>Aww!</button>
+                            {% endif %}
                             {% endif %}
                        </div>
 
@@ -39,7 +41,6 @@
                     <div>
                          <form id ="comment_form" method="post" action="{% url 'purrfectpets_project:add_comment'%}">
                              {{ comment_form | crispy }}
-                             {% csrf_token %}
                              {% csrf_token %}
                              {% for hidden in form.hidden_fields %}
                                  {{hidden}}

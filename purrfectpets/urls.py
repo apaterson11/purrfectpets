@@ -25,5 +25,4 @@ urlpatterns = [
     path('purrfectpets_project/', include('purrfectpets_project.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('aww_pet/', views.awwPet.as_view(), name='aww_pet'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
