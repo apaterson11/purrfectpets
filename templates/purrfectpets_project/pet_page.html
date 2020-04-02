@@ -16,14 +16,19 @@
 						{% endfor %}
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
+					  <img id="myImage" src="/static/images/aww-empty.png" style="width:25px">
                       <div>
                             <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
                             {% if user.is_authenticated %}
-                            <button id="like_btn" data-petid="{{ pet.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
+                            <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
                             {% endif %}
                        </div>
 
-                   
+					<!--
+					<button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'">Remove Aww</button>
+					-->
+						
+						
 
                     {% if comments %}
                          {% for comment in comments%}
