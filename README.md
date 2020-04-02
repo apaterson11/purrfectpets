@@ -35,3 +35,29 @@ https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon.ico
 https://getbootstrap.com/docs/4.4/assets/img/favicons/browserconfig.xml
 https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css  
 [Tango With Django 2](https://leanpub.com/tangowithdjango2/c/uofg2020-ZGF2aWRhbmRsZWlm) 
+https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_template1 
+#images used in graphics
+https://www.goodhousekeeping.com/life/pets/g4503/dogs-that-dont-shed/
+https://www.petfinder.com/dog-breeds/
+https://www.pinterest.co.uk/pin/708050372640270366/?lp=true
+https://www.cats.org.uk/adopt-a-cat/choosing-a-cat
+https://en.wiktionary.org/wiki/cat
+https://www.medicalnewstoday.com/articles/327448
+https://pets.webmd.com/cats/guide/cats-excessive-meowing
+https://www.pexels.com/search/fish/
+https://time.com/5725118/fish-with-human-like-face-tik-tok-video/
+https://www.peta.org/living/animal-companions/9-reasons-fish-sad-pets/
+https://www.dkfindout.com/uk/animals-and-nature/reptiles/
+https://www.nationalgeographic.com/animals/reptiles/group/snakes/
+https://www.telegraph.co.uk/content/dam/news/2019/08/26/EC4sL21XoAAaP_E_trans_NvBQzQNjv4BqGhFGD3OcMvc3EVqNhTDH_8PGWbtrQPyb7frkldAHrbw.jpg?imwidth=450
+https://woodgreen.org.uk/pet-advice/article/how-to-make-your-hamster-feel-at-home
+https://qualitycage.com/blogs/news/do-chinchillas-make-good-pets
+https://www.elisagenie.com/mouse-12-hydroxyeicosatetraenoic-acid-12hete-elisa-kit/
+https://en.wikipedia.org/wiki/Tarantula
+https://en.wikipedia.org/wiki/Snail
+https://www.thesprucepets.com/popular-small-bird-species-390926
+https://www.pinterest.co.uk/pin/268175352790388012/
+
+
+
+

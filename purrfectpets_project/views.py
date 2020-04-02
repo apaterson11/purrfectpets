@@ -34,6 +34,22 @@ def popular_pets(request):
     context_dict = {}
     pet_list = Pet.objects.order_by('-awwCount')[:10]
     context_dict['pets'] = pet_list
+    
+#    user=User.objects.get(username=username)
+    
+    
+#    try:
+#        pet=Pet.objects.get(owner = user, slug = pet_name)
+#        context_dict['pet']=pet
+#    except:
+#        context_dict['pet'] = None 
+#    try:
+#        photos = PetPhoto.objects.filter(pet=pet)[:1]
+#        context_dict['photos']=photos
+#    except Exception as e:
+#        print(e)
+#        context_dict['photos'] = None 
+        
     return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
 	
 def categories(request):
