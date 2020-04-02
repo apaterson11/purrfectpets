@@ -16,27 +16,52 @@
 						{% endfor %}
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
+					  <img id="myImage" src="/static/images/aww-empty.png" style="width:25px">
                       <div>
                             <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
                             {% if user.is_authenticated %}
                             {% if user not in admirers %}
-                            <button id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class="btn btn-primary btn-sm" type="button"><span data-feather="heart"></span>Aww!</button>
+                                <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
                             {% endif %}
                             {% endif %}
                        </div>
 
+					<!--
+					<button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'">Remove Aww</button>
+					-->
+					
+
+
+
+					<script>
+					function myFunction() {
+					  var x = document.getElementById("myDIV");
+					  if (x.style.display === "block") {
+						x.style.display = "none";
+					  } else {
+						x.style.display = "block";
+					  }
+					}
+					</script>
+						
+					<button onclick="myFunction()" >View Comments</button>	
+					
+					<div id="myDIV" style="display : none;">
+						{% if comments %}
+							 {% for comment in comments%}
+							 <p class="card-text">{{ comment.name}}: {{comment.body}}</p><br>
+							<p>Written by {{ comment.name }} on {{ comment.created_on }}</p>
+							{% endfor %}
+						{% else %}
+							<p>There are no comments</p>
+						{% endif %}
+					</div>
                    
-
-                    {% if comments %}
-                         {% for comment in comments%}
-                         <p class="card-text">{{ comment.name}}: {{comment.body}}</p><br>
-                        <p>Written by {{ comment.name }} on {{ comment.created_on }}</p>
-                        {% endfor %}
-                    {% else %}
-                        <p>There are no comments</p>
-                    {% endif %}
-
-                    
+				   
+				   
+					
+					
+					
                     <h3>Add new comment</h3>
                     <div>
                          <form id ="comment_form" method="post" action="{% url 'purrfectpets_project:add_comment'%}">
