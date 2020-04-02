@@ -13,7 +13,7 @@
         <ul class="list-group">
         {% for pet in pets %}
             <li class="list-group-item">
-            <a href="{{ pet.url }}">{{ pet.name }}</a>
+            <a href="{% url 'purrfectpets_project:pet_page' pet.owner.username pet.slug %}">{{ pet.name }}</a>
             </li>
         {% endfor %}
         </ul>
