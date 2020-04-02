@@ -241,6 +241,7 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'purrfectpets_project/change_password.html', args)
     
+	
 @login_required
 def add_comment(request, username, pet_name_slug):
     form = CommentForm()

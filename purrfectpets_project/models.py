@@ -78,6 +78,8 @@ class PetPhoto(models.Model):
     
     photo = models.ImageField(upload_to = 'uploads/', null=True)
 
+
+# Model for storing comments by users
 class Comment(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='comments')
     name = models.ForeignKey(User,on_delete=models.CASCADE, related_name="commenter", null=True)
@@ -85,6 +87,7 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
+    #The most recent comments are displayed first 
     class Meta:
         ordering = ["created_on"]
 
