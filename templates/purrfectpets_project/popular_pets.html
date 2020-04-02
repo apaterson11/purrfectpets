@@ -1,8 +1,7 @@
 
-<!DOCTYPE html> 
 
 {% extends 'purrfectpets_project/base.html' %}
-{% load staticfiles %}
+
 
 {% block body_block %}
 
@@ -24,21 +23,25 @@
         <img src="/static/images/Fish.jpeg" width=400px height=250px alt="Category: Fish"/>
 	-->
 
-        {% if pets %}
-            <ul>
-            {% for pet in pets %}
-                <li>
-                <a href="{{ pet.url }}">{{ pet.name }}</a>
-				<!-- 
-				
-				<img src="{{PetPhoto.photo}}">
-				-->
-                </li>
-            {% endfor %}
-            </ul>
-            {% else %}
-            <strong>There are no pets up yet! Post some yourself!</strong>
-            {% endif %}
+	<div class="card mb-6">
+            <div class="card-body">
+			<h2>Our Most <strong>Aww</strong>some Animals</h2>
+			<p class="card_text"}
+			{% if pets %}
+			<ul class= "list-group-items">
+			{% for p in pets %}
+				<li class="list_group_item">
+				<a href="{% url 'purrfectpets_project:pet_page' p.owner.username p.slug %}">{{ p.name }}</a>
+				</li>
+			{% endfor %}
+			</ul>
+			{% else %}
+			<strong> There are no pets up yet! Post some yourself!</strong>
+			{% endif %}
+			</p>
+			
+             </div>       
+
 
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
