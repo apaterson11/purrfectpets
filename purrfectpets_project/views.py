@@ -253,10 +253,10 @@ def add_comment(request, username, pet_name_slug):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
+            comment.name = User.objects.get(username=request.user.username) 
             comment.pet = pet
             comment.save()
-            return redirect('/purrfectpets_project/pet_page/'+owner.username+"/"+pet.slug+"/") # not sure what this should be 
+            return redirect('/purrfectpets_project/pet_page/'+owner.username+"/"+pet.slug+"/")  
         else:
             print(form.errors)
     
@@ -334,59 +334,12 @@ def user_logout(request):
 	logout(request) 
 	return redirect(reverse('purrfectpets_project:home'))
 
-"""
-def list_of_post_by_category(request, category_slug):
-	categories = Category.objects.all()
-	post = Post.objects.filter(status=1)
-	if category_slug:
-		category = get_object_or_404(Category, slug=category_slug)
-		post = post.filter(category=category)
-
-	context = {'categories': categories, 'post': post, 'category': category}
-
-	return render(request, 'purrfectpets_project/list_of_post_by_category.html', context)
-
-	
-def list_of_post(request):
-	post = Post.objects.filter(status=1)
-	context = {'post': post}
-	return render(request, 'purrfectpets_project/list_of_post.html', context)
-"""
 
 class PetList(generic.ListView):
 	queryset = Pet.objects.filter(category = "DO").order_by("-created_on")
 	template_name= "dogs.html"
 
-"""
-def post_detail(request, slug):
-	template_name = 'post_detail.html'
-	pet = get_object_or_404(Post, slug=slug)
-	comments = post.comments.order_by("-created_on")
-	new_comment = None
 
-	context = {'pet': pet}
-
-	if request.method == "POST":
-		comment_form = CommentForm(data=request.POST)
-		if comment_form.is_valid():
-
-			new_comment = comment_form.save(commit=False)
-			new_comment.post = post
-			new_comment.save()
-	else:
-		comment_form = CommentForm()
-
-	return render(
-		request, 
-		template_name, 
-		{
-			"pet": pet, 
-			"comments": comments, 
-			"new_comment": new_comment, 
-			"comment_form": comment_form,
-		},
-	)
-"""
 
 
 
