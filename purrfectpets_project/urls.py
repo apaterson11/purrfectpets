@@ -33,5 +33,6 @@ urlpatterns = [
     path('edit_account/', views.edit_account, name='edit_account'),
     path('edit_account/change_password', views.change_password, name='change_password'),
     path('aww_pet/', views.awwPet.as_view(), name='aww_pet'),
+    path('disaww_pet/', views.disAwwPet.as_view(), name='disaww_pet'),
     
 ]

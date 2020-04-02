@@ -134,7 +134,6 @@ class awwPet(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        print('in get')
         pet_id = request.GET['pet_id']
         user_id = request.GET['user_id']
         try:
@@ -147,6 +146,27 @@ class awwPet(View):
             
         pet.awwCount = pet.awwCount + 1
         pet.awwSenders.add(User.objects.get(id=int(user_id)))
+
+        pet.save()
+        
+        return HttpResponse(pet.awwCount)
+
+class disAwwPet(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
+        pet_id = request.GET['pet_id']
+        user_id = request.GET['user_id']
+        try:
+            pet = Pet.objects.get(id=int(pet_id))
+            
+        except Pet.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+            
+        pet.awwCount = pet.awwCount - 1
+        pet.awwSenders.remove(User.objects.get(id=int(user_id)))
 
         pet.save()
         

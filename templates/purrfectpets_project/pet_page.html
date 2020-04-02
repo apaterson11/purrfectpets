@@ -16,19 +16,25 @@
 						{% endfor %}
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
-					  <img id="myImage" src="/static/images/aww-empty.png" style="width:25px">
+                      
                       <div>
                             <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
+                            <img id="myImage" src="/static/images/aww-empty.png" style="width:25px">
+                            <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
+                            <button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'" id='unlike_btn'data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart">Remove Aww</button>
+                            <script>document.getElementById('like_btn').style.visibility = "hidden"</script>
+                            <script>document.getElementById('unlike_btn').style.visibility = "hidden"</script>
                             {% if user.is_authenticated %}
                             {% if user not in admirers %}
-                                <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
+                            <script>document.getElementById('like_btn').style.visibility = "visible"</script>
+                            {% else %}
+                            <script>document.getElementById('myImage').src='/static/images/aww-full.png'</script>
+                            <script>document.getElementById('unlike_btn').style.visibility = "visible"</script>
                             {% endif %}
                             {% endif %}
+
                        </div>
 
-					<!--
-					<button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'">Remove Aww</button>
-					-->
 					
 
 
