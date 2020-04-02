@@ -34,6 +34,22 @@ def popular_pets(request):
     context_dict = {}
     pet_list = Pet.objects.order_by('-awwCount')[:10]
     context_dict['pets'] = pet_list
+    
+#    user=User.objects.get(username=username)
+    
+    
+#    try:
+#        pet=Pet.objects.get(owner = user, slug = pet_name)
+#        context_dict['pet']=pet
+#    except:
+#        context_dict['pet'] = None 
+#    try:
+#        photos = PetPhoto.objects.filter(pet=pet)[:1]
+#        context_dict['photos']=photos
+#    except Exception as e:
+#        print(e)
+#        context_dict['photos'] = None 
+        
     return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
 	
 def categories(request):
@@ -231,10 +247,10 @@ def add_comment(request):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=True)
-            comment.name = User.objects.get(username=request.user.username)
+            comment = form.save(commit=False)
+			#comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
             comment.save()
-            return redirect('purrfectpets_project:pet_page', slug=post.slug)
+            return redirect('pet_page/<slug:username>/<slug:pet_name_slug>/') # not sure what this should be 
         else:
             return redirect('purrfectpets_project:add_comment')
 

@@ -1,33 +1,40 @@
-
-<!DOCTYPE html> 
-
-{% extends 'purrfectpets/base.html' %}
+{% extends 'purrfectpets_project/base.html' %}
 {% load staticfiles %}
-{% load crispy_forms_tags %}
-
+            
 {% block body_block %}
 
-<title>Purrfect Pets | Popular Pets</title>
+<title>Purrfect Pets | Add comment</title>
+
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <p class="lead font-weight-normal">Purrfect Pets | Popular Pets</p>
-      <a class="btn btn-outline-secondary" href="{% url 'purrfectpets:categories' %}">Categories</a>
-    </div>
-    <div>
+        
+         <div class="col-md-5 p-lg-5 mx-auto my-5">
+           
+                <div class="jumbotron text-center">
+				<p class="lead font-weight-normal">Purrfect Pets | Add Comment</p>
+				</div>
+		</div>
+		<div>
 
-        <h1>Add new comment</h1>
-        <form method="post" style="margin-top: 1.3em;">
-          {{ comment_form | crispy }}
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-        </form>
+                <h3>Add Comment</h3>
+                <div>
+                    <form id ="add_comment_form" method="post" action="/purrfectpets_project/login/my_account/add_comment/">
+                        {% csrf_token %}
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                            {{hidden}}
+                        {% endfor %}
+                        {% for field in form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                        {% endfor %}
+                        
+                        <input type="submit" name="submit" value="Add Comment" />
+                    </form>
+                </div>
+		</div>
+</div>
 
-
-    </div>
-    <div class="product-device shadow-sm d-none d-md-block"></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-  </div>
-  
 
 {% endblock %}

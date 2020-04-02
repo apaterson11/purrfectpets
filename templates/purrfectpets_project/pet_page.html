@@ -37,8 +37,6 @@
 
 					
 
-
-
 					<script>
 					function myFunction() {
 					  var x = document.getElementById("myDIV");
@@ -51,7 +49,7 @@
 					</script>
 						
 					<button onclick="myFunction()" >View Comments</button>	
-					
+				<hr>
 					<div id="myDIV" style="display : none;">
 						{% if comments %}
 							 {% for comment in comments%}
@@ -62,32 +60,14 @@
 							<p>There are no comments</p>
 						{% endif %}
 					</div>
-                   
-				   
-				   
-					
-					
-					
-                    <h3>Add new comment</h3>
-                    <div>
-                         <form id ="comment_form" method="post" action="{% url 'purrfectpets_project:add_comment'%}">
-                             {{ comment_form | crispy }}
-                             {% csrf_token %}
-                             {% for hidden in form.hidden_fields %}
-                                 {{hidden}}
-                             {% endfor %}
-                             {% for field in form.visible_fields %}
-                                 {{ field.errors }}
-                                 {{ field.help_text }}
-                                 {{ field }}
-                             {% endfor %}
-                             
-                             <a href="{% url 'purrfectpets_project:add_comment'%}" class="btn btn-primary">Add Comment</a>
-                         </form>
-                     </div>
-                   
 
+                    <hr>
 
+                    <a href="{% url 'purrfectpets_project:add_comment' %}" class="btn btn-primary">Add Comment</a>
+
+                  
+                         </div>
+                   
                  </div>
             </div> 
        </div>
