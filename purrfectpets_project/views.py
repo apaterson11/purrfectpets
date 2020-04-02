@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Category, Pet, PetPhoto, Comment, User
 from django.views import generic, View
-from .forms import CommentForm
+from .forms import CommentForm, PetPhotoForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -255,16 +255,58 @@ def add_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST)
         if form.is_valid():
-                pet = form.save(commit = True)
+                pet = form.save(commit = False)
                 pet.awws = 0
                 pet.owner = User.objects.get(username=request.user.username)
                 pet.save()
+                p_p = PetPhoto.objects.get_or_create(photo=request.FILES.get("photos"))[0]
+                p_p.pet=pet
+                p_p.save()
                 return redirect('/purrfectpets_project/my_pets/' + request.user.username)
         else:
             print(form.errors)
+
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
     
+@login_required
+def add_photo(request, username, pet_name_slug):
+    form = PetPhotoForm()
+
+    owner = User.objects.get(username=username)
+
+    pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
+
+    if request.method == 'POST':
+        print(request.FILES)
+        form = PetPhotoForm(request.POST)
+        photo = request.FILES.get("photo")
+        if photo:
+            p_p = PetPhoto.objects.get_or_create(photo=request.FILES.get("photo"))[0]
+            p_p.pet=pet
+            p_p.save()
+            return redirect('/purrfectpets_project/pet_page/'+owner.username+"/"+pet.slug+"/")  
+        else:
+            print(form.errors)
+    
+
+    context_dict = {'form': form, 'pet':pet}
+    return render(request, 'purrfectpets_project/add_photo.html', context_dict)
+
+
+@login_required
+def delete_pet(request, username, pet_name_slug):
+    owner = User.objects.get(username=username)
+    pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
+    
+    if request.method == "POST":
+        pet.delete()
+        return redirect("/purrfectpets_project/my_pets/" + owner.username)
+
+    context_dict = {'pet':pet}
+
+    return render(request, "purrfectpets_project/delete_pet.html", context_dict)
+
 @login_required
 def edit_account(request):
     if request.method == "POST":
@@ -348,21 +390,26 @@ def show_category(request, category_name_slug):
     return render(request, 'purrfectpets_project/categories.html', context=context_dict)
 
 def sign_up(request):
-	registered = False
-	
-	if request.method == 'POST':
-		user_form = UserForm(request.POST)
-		
-		if user_form.is_valid():
-			user = user_form.save()
-			user.set_password(user.password)
-			user.save()
-			registered = True
-		else:
-			print(user_form.errors)
-	else:
-		user_form = UserForm()
-	return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
+
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+            
+        
+        else:
+            print(user_form.errors)
+
+
+    else:
+        user_form = UserForm()
+        return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
 
 def user_login(request):
     if request.method == 'POST':

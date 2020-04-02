@@ -2,9 +2,14 @@
 This project is a website that allows users to upload photos of their pets as well as view and rate other users' pets. The rating system we use is an awww rating. Users can give an awww to a pet they think is particular good to show support. Users are also able to leave comments on each pet's page. This project is being made for the WAD2 group project for group 7A.
 
 ## Requirements
-run command pip install -r requirments.txt 
+run command pip install -r requirments.txt
 
-
+## Built With
+* Django
+* Python
+* AJAX
+* JQuery
+* Javascript
 
 ## Authours
 * Anna Berry: 2373329B
@@ -34,9 +39,10 @@ https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg
 https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon.ico
 https://getbootstrap.com/docs/4.4/assets/img/favicons/browserconfig.xml
 https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css  
-[Tango With Django 2](https://leanpub.com/tangowithdjango2/c/uofg2020-ZGF2aWRhbmRsZWlm) 
-https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_template1 
-#images used in graphics
+[Tango With Django 2](https://leanpub.com/tangowithdjango2/c/uofg2020-ZGF2aWRhbmRsZWlm)
+https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_template1
+
+### Images Used In Graphics
 https://www.goodhousekeeping.com/life/pets/g4503/dogs-that-dont-shed/
 https://www.petfinder.com/dog-breeds/
 https://www.pinterest.co.uk/pin/708050372640270366/?lp=true
@@ -57,7 +63,6 @@ https://en.wikipedia.org/wiki/Tarantula
 https://en.wikipedia.org/wiki/Snail
 https://www.thesprucepets.com/popular-small-bird-species-390926
 https://www.pinterest.co.uk/pin/268175352790388012/
-
 
 
 
