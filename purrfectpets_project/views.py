@@ -7,10 +7,11 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Category, Pet, PetPhoto, Comment, User
-from django.views import generic
+from django.views import generic, View
 from .forms import CommentForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 
 
 def home(request):
@@ -123,9 +124,9 @@ def pet_page(request, username, pet_name_slug):
         context_dict['comments'] = comments
     except:
         context_dict['comments'] = None
-         
 
-    print(context_dict)
+    context_dict['admirers'] = pet.awwSenders.all()
+    print(context_dict)         
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
 
 
@@ -166,7 +167,6 @@ def add_pet(request):
                 pet = form.save(commit = True)
                 pet.awws = 0
                 pet.owner = User.objects.get(username=request.user.username)
-                #pet.category = Category.objects.get(name='dogs')
                 pet.save()
                 return redirect('/purrfectpets_project/my_pets/' + request.user.username)
         else:
@@ -216,12 +216,12 @@ def add_comment(request):
             comment.save()
             return redirect('pet_page/<slug:username>/<slug:pet_name_slug>/') # not sure what this should be 
         else:
-            print(form.errors)
+            return redirect('purrfectpets_project:add_comment')
 
     else:
-        template = 'purrfectpets_project/add_comment.html'
-        context_dict = {'form': form}
-        return render(request, template, context_dict)
+        form = CommentForm()
+        args = {'form': form}
+        return render(request, 'purrfectpets_project:add_comment', args)
 
 
 
