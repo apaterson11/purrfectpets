@@ -34,6 +34,22 @@ def popular_pets(request):
     context_dict = {}
     pet_list = Pet.objects.order_by('-awwCount')[:10]
     context_dict['pets'] = pet_list
+    
+#    user=User.objects.get(username=username)
+    
+    
+#    try:
+#        pet=Pet.objects.get(owner = user, slug = pet_name)
+#        context_dict['pet']=pet
+#    except:
+#        context_dict['pet'] = None 
+#    try:
+#        photos = PetPhoto.objects.filter(pet=pet)[:1]
+#        context_dict['photos']=photos
+#    except Exception as e:
+#        print(e)
+#        context_dict['photos'] = None 
+        
     return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
 	
 def categories(request):
@@ -134,7 +150,6 @@ class awwPet(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        print('in get')
         pet_id = request.GET['pet_id']
         user_id = request.GET['user_id']
         try:
@@ -147,6 +162,27 @@ class awwPet(View):
             
         pet.awwCount = pet.awwCount + 1
         pet.awwSenders.add(User.objects.get(id=int(user_id)))
+
+        pet.save()
+        
+        return HttpResponse(pet.awwCount)
+
+class disAwwPet(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
+        pet_id = request.GET['pet_id']
+        user_id = request.GET['user_id']
+        try:
+            pet = Pet.objects.get(id=int(pet_id))
+            
+        except Pet.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+            
+        pet.awwCount = pet.awwCount - 1
+        pet.awwSenders.remove(User.objects.get(id=int(user_id)))
 
         pet.save()
         
