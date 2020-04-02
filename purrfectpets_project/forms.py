@@ -17,14 +17,13 @@ class PetForm(forms.ModelForm):
  
     breed = forms.CharField(max_length=Pet.MAX_LENGTH, help_text="Please enter the breed of your pet.", required=True)
     bio = forms.CharField(max_length=1000, help_text="Tell us about your pet!")
-    photos = []
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    photos = forms.ImageField(required=False, help_text="Enter a photo of your pet")
     awws = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     
     class Meta:         #provides additional info on the form
         model = Pet
-        fields = ('name','category','breed','bio',)
+        fields = ('name','category','breed','bio','photos')
         
 class EditAccountForm(forms.ModelForm):
     username = forms.CharField(max_length=150, help_text="Edit the text to change your username.")

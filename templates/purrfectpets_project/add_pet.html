@@ -17,7 +17,7 @@
 
                 <h3>Add a Pet</h3>
                 <div>
-                    <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/">
+                    <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% csrf_token %}
                         {% for hidden in form.hidden_fields %}

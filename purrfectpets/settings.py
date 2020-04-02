@@ -61,6 +61,8 @@ LOGIN_REDIRECT_URL = 'purrfectpets_project:my_account'
 
 LOGIN_URL = 'auth_login'
 
+SIMPLE_BACKEND_REDIRECT_URL = 'purrfectpets_project:my_account'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
