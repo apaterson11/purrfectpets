@@ -12,8 +12,12 @@
                       <h4 class="card-title"><br>Name: {{ pet.name}}</h4>
                       <p class="card-text">Breed: {{ pet.breed }}</p>
                       <p class="card-text">Bio: {{ pet.bio }}<br></p>
-                      <p class="card-text">Number of awws: {{ pet.awwCount }}<br><br></p>
-                      <p class="card-text">Number of views: {{ pet.views }}</p>
+                      <div>
+                            <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
+                            {% if user.is_authenticated %}
+                            <button id="like_btn" data-petid="{{ pet.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
+                            {% endif %}
+                       </div>
 
                     {% for photo in photos %}
                          <img src="/media/{{photo.photo}}" alt="{{photo.id}}"/>
@@ -31,8 +35,8 @@
                     
                     <h3>Add new comment</h3>
                     <div>
-                         <form id ="comment_form" method="post" action="/purrfectpets_project/add_comment/">
-                              {{ comment_form | crispy }}
+                         <form id ="comment_form" method="post" action="{% url 'purrfectpets_project:add_comment'%}">
+                             {{ comment_form | crispy }}
                              {% csrf_token %}
                              {% csrf_token %}
                              {% for hidden in form.hidden_fields %}
@@ -44,7 +48,7 @@
                                  {{ field }}
                              {% endfor %}
                              
-                             <input type="submit" name="submit" value="Add comment" />
+                             <a href="{% url 'purrfectpets_project:add_comment'%}" class="btn btn-primary">Add Comment</a>
                          </form>
                      </div>
                    

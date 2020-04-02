@@ -7,10 +7,11 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .models import Category, Pet, PetPhoto, Comment, User
-from django.views import generic
+from django.views import generic, View
 from .forms import CommentForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 
 
 def home(request):
@@ -31,9 +32,10 @@ def contact_us(request):
 	return render(request, 'purrfectpets_project/contact_us.html', context=context_dict)
 	
 def popular_pets(request):
-	pet = Pet.objects.all()
-	context = {'pet': pet}
-	return render(request, 'purrfectpets_project/popular_pets.html', context)
+    context_dict = {}
+    pet_list = Pet.objects.order_by('-awwCount')
+    context_dict['pets'] = pet_list
+    return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
 	
 def categories(request):
 	context_dict = {}
@@ -127,6 +129,23 @@ def pet_page(request, username, pet_name_slug):
 
     print(context_dict)
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
+    
+class awwPet(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        pet_id = request.GET['pet_id']
+        try:
+            pet = Pet.objects.get(id=int(pet_id))
+            
+        except Pet.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+            
+        pet.awwCount = pet.awwCount + 1
+        pet.save()
+        
+        return HttpResponse(pet.awwCount)
 	
 	
 #@login_required	
@@ -143,7 +162,6 @@ def add_pet(request):
                 pet = form.save(commit = True)
                 pet.awws = 0
                 pet.owner = User.objects.get(username=request.user.username)
-                #pet.category = Category.objects.get(name='dogs')
                 pet.save()
                 return redirect('/purrfectpets_project/my_pets/' + request.user.username)
         else:
@@ -191,14 +209,14 @@ def add_comment(request):
             comment = form.save(commit=True)
             comment.name = User.objects.get(username=request.user.username)
             comment.save()
-            return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
+            return redirect('purrfectpets_project:pet_page', slug=post.slug)
         else:
-            print(form.errors)
+            return redirect('purrfectpets_project:add_comment')
 
     else:
-        template = 'purrfectpets_project/add_comment.html'
-        context_dict = {'form': form}
-        return render(request, template, context_dict)
+        form = CommentForm()
+        args = {'form': form}
+        return render(request, 'purrfectpets_project:add_comment', args)
 
 
 
