@@ -200,13 +200,18 @@ def add_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST)
         if form.is_valid():
-                pet = form.save(commit = True)
+                pet = form.save(commit = False)
                 pet.awws = 0
                 pet.owner = User.objects.get(username=request.user.username)
                 pet.save()
+                print(request.FILES)
+                p_p = PetPhoto.objects.get_or_create(photo=request.FILES.get("photos"))[0]
+                p_p.pet=pet
+                p_p.save()
                 return redirect('/purrfectpets_project/my_pets/' + request.user.username)
         else:
             print(form.errors)
+            
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
     
@@ -294,21 +299,26 @@ def show_category(request, category_name_slug):
     return render(request, 'purrfectpets_project/categories.html', context=context_dict)
 
 def sign_up(request):
-	registered = False
-	
-	if request.method == 'POST':
-		user_form = UserForm(request.POST)
-		
-		if user_form.is_valid():
-			user = user_form.save()
-			user.set_password(user.password)
-			user.save()
-			registered = True
-		else:
-			print(user_form.errors)
-	else:
-		user_form = UserForm()
-	return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
+
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+            
+        
+        else:
+            print(user_form.errors)
+
+
+    else:
+        user_form = UserForm()
+        return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
 
 def user_login(request):
     if request.method == 'POST':
