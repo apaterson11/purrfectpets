@@ -127,6 +127,29 @@ def pet_page(request, username, pet_name_slug):
 
     print(context_dict)
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
+
+
+class awwPet(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
+        print('in get')
+        pet_id = request.GET['pet_id']
+        user_id = request.GET['user_id']
+        try:
+            pet = Pet.objects.get(id=int(pet_id))
+            
+        except Pet.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+            
+        pet.awwCount = pet.awwCount + 1
+        pet.awwSenders.add(User.objects.get(id=int(user_id)))
+
+        pet.save()
+        
+        return HttpResponse(pet.awwCount)
 	
 	
 #@login_required	
@@ -188,10 +211,10 @@ def add_comment(request):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=True)
-            comment.name = User.objects.get(username=request.user.username)
+            comment = form.save(commit=False)
+			#comment.name = User.objects.get(username=request.user.username) # This is causing an indentation error 
             comment.save()
-            return redirect('/purrfectpets_project/pet_page/', slug=post.slug)
+            return redirect('pet_page/<slug:username>/<slug:pet_name_slug>/') # not sure what this should be 
         else:
             print(form.errors)
 

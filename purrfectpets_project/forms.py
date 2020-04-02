@@ -44,9 +44,10 @@ class UserForm(forms.ModelForm):
         
 
 class CommentForm(forms.ModelForm):
+    body = forms.CharField()
     class Meta:
         model = Comment
-        fields = ('name','email','body')
+        fields = ('pet','body')
 
 
 
