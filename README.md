@@ -7,6 +7,9 @@ run command pip install -r requirments.txt
 ## Deployment 
 Deployed on python anywhere at http://2297552s.pythonanywhere.com/
 
+## Testing
+To run tests run command python manage.py test purrfetpets_projects.tests in anaconda prompt.
+
 ## Built With
 * Django
 * Python
