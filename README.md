@@ -6,6 +6,10 @@ run command pip install -r requirments.txt
 
 ## Deployment 
 Deployed on python anywhere at http://2297552s.pythonanywhere.com/
+To deploy on your own machine, clone the repository and run the following commands in anaconda prompt:
+  - python manage.py makemigrations
+  - python manage.py migrate --run-syncdb
+  - python populate_purrfects.py
 
 ## Testing
 To run tests run command python manage.py test purrfectpets_project.tests in anaconda prompt.
