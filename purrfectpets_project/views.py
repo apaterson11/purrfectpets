@@ -61,42 +61,97 @@ def dogs(request):
     category = Category.objects.get(animalType='DO')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/dogs.html', context=context_dict)
+
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/dogs.html', context=context_dict)
+    return response
+
 	
 def cats(request):
     context_dict = {}
     category = Category.objects.get(animalType='CA')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/cats.html', context=context_dict)
+    
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/cats.html', context=context_dict)
+    return response
 	
 def fish(request):
     context_dict = {}
     category = Category.objects.get(animalType='FI')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/fish.html', context=context_dict)
+    
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/fish.html', context=context_dict)
+    return response
 	
 def rodents(request):
     context_dict = {}
     category = Category.objects.get(animalType='RO')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/rodents.html', context=context_dict)
+    
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/rodents.html', context=context_dict)
+    return response
 
 def reptiles(request):
     context_dict = {}
     category = Category.objects.get(animalType='RE')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/reptiles.html', context=context_dict)
+    
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/reptiles.html', context=context_dict)
+    return response
 	
 def other(request):
     context_dict = {}
     category = Category.objects.get(animalType='OT')
     pet_list = Pet.objects.filter(category=category)
     context_dict['pets'] = pet_list
-    return render(request, 'purrfectpets_project/other.html', context=context_dict)
+    
+    # Call the helper function to handle the cookies
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    
+    # Return response back to the user, updating any cookies that need changed.
+    category.views += 1
+    category.save()
+    response = render(request, 'purrfectpets_project/other.html', context=context_dict)
+    return response
 
 @login_required
 def my_account(request):
@@ -387,6 +442,29 @@ class PetList(generic.ListView):
 	template_name= "dogs.html"
 
 
+def visitor_cookie_handler(request):
+    # Get the number of visits to the site.
+    # We use the COOKIES.get() function to obtain the visits cookie.
+    # If the cookie exists, the value returned is casted to an integer.
+    # If the cookie doesn't exist, then the default value of 1 is used.
+    visits = int(get_server_side_cookie(request, 'visits', '1'))
+    last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],
+    '%Y-%m-%d %H:%M:%S')
+    # If it's been more than a day since the last visit...
+    visits = visits + 1
+        # Update the last visit cookie now that we have updated the count
+    request.session['last_visit'] = str(datetime.now())
+
+        # Update/set the visits cookie
+    request.session['visits'] = visits
+        
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val
+    return val
+    
 
 
 

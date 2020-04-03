@@ -158,5 +158,5 @@ def add_user(user, email, password, first_name, last_name):
     return u
     
 if __name__ == '__main__':
-    print('Starting Rango population script...')
+    print('Starting Purrfect Pets population script...')
     populate()
