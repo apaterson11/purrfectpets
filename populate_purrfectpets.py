@@ -25,8 +25,14 @@ def populate():
         print(user)
 
     #lists of dictionaries of animals
+    fish = [
+        {'animalType':'FI', 'name': 'Nemo', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount':2, 'bio':'He wilding.', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Dory', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Pacific blue tang fish', 'awwCount':6, 'bio':'She cannot find Nemo please help her.', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Marlin', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount': 3, 'bio':'Have you seen his son?', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Bruce', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Great white shark', 'awwCount':0, 'bio':'He too wishes to find this fish.', 'created_on':'2020-03-29'},
+        ]
     dogs = [
-        {'animalType':'DO', 'name': 'Rover', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Shih Tzu', 'awwCount':6, 'bio':'This dog belongs to Bradley Cooper.', 'created_on':'2017-02-14'},
+        {'animalType':'DO', 'name': 'Rover', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Mongrel', 'awwCount':6, 'bio':'This dog belongs to Bradley Cooper.', 'created_on':'2017-02-14'},
         {'animalType':'DO', 'name': 'Fido', 'owner': User.objects.get(username='samsepi0l'), 'breed': 'Golden Labrador', 'awwCount':3, 'bio':'My wee Fido. He has gotten so big! And he is only 4 years old. Wonderful.', 'created_on':'2020-02-14'},
         {'animalType':'DO', 'name': 'Clifford', 'owner': User.objects.get(username='samsepi0l'), 'breed': 'Red Labrador Retriever', 'awwCount':2, 'bio':'Blimey, he is massive.', 'created_on':'2020-04-01'},
         {'animalType':'DO', 'name': 'Jack-Russell', 'owner': User.objects.get(username='dandyandy'), 'breed': 'Jack Russell', 'awwCount':3, 'bio':'His name is Jack Russell. And he is a Jack Russell. Haha!', 'created_on':'2020-04-01'},
@@ -38,12 +44,6 @@ def populate():
         {'animalType':'CA', 'name': 'Maisey', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Moggy', 'awwCount':3, 'bio':'The friendliest cat you will ever meet. Has no teeth!', 'created_on':'2020-03-29'},
         {'animalType':'CA', 'name': 'Ziggy', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Siamese', 'awwCount':2, 'bio':'If you please.', 'created_on':'2020-03-29'},
         {'animalType':'CA', 'name': 'Snaps', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Ginger tabby', 'awwCount':4, 'bio':'Used to live across the road from me. I miss him!', 'created_on':'2020-03-29'},
-        ]
-    fish = [
-        {'animalType':'FI', 'name': 'Nemo', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount':2, 'bio':'He wilding.', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Dory', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Pacific blue tang fish', 'awwCount':6, 'bio':'She cannot find Nemo please help her.', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Marlin', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount': 3, 'bio':'Have you seen his son?', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Bruce', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Great white shark', 'awwCount':0, 'bio':'He too wishes to find this fish.', 'created_on':'2020-03-29'},
         ]
     reptiles = [
         {'animalType':'RE', 'name': 'Harry Potter', 'owner': User.objects.get(username='dandyandy'), 'breed': 'Horn tailed firewhizzer', 'awwCount':3, 'bio':'Weird.', 'created_on':'2020-03-29'},
