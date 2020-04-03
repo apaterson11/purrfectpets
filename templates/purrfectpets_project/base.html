@@ -93,7 +93,8 @@
 			</div>
 			
           <ul class="nav navbar-nav">
-          
+          <!-- If the users are signed they will have a different view of the navigation bar -->
+		  <!-- When signed in they will be able to access My account and logout otherwise they can login or create a new account -->
           {% if user.is_authenticated %}
              
             <li><a href="{% url 'purrfectpets_project:my_account'%}"><span class="glyphicon glyphicon-user"></span>My Account  |  </a></li>

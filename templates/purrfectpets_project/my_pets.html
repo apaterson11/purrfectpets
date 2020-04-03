@@ -14,6 +14,7 @@
                 </div>
             </div>
                     <h3>My Pets</h3>
+					<!-- If the user owns any pets a table will be created with the pet's name, type and date added -->
                     {% if pets %}
                         <table class="table table-striped" style = "width: 50%">
 						
@@ -23,6 +24,7 @@
 								<th>Date Added</th>
                             {% for p in pets %}
                                 <tr>
+								<!-- The pet's name is a link that will bring the user to the pet's page -->
                                     <td><a href="{% url 'purrfectpets_project:pet_page' user.username p.slug %}">{{ p.name }}</a></td>
                                     <td>{{ p.category }}</td>
 									<td>{{ p.created_on }}</td>
