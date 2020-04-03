@@ -18,8 +18,7 @@
                 <div>
                     <form id ="add_pet_form" method="post" action="/purrfectpets_project/login/my_account/add_pet/" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% csrf_token %}
-                        {% for hidden in form.hidden_fields %}
+                        {% for hidden in form.hidden_fields %}      
                             {{hidden}}
                         {% endfor %}
                         {% for field in form.visible_fields %}
