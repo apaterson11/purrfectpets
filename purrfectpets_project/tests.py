@@ -100,12 +100,26 @@ class test_popular_pets_view(TestCase):
 
 class test_register_view(TestCase):
 
-     def test_register_correct_template(self):
+    @classmethod
+    def setUp(self):
+        test_user = User.objects.create_user(username = 'Test', email = 'test@gmail.com', password = 'password1')
+
+        test_user.save()
+        pass
+
+    def test_register_correct_template(self):
         response = self.client.get(reverse('registration_register'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/registration_form.html')
 
+    def test_register_registers_user(self):
+        user_details = {'username' :'Test', 'email' : 'test@gmail.com', 'password' : 'password1'}
+        response = self.client.post(reverse('registration_register'), data=user_details)
+        self.assertTrue(User.objects.filter(username='Test').exists())
+
 class test_login_view(TestCase):
+
+    
 
      def test_register_correct_template(self):
         response = self.client.get(reverse('auth_login'))
@@ -122,23 +136,19 @@ class test_categories_view(TestCase):
 
 class Test_pet_views(TestCase):
 
-    def setUp(self):
-        test_user = User.objects.create_user(username = 'Test', email = 'test@gmail.com', password = 'password1')
-
-        test_user.save()
-
-        UserProfile.objects.create(user = test_user)
     
     """
     def test_list_url_accessible(self):
         response = self.client.get(reverse('purrfectpets_project:dogs'))
         self.assertEquals(response.status_code, 200)
     
+
     def test_dog_correct_template(self):
         response = self.client.get(reverse('purrfectpets_project:dogs'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/dogs.html')
     """
+    
 
 
 
