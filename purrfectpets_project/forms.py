@@ -15,6 +15,7 @@ class PetForm(forms.ModelForm):
         ('others', 'Other'),
     ]
  
+    category = forms.ModelChoiceField(help_text = "Please enter the category of your pet.", queryset = Category.objects.all())
     breed = forms.CharField(max_length=Pet.MAX_LENGTH, help_text="Please enter the breed of your pet.", required=True)
     bio = forms.CharField(max_length=1000, help_text="Tell us about your pet!")
     photos = forms.ImageField(required=False, help_text="Enter a photo of your pet")
