@@ -42,6 +42,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
         
+        
 class PetPhotoForm(forms.ModelForm):
     photo = forms.ImageField()
     class Meta:

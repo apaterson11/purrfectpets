@@ -23,6 +23,9 @@ urlpatterns = [
     path('other/', views.other, name="other"),
 	path('my_account/', views.my_account, name='my_account'),
 	path('my_pets/<slug:username>/', views.my_pets, name='my_pets'),
+    
+    # For pet related urls, we could have just used the pet id but 
+    # we thought this layout was more user friendly
 	path('pet_page/<slug:username>/<slug:pet_name_slug>/', views.pet_page, name = 'pet_page'),
     path('pet_page/<slug:username>/<slug:pet_name_slug>/', views.pet_page, name = 'home_pet_page'),
     path('add_photo/<slug:username>/<slug:pet_name_slug>/', views.add_photo, name = 'add_photo'),
