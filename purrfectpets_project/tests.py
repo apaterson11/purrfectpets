@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from purrfectpets_project.models import Category
+from purrfectpets_project.models import Category, Comment
 from purrfectpets_project import views
 import os
 import importlib
@@ -66,13 +66,6 @@ class Test_home_view(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/home.html')
 
-"""
-    def test_home_with_no_most_viewed_categories(self):
-        response = self.client.get(reverse('home'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'There are no Categories up yet!')
-        self.assertEquals(response.context['categories'], None)
-"""
 
 class test_about_us_view(TestCase):
 
@@ -117,15 +110,17 @@ class test_register_view(TestCase):
         response = self.client.post(reverse('registration_register'), data=user_details)
         self.assertTrue(User.objects.filter(username='Test').exists())
 
+    def test_logout_works(self):
+        response = self.client.post(reverse('purrfectpets_project:logout'))
+        self.assertTrue(response.context == None)
+
 class test_login_view(TestCase):
 
-    
-
-     def test_register_correct_template(self):
+    def test_register_correct_template(self):
         response = self.client.get(reverse('auth_login'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login.html')
-
+    
 
 class test_categories_view(TestCase):
 
@@ -134,20 +129,11 @@ class test_categories_view(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/categories.html')
 
-class Test_pet_views(TestCase):
 
-    
-    """
-    def test_list_url_accessible(self):
-        response = self.client.get(reverse('purrfectpets_project:dogs'))
-        self.assertEquals(response.status_code, 200)
-    
 
-    def test_dog_correct_template(self):
-        response = self.client.get(reverse('purrfectpets_project:dogs'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'purrfectpets_project/dogs.html')
-    """
+
+        
+
     
 
 
