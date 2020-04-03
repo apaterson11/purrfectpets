@@ -136,6 +136,7 @@ class Test_pet_views(TestCase):
         response = self.client.get(reverse('dogs'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/dogs.html')
+>>>>>>> b6f3576c881dda5197fdacd71c8ca20efaf0a6c6
     
 
 
