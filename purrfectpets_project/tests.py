@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from purrfectpets_project.models import Category
-from purrfectpets_project.views import home
+from purrfectpets_project import views
 import os
 import importlib
 from django.conf import settings
@@ -53,6 +53,7 @@ class General_set_up_test(TestCase):
         
         self.assertTrue(is_app_configured, f"{FAILURE_HEADER}The purrfectpets app is missing from setting's INSTALLED_APPS list.{FAILURE_FOOTER}")
 
+# Tests on views which can be accessed without calls to the models
 
 class Test_home_view(TestCase):
 
@@ -71,8 +72,52 @@ class Test_home_view(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'There are no Categories up yet!')
         self.assertEquals(response.context['categories'], None)
-
 """
+<<<<<<< HEAD
+
+class test_about_us_view(TestCase):
+
+     def test_about_us_correct_template(self):
+        response = self.client.get(reverse('purrfectpets_project:about_us'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'purrfectpets_project/about_us.html')
+
+
+class test_contact_us_view(TestCase):
+
+     def test_contact_us_correct_template(self):
+        response = self.client.get(reverse('purrfectpets_project:contact_us'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'purrfectpets_project/contact_us.html')
+
+
+class test_popular_pets_view(TestCase):
+
+     def test_popular_pets_correct_template(self):
+        response = self.client.get(reverse('purrfectpets_project:popular_pets'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'purrfectpets_project/popular_pets.html')
+
+
+
+class test_register_view(TestCase):
+
+     def test_register_correct_template(self):
+        response = self.client.get(reverse('registration_register'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/registration_form.html')
+
+class test_login_view(TestCase):
+
+     def test_register_correct_template(self):
+        response = self.client.get(reverse('auth_login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/login.html')
+
+
+
+
+=======
 """
 class test_categories_view(TestCase):
 

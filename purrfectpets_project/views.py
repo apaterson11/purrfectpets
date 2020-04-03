@@ -328,10 +328,13 @@ def change_password(request):
 def add_comment(request, username, pet_name_slug):
     form = CommentForm()
 
+	# Retrieves name of the user currently logged in 
     owner = User.objects.get(username=username)
 
+	# Retrives the name of the current pet page which is being commmented on 
     pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
 
+	# If the request is a post method then assigns comment values and saves comment 
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -343,6 +346,7 @@ def add_comment(request, username, pet_name_slug):
         else:
             print(form.errors)
     
+	# Add form input and name of pet to context dictionary 
 
     context_dict = {'form': form, 'pet':pet}
     return render(request, 'purrfectpets_project/add_comment.html', context_dict)
@@ -421,11 +425,6 @@ def user_login(request):
 def user_logout(request): 
 	logout(request) 
 	return redirect(reverse('purrfectpets_project:home'))
-
-
-class PetList(generic.ListView):
-	queryset = Pet.objects.filter(category = "DO").order_by("-created_on")
-	template_name= "dogs.html"
 
 
 def visitor_cookie_handler(request):

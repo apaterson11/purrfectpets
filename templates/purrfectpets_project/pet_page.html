@@ -76,7 +76,12 @@
 					</div>
 
 
+                    <!-- Link to comment page through 'add comment' button-->
+
                     <a href="{% url 'purrfectpets_project:add_comment' pet.owner.username pet.slug %}" class="btn btn-primary">Add Comment</a> 
+
+                    <!-- If the current pet belongs to the user then they can edit and delete the pet-->
+                    
                     {% if pet.owner == user %}
                     <a href="{% url 'purrfectpets_project:add_photo' user.username pet.slug %}" class="btn btn-primary">Add Photo</a> 
                     <a href="{% url 'purrfectpets_project:delete_pet' user.username pet.slug %}" class="btn btn-primary">Delete Pet</a>

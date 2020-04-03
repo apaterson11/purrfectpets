@@ -79,7 +79,12 @@ class PetPhoto(models.Model):
     photo = models.ImageField(upload_to = 'uploads/')
 
 
-# Model for storing comments by users
+"""
+This is a model for storing the comments made by users on the site. It stores the pet which has had a comment made of, 
+this is a foreign key which links to the Pet model. The model also stores the name of the user who made the comment, 
+the body which is the actual comment and the date which the comment was written on.
+"""
+
 class Comment(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='comments')
     name = models.ForeignKey(User,on_delete=models.CASCADE, related_name="commenter", null=True)
