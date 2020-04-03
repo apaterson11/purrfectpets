@@ -282,15 +282,19 @@ def add_photo(request, username, pet_name_slug):
 @login_required
 def delete_pet(request, username, pet_name_slug):
     owner = User.objects.get(username=username)
-    pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
-    
-    if request.method == "POST":
-        pet.delete()
-        return redirect("/purrfectpets_project/my_pets/" + owner.username)
+    current_user = User.objects.get(username=request.user.username)
+    if owner == current_user:
+        pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
+        
+        if request.method == "POST":
+            pet.delete()
+            return redirect("/purrfectpets_project/my_pets/" + owner.username)
 
-    context_dict = {'pet':pet}
+        context_dict = {'pet':pet}
 
-    return render(request, "purrfectpets_project/delete_pet.html", context_dict)
+        return render(request, "purrfectpets_project/delete_pet.html", context_dict)
+    else:
+        return redirect("/purrfectpets_project/")
 
 @login_required
 def edit_account(request):
@@ -354,12 +358,12 @@ def add_comment(request, username, pet_name_slug):
 
 @login_required
 def delete_account(request):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(User, username = request.user.username)
     if request.method == "POST":
         user.delete()
         return redirect("/purrfectpets_project/")
 
-    context_dict = {'username':user.username}
+    context_dict = {'username':request.user.username}
 
     return render(request, "purrfectpets_project/delete_account.html", context_dict)
 
