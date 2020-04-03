@@ -1,5 +1,10 @@
+// all functionality used in pet_page.html
+
 $(document).ready(function() {
 
+    // when like button is clicked it is set to hidden and the unlike button becomes visible
+    // Also passes the user id and pet id into the awwPet view get method
+    // and returns the count of the awwCount
     $('#like_btn').click(function() {
         var petIdVar, userIdVar;
         petIdVar = $(this).attr('data-petid');
@@ -15,6 +20,8 @@ $(document).ready(function() {
         }
     });
 
+
+    // reverse of like button
     $('#unlike_btn').click(function() {
         var petIdVar, userIdVar;
         petIdVar = $(this).attr('data-petid');
