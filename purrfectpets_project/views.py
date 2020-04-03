@@ -452,12 +452,9 @@ def visitor_cookie_handler(request):
     last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],
     '%Y-%m-%d %H:%M:%S')
-    # If it's been more than a day since the last visit...
     visits = visits + 1
-        # Update the last visit cookie now that we have updated the count
     request.session['last_visit'] = str(datetime.now())
 
-        # Update/set the visits cookie
     request.session['visits'] = visits
         
 def get_server_side_cookie(request, cookie, default_val=None):

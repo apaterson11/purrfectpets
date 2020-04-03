@@ -28,7 +28,6 @@
                     {% endfor %}
                     <br>
                     <input type="submit" value="Submit" class ="btn btn-primary btn-sm" />
-					<a class="btn btn-primary" href="{% url 'purrfectpets_project:pet_page' user.username pet.slug %}">Cancel</a>
                     <br>
                     <a href="{% url 'purrfectpets_project:change_password' %}">Click here to change password.</a>
                 </form>
