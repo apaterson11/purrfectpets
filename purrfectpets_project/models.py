@@ -5,6 +5,15 @@ from django.utils import timezone
 from django.urls import reverse
 
 
+# There is no UserProfile Model as all the fields that we require a user
+# to have are already met by User
+
+
+# This Model keeps track of which pets are in each Category
+# and how many views a category of pets has had
+
+# All the Categories are made during the set-up population and users
+# can never edit them
 class Category(models.Model):
     name = models.CharField(max_length=250)
     views = models.IntegerField(default=0)
@@ -45,6 +54,12 @@ class Category(models.Model):
         return self.slug
         
  
+
+# This is the key model as it holds nearly all information associated with each pet
+# Each pet has a ManyToOne relationship with a user and a category
+
+# Pets also have a store of how many times they have been Aww'ed and a ManyToMany 
+# field with all users who have already sent an Aww
 class Pet(models.Model):            
     category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default='OT', null=True)
     MAX_LENGTH = 128
@@ -72,6 +87,9 @@ class Pet(models.Model):
         self.slug = slugify(self.name)
         super(Pet, self).save(*args, **kwargs)
 
+
+# PetPhoto being its own model allows it to have a ManyToOne relationshap with Pet
+# Allowing users to add more than one image of their pet if they wish
 class PetPhoto(models.Model):
 
     pet = models.ForeignKey(Pet, on_delete = models.CASCADE, related_name="pet", parent_link = True, null=True)

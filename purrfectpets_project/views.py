@@ -155,11 +155,13 @@ def my_pets(request,username):
 	return render(request, 'purrfectpets_project/my_pets.html', context = context_dict)
 	
 
-	
+# pet page takes in parameters referring to the username of the owner and the pet slug
 def pet_page(request, username, pet_name_slug):
     context_dict = {}
 
     user = User.objects.get(username=username)
+
+    # all information for context dict is collected to be displayed on template 
 
     try:
         pet = Pet.objects.get(owner = user, slug = pet_name_slug)
@@ -185,7 +187,8 @@ def pet_page(request, username, pet_name_slug):
     print(context_dict)         
     return render(request, 'purrfectpets_project/pet_page.html', context = context_dict)
 
-
+# awwPet class get() function adds 1 aww to pet of specified Id
+# and adds the user who aww'd to the pets awwSenders list
 class awwPet(View):
 
     @method_decorator(login_required)
@@ -207,6 +210,7 @@ class awwPet(View):
         
         return HttpResponse(pet.awwCount)
 
+# Same as AwwSender but in reverse
 class disAwwPet(View):
 
     @method_decorator(login_required)
@@ -228,12 +232,8 @@ class disAwwPet(View):
         
         return HttpResponse(pet.awwCount)
 	
-	
-#@login_required	
-#def add_picture(request, pet_name_slug):
-#    return  render(request, 'purrfectpets_project/add_picture.html', {'form': form})
-	
 
+# Collects and displays add pets form
 @login_required
 def add_pet(request):
     form = PetForm()
