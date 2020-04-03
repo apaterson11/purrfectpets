@@ -4,6 +4,9 @@ This project is a website that allows users to upload photos of their pets as we
 ## Requirements
 run command pip install -r requirments.txt
 
+## Deployment 
+Deployed on python anywhere at http://2297552s.pythonanywhere.com/
+
 ## Built With
 * Django
 * Python
@@ -32,12 +35,6 @@ https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css
 https://code.jquery.com/jquery-3.4.1.slim.min.js
 https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js
 https://code.jquery.com/jquery-3.4.1.slim.min.
-https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png
-https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon-16x16.png
-https://getbootstrap.com/docs/4.4/assets/img/favicons/manifest.json
-https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg
-https://getbootstrap.com/docs/4.4/assets/img/favicons/favicon.ico
-https://getbootstrap.com/docs/4.4/assets/img/favicons/browserconfig.xml
 https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css  
 [Tango With Django 2](https://leanpub.com/tangowithdjango2/c/uofg2020-ZGF2aWRhbmRsZWlm)
 https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_template1
