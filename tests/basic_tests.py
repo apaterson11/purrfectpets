@@ -46,7 +46,7 @@ class General_set_up_test(TestCase):
         module_exists = os.path.isfile(os.path.join(self.app_dir, 'urls.py'))
         self.assertTrue(module_exists, f"{FAILURE_HEADER}The purrfectpets app's urls.py module is missing{FAILURE_FOOTER}")
     
-    def test_is_rango_app_configured(self):
+    def test_is_purrfectpets_project_app_configured(self):
         """
         Is the new purrfectpets app in INSTALLED_APPS list?
         """
