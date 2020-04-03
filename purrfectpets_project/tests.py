@@ -72,9 +72,7 @@ class Test_home_view(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'There are no Categories up yet!')
         self.assertEquals(response.context['categories'], None)
-
 """
-<<<<<<< HEAD
 
 class test_about_us_view(TestCase):
 
@@ -100,7 +98,6 @@ class test_popular_pets_view(TestCase):
         self.assertTemplateUsed(response, 'purrfectpets_project/popular_pets.html')
 
 
-
 class test_register_view(TestCase):
 
      def test_register_correct_template(self):
@@ -116,28 +113,32 @@ class test_login_view(TestCase):
         self.assertTemplateUsed(response, 'registration/login.html')
 
 
-
-
-=======
-"""
 class test_categories_view(TestCase):
 
      def test_categories_correct_template(self):
-        response = self.client.get(reverse('categories'))
+        response = self.client.get(reverse('purrfectpets_project:categories'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/categories.html')
-"""
+
 class Test_pet_views(TestCase):
 
-    def test_list_url_accessible(self):
-        response = self.client.get(reverse('dogs'))
-        self.assertEquals(response.status_code, 200)
+    def setUp(self):
+        test_user = User.objects.create_user(username = 'Test', email = 'test@gmail.com', password = 'password1')
 
+        test_user.save()
+
+        UserProfile.objects.create(user = test_user)
+    
+    """
+    def test_list_url_accessible(self):
+        response = self.client.get(reverse('purrfectpets_project:dogs'))
+        self.assertEquals(response.status_code, 200)
+    
     def test_dog_correct_template(self):
-        response = self.client.get(reverse('dogs'))
+        response = self.client.get(reverse('purrfectpets_project:dogs'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purrfectpets_project/dogs.html')
->>>>>>> b6f3576c881dda5197fdacd71c8ca20efaf0a6c6
-    
+    """
+
 
 

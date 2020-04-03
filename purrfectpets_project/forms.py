@@ -52,6 +52,8 @@ class PetPhotoForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     body = forms.CharField()
 
+    #Form only takes input for the body variable 
+
     class Meta:
         model = Comment
         fields = ('body',)
