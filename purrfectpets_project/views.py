@@ -13,11 +13,11 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 
-
+    #this view implements the dynamic list functionality
 def home(request):
     context_dict = {}	
-    category_list = Category.objects.order_by('-views')[:3]
-    pet_list = Pet.objects.order_by('-awwCount')[:3]
+    category_list = Category.objects.order_by('-views')[:3]                         #list of the top 3 most viewed categories
+    pet_list = Pet.objects.order_by('-awwCount')[:3]                                #list of the top 3 most awwed pets
     context_dict['categories'] = category_list
     context_dict['pets'] = pet_list
     return render(request, 'purrfectpets_project/home.html', context=context_dict)
@@ -30,9 +30,10 @@ def contact_us(request):
 	context_dict = {}
 	return render(request, 'purrfectpets_project/contact_us.html', context=context_dict)
 	
+    #this view displays the Awwsome Animals page 
 def popular_pets(request):
     context_dict = {}
-    pet_list = Pet.objects.order_by('-awwCount')[:10]
+    pet_list = Pet.objects.order_by('-awwCount')[:10]                           #list of the top 10 most awwed pets
     context_dict['pets'] = pet_list
         
     return render(request, 'purrfectpets_project/popular_pets.html', context=context_dict)
@@ -40,7 +41,9 @@ def popular_pets(request):
 def categories(request):
 	context_dict = {}
 	return render(request, 'purrfectpets_project/categories.html', context=context_dict)
-	
+
+'''The following pet category views use server side cookies to track how many times their pages have been viewed.'''
+
 def dogs(request):
     context_dict = {}
     category = Category.objects.get(animalType='DO')
@@ -143,6 +146,7 @@ def my_account(request):
     return render(request, 'purrfectpets_project/my_account.html')
 
 
+#this view displays the "my pets" page
 @login_required
 def my_pets(request,username):
 	context_dict = {}
@@ -210,7 +214,7 @@ class awwPet(View):
         
         return HttpResponse(pet.awwCount)
 
-# Same as AwwSender but in reverse
+# Same as awwPet but in reverse
 class disAwwPet(View):
 
     @method_decorator(login_required)
@@ -253,7 +257,8 @@ def add_pet(request):
 
     context_dict = {'form': form}
     return render(request, 'purrfectpets_project/add_pet.html', context = context_dict)
-    
+
+#this view adds a pet photo to the pet page
 @login_required
 def add_photo(request, username, pet_name_slug):
     form = PetPhotoForm()
@@ -279,10 +284,13 @@ def add_photo(request, username, pet_name_slug):
     return render(request, 'purrfectpets_project/add_photo.html', context_dict)
 
 
+#this view deletes a pet, but only if the user attempting to delete the pet is the owner of said pet
 @login_required
 def delete_pet(request, username, pet_name_slug):
     owner = User.objects.get(username=username)
     current_user = User.objects.get(username=request.user.username)
+    
+    #checks if user attempting to delete pet is the owner of said pet
     if owner == current_user:
         pet = Pet.objects.get(owner = owner, slug = pet_name_slug)
         
@@ -296,6 +304,7 @@ def delete_pet(request, username, pet_name_slug):
     else:
         return redirect("/purrfectpets_project/")
 
+#view that edits account, handles username and email
 @login_required
 def edit_account(request):
     if request.method == "POST":
@@ -311,6 +320,7 @@ def edit_account(request):
         args = {'form': form}
         return render(request, 'purrfectpets_project/edit_account.html', args)
     
+#view that changes user password
 @login_required
 def change_password(request):
     if request.method == "POST":
@@ -327,7 +337,8 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'purrfectpets_project/change_password.html', args)
     
-	
+
+#view that adds comment to pet page	
 @login_required
 def add_comment(request, username, pet_name_slug):
     form = CommentForm()
@@ -356,6 +367,7 @@ def add_comment(request, username, pet_name_slug):
     return render(request, 'purrfectpets_project/add_comment.html', context_dict)
 
 
+#view that deletes account
 @login_required
 def delete_account(request):
     user = get_object_or_404(User, username = request.user.username)
@@ -368,21 +380,22 @@ def delete_account(request):
     return render(request, "purrfectpets_project/delete_account.html", context_dict)
 
 def show_category(request, category_name_slug):
-    context_dict = {} #create a context dictionary whch we can pass to the template rendering engine
-    try: #attempt to find a category name slug with the given name
+    context_dict = {}                                                           #create a context dictionary which we can pass to the template rendering engine
+    try:                                                                        #attempt to find a category name slug with the given name
         category = Category.objects.get(slug=category_name_slug)
         
-        pets = Pet.objects.filter(category=category)  #retrieve all associated pages, filter() will return a list of page objects or an empty list
+        pets = Pet.objects.filter(category=category)                            #retrieve all associated pages, filter() will return a list of page objects or an empty list
         
-        context_dict['pets'] = pets  #add results list to template context under pages
-        context_dict['category'] = category     #and under category
+        context_dict['pets'] = pets                                             #add results list to template context under pages
+        context_dict['category'] = category                                     #and under category
     
-    except Category.DoesNotExist: #if try fails, display no category message
+    except Category.DoesNotExist:                                               #if try fails, display no category message
         context_dict['category'] = None
         context_dict['pets'] = None
     
     return render(request, 'purrfectpets_project/categories.html', context=context_dict)
 
+#view that handles sign up functionality to create a new account
 def sign_up(request):
 
     registered = False
@@ -404,7 +417,8 @@ def sign_up(request):
     else:
         user_form = UserForm()
         return render(request, 'purrfectpets_project/sign_up.html', context = {'user_form': user_form, 'registered': registered})
-
+        
+#view that handles user login
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -425,12 +439,14 @@ def user_login(request):
         return render(request, 'purrfectpets_project/login.html')
 
 
+#view that handles user logout
 @login_required 
 def user_logout(request): 
 	logout(request) 
 	return redirect(reverse('purrfectpets_project:home'))
+    
 
-
+#views that handle page view counting
 def visitor_cookie_handler(request):
     # Get the number of visits to the site.
     # We use the COOKIES.get() function to obtain the visits cookie.

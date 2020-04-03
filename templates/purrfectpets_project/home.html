@@ -19,8 +19,10 @@
         <div class="col-md-6">
             <div class="card mb-6">
                 <div class="card-body">
+                    <!-- dynamic list that shows the top 3 most viewed categories -->
                      <h2>Most Viewed Categories</h2>
                      <p class="card-text">
+                     <!-- ensures there are categories in the first place -->
                     {% if categories %}
                     <ul class="list-group">
                     {% for category in categories %}
@@ -39,10 +41,11 @@
         <div class="col-md-6">
             <div class="card mb-6">
                 <div class="card-body">
-					
+					<!-- dynamic list that shows the top 3 most awwed pets -->
 					<a href="{% url 'purrfectpets_project:popular_pets' %}"> <h2>Our Most <strong>Aww</strong>some Animals</h2></a>
                     
                     <p class="card-text">
+                    <!-- ensures there are pets in the first place -->
                     {% if pets %}
                     <ul class="list-group">
                     {% for p in pets %}
