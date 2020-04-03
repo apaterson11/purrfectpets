@@ -1,5 +1,5 @@
 from django import forms
-from purrfectpets_project.models import Pet, Comment, Category
+from purrfectpets_project.models import Pet, Comment, Category, PetPhoto
 from django.contrib.auth.models import User
 
 
@@ -19,7 +19,7 @@ class PetForm(forms.ModelForm):
     bio = forms.CharField(max_length=1000, help_text="Tell us about your pet!")
     photos = forms.ImageField(required=False, help_text="Enter a photo of your pet")
     awws = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    slug = forms.CharField(label="Please enter the category for your pet." ,widget=forms.HiddenInput(), required=False)
     
     class Meta:         #provides additional info on the form
         model = Pet
@@ -41,6 +41,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
         
+class PetPhotoForm(forms.ModelForm):
+    photo = forms.ImageField()
+    class Meta:
+        model = PetPhoto
+        fields = ('photo',)
 
 class CommentForm(forms.ModelForm):
     body = forms.CharField()

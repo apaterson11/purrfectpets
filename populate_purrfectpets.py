@@ -10,12 +10,12 @@ from django.core.files import File
 
 def populate():
     users = [               #list of users
-        {'user':'Alex', 'email':'apaterson11.ap11@gmail.com', 'password':'password', 'first_name':'Alex', 'last_name':'Paterson'},
-        {'user':'Sarah', 'email':'sarah@gmail.com', 'password':'password', 'first_name':'Sarah', 'last_name':'Paterson'},
-        {'user':'Andrew', 'email':'andrew@gmail.com', 'password':'password', 'first_name':'Andrew', 'last_name':'Paterson'},
-        {'user':'Jake', 'email':'jake@gmail.com', 'password':'password', 'first_name':'Jake', 'last_name':'Paterson'},
-        {'user':'Joe', 'email':'joe@gmail.com', 'password':'password', 'first_name':'Joe', 'last_name':'Paterson'},
-        {'user':'Beth', 'email':'beth@gmail.com', 'password':'password', 'first_name':'Beth', 'last_name':'Langlands'},
+        {'user':'pet_lover99', 'email':'pet_lover99@gmail.com', 'password':'password', 'first_name':'Alex', 'last_name':'Paterson'},
+        {'user':'john_smith_1964', 'email':'john_smith_1964@gmail.com', 'password':'password', 'first_name':'John', 'last_name':'Smith'},
+        {'user':'dandyandy', 'email':'andrew@gmail.com', 'password':'password', 'first_name':'Andrew', 'last_name':'Paterson'},
+        {'user':'surfergal62', 'email':'jake@gmail.com', 'password':'password', 'first_name':'Jake', 'last_name':'Paterson'},
+        {'user':'samsepi0l', 'email':'elliot@gmail.com', 'password':'password', 'first_name':'Elliot', 'last_name':'Alderson'},
+        {'user':'1whoknox', 'email':'bb@gmail.com', 'password':'password', 'first_name':'Heisen', 'last_name':'Berg'},
         ]
         
     for user in users:      #adds users
@@ -26,32 +26,39 @@ def populate():
 
     #lists of dictionaries of animals
     dogs = [
-        {'animalType':'DO', 'name': 'Rover', 'owner': User.objects.get(username='Beth'), 'breed': 'Shih Tzu', 'awwCount':6, 'bio':'This dog belongs to Bradley Cooper.', 'created_on':'2017-02-14'},
-        {'animalType':'DO', 'name': 'Fido', 'owner': User.objects.get(username='Joe'), 'breed': 'Golden Labrador', 'awwCount':3, 'bio':'My wee Fido. He has gotten so big! And he is only 4 years old. Wonderful.', 'created_on':'2020-02-14'},
-        {'animalType':'DO', 'name': 'Clifford', 'owner': User.objects.get(username='Joe'), 'breed': 'Red Labrador Retriever', 'awwCount':4, 'bio':'Blimey, he is massive.', 'created_on':'2020-04-01'},
+        {'animalType':'DO', 'name': 'Rover', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Shih Tzu', 'awwCount':6, 'bio':'This dog belongs to Bradley Cooper.', 'created_on':'2017-02-14'},
+        {'animalType':'DO', 'name': 'Fido', 'owner': User.objects.get(username='samsepi0l'), 'breed': 'Golden Labrador', 'awwCount':3, 'bio':'My wee Fido. He has gotten so big! And he is only 4 years old. Wonderful.', 'created_on':'2020-02-14'},
+        {'animalType':'DO', 'name': 'Clifford', 'owner': User.objects.get(username='samsepi0l'), 'breed': 'Red Labrador Retriever', 'awwCount':2, 'bio':'Blimey, he is massive.', 'created_on':'2020-04-01'},
+        {'animalType':'DO', 'name': 'Jack-Russell', 'owner': User.objects.get(username='dandyandy'), 'breed': 'Jack Russell', 'awwCount':3, 'bio':'His name is Jack Russell. And he is a Jack Russell. Haha!', 'created_on':'2020-04-01'},
+        {'animalType':'DO', 'name': 'Poppy', 'owner': User.objects.get(username='1whoknox'), 'breed': 'Old English Sheepdog', 'awwCount':4, 'bio':'From Shetland!', 'created_on':'2020-04-01'},
+        {'animalType':'DO', 'name': 'Kiwi', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Labradoodle', 'awwCount':4, 'bio':'I am really bored of typing these bios now.', 'created_on':'2020-04-01'},
         ]
     cats = [
-        {'animalType':'CA', 'name': 'Tiger', 'owner': User.objects.get(username='Sarah'), 'breed': 'Tortoiseshell tabby', 'awwCount':1, 'bio':'We used to have the kitten of this cat, but it got hit by a car. Fun! Good cat.', 'created_on':'2020-03-14'},
-        {'animalType':'CA', 'name': 'Bobo', 'owner': User.objects.get(username='Alex'), 'breed': 'Moggy', 'awwCount':3, 'bio':'The friendliest cat you will ever meet. Has no teeth!', 'created_on':'2020-03-29'},
+        {'animalType':'CA', 'name': 'Lizzie', 'owner': User.objects.get(username='john_smith_1964'), 'breed': 'Tortoiseshell tabby', 'awwCount':1, 'bio':'We used to have the kitten of this cat, but it got hit by a car. Fun! Good cat.', 'created_on':'2020-03-14'},
+        {'animalType':'CA', 'name': 'Maisey', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Moggy', 'awwCount':3, 'bio':'The friendliest cat you will ever meet. Has no teeth!', 'created_on':'2020-03-29'},
+        {'animalType':'CA', 'name': 'Ziggy', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Siamese', 'awwCount':2, 'bio':'If you please.', 'created_on':'2020-03-29'},
+        {'animalType':'CA', 'name': 'Snaps', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Ginger tabby', 'awwCount':4, 'bio':'Used to live across the road from me. I miss him!', 'created_on':'2020-03-29'},
         ]
     fish = [
-        {'animalType':'FI', 'name': 'Nemo', 'owner': User.objects.get(username='Jake'), 'breed': 'Clown Fish', 'awwCount':2, 'bio':'He wilding.', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Dory', 'owner': User.objects.get(username='Beth'), 'breed': 'Pacific blue tang fish', 'awwCount':6, 'bio':'She cannot find Nemo please help her.', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Marlin', 'owner': User.objects.get(username='Jake'), 'breed': 'Clown Fish', 'awwCount': 3, 'bio':'Have you seen his son?', 'created_on':'2020-03-29'},
-        {'animalType':'FI', 'name': 'Bruce', 'owner': User.objects.get(username='Alex'), 'breed': 'Great white shark', 'awwCount':0, 'bio':'He too wishes to find this fish.', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Nemo', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount':2, 'bio':'He wilding.', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Dory', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Pacific blue tang fish', 'awwCount':6, 'bio':'She cannot find Nemo please help her.', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Marlin', 'owner': User.objects.get(username='surfergal62'), 'breed': 'Clown Fish', 'awwCount': 3, 'bio':'Have you seen his son?', 'created_on':'2020-03-29'},
+        {'animalType':'FI', 'name': 'Bruce', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Great white shark', 'awwCount':0, 'bio':'He too wishes to find this fish.', 'created_on':'2020-03-29'},
         ]
     reptiles = [
-        {'animalType':'RE', 'name': 'Harry Potter', 'owner': User.objects.get(username='Andrew'), 'breed': 'Horn tailed firewhizzer', 'awwCount':3, 'bio':'Weird.', 'created_on':'2020-03-29'},
+        {'animalType':'RE', 'name': 'Harry Potter', 'owner': User.objects.get(username='dandyandy'), 'breed': 'Horn tailed firewhizzer', 'awwCount':3, 'bio':'Weird.', 'created_on':'2020-03-29'},
+        {'animalType':'RE', 'name': 'Paarthurnax', 'owner': User.objects.get(username='1whoknox'), 'breed': 'Komodo dragon', 'awwCount':2, 'bio':'You should avoid hurting this lizard. He is cool.', 'created_on':'2020-03-29'},
+        {'animalType':'RE', 'name': 'Kaa', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Rock Python', 'awwCount':0, 'bio':'Do NOT look him in the eyes.', 'created_on':'2020-03-29'},
         ]
     rodents = [
-        {'animalType':'RO', 'name': 'Remy', 'owner': User.objects.get(username='Sarah'), 'breed': 'Rat', 'awwCount':1, 'bio':'Remy believes anyone can cook! Which is silly, for he is a rat.', 'created_on':'2020-03-29'},
-        {'animalType':'RO', 'name': 'Brian', 'owner': User.objects.get(username='Sarah'), 'breed': 'Gerbil', 'awwCount':2, 'bio':'Our last gerbil died while we were on holiday so the people looking after him put him in our freezer. Turns out, he was still alive, but then froze to death. Unfortunate. Anyway, this is Brian. We are going on holiday soon.', 'created_on':'2020-03-29'},
+        {'animalType':'RO', 'name': 'Remy', 'owner': User.objects.get(username='dandyandy'), 'breed': 'Rat', 'awwCount':1, 'bio':'Remy believes anyone can cook! Which is silly, he is a rat.', 'created_on':'2020-03-29'},
+        {'animalType':'RO', 'name': 'Brian', 'owner': User.objects.get(username='pet_lover99'), 'breed': 'Gerbil', 'awwCount':2, 'bio':'Our last gerbil died while we were on holiday so the people looking after him put him in our freezer. Turns out, he was still alive, but then froze to death. Unfortunate. Anyway, this is Brian. We are going on holiday soon.', 'created_on':'2020-03-29'},
         ]
     other = [
         ]
     
     #list of categories
-    cats = {'dogs': {'name':'dogs', 'category': dogs, 'views': 128, 'animalType':'DO'},
+    cats = {'dogs': {'name':'dogs', 'category': dogs, 'views': 500, 'animalType':'DO'},
             'cats': {'name':'cats', 'category': cats, 'views': 64, 'animalType':'CA'}, 
             'fish': {'name':'fish', 'category': fish, 'views': 32, 'animalType':'FI'},
             'reptiles': {'name':'reptiles', 'category': reptiles, 'views': 1, 'animalType':'RE'},
@@ -74,17 +81,18 @@ def populate():
     
     #list of comments
     comments = [
-        {'pet':Pet.objects.get(name='Rover'), 'name':User.objects.get(username='Alex'), 'email': 'alex@gmail.com', 'created_on':'2017-02-14', 'body':'Nice!', 'active':True},
-        {'pet':Pet.objects.get(name='Fido'), 'name':User.objects.get(username='Sarah'), 'email': 'sarah@gmail.com', 'created_on':'2020-03-28', 'body':'Cute dog!', 'active':True},
-        {'pet':Pet.objects.get(name='Clifford'), 'name':User.objects.get(username='Andrew'), 'email': 'andrew@gmail.com', 'created_on':'2016-02-13', 'body':'Lovely content thanks for sharing.', 'active':True},
-        {'pet':Pet.objects.get(name='Tiger'), 'name':User.objects.get(username='Joe'), 'email': 'joe@gmail.com', 'created_on':'2020-02-14', 'body':'WHere am I?', 'active':True},
-        {'pet':Pet.objects.get(name='Bobo'), 'name':User.objects.get(username='Jake'), 'email': 'jake@gmail.com', 'created_on':'2020-01-29', 'body':'AAAAAAAAAAAAAAAAAAAAAAAaa', 'active':True},
-        {'pet':Pet.objects.get(name='Nemo'), 'name':User.objects.get(username='Beth'), 'email': 'beth@gmail.com', 'created_on':'2018-02-14', 'body':'haha thanks very cool', 'active':False},
+        {'pet':Pet.objects.get(name='Rover'), 'name':User.objects.get(username='pet_lover99'), 'created_on':'2017-02-14', 'body':'Nice!', 'active':True},
+        {'pet':Pet.objects.get(name='Rover'), 'name':User.objects.get(username='1whoknox'), 'created_on':'2017-02-14', 'body':'He is beautiful!', 'active':True},
+        {'pet':Pet.objects.get(name='Fido'), 'name':User.objects.get(username='john_smith_1964'), 'created_on':'2020-03-28', 'body':'Cute dog!', 'active':True},
+        {'pet':Pet.objects.get(name='Clifford'), 'name':User.objects.get(username='dandyandy'), 'created_on':'2016-02-13', 'body':'Lovely content thanks for sharing.', 'active':True},
+        {'pet':Pet.objects.get(name='Lizzie'), 'name':User.objects.get(username='samsepi0l'), 'created_on':'2020-02-14', 'body':'WHere am I?', 'active':True},
+        {'pet':Pet.objects.get(name='Maisey'), 'name':User.objects.get(username='surfergal62'), 'created_on':'2020-01-29', 'body':'AAAAAAAAAAAAAAAAAAAAAAAaa', 'active':True},
+        {'pet':Pet.objects.get(name='Nemo'), 'name':User.objects.get(username='1whoknox'), 'created_on':'2018-02-14', 'body':'haha thanks very cool', 'active':False},
         ]
     
     #adds all comments
     for dict in comments:
-        add_comment(dict['pet'], dict['name'], dict['email'], dict['created_on'], dict['body'], dict['active']) 
+        add_comment(dict['pet'], dict['name'], dict['created_on'], dict['body'], dict['active']) 
     
     #prints all comments
     for comment in Comment.objects.all():
@@ -95,9 +103,22 @@ def populate():
         {'pet':Pet.objects.get(name='Rover'), 'photo': File(open("rover.jpg",'rb'))},
         {'pet':Pet.objects.get(name='Fido'), 'photo': File(open("fido.jpg",'rb'))},
         {'pet':Pet.objects.get(name='Clifford'), 'photo': File(open("clifford.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Tiger'), 'photo': File(open("tiger.jpg",'rb'))},
-        {'pet':Pet.objects.get(name='Bobo'), 'photo': File(open("bobo.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Lizzie'), 'photo': File(open("lizzie.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Maisey'), 'photo': File(open("maisey.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Jack-Russell'), 'photo': File(open("jack-russell.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Poppy'), 'photo': File(open("poppy.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Kiwi'), 'photo': File(open("kiwi.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Ziggy'), 'photo': File(open("ziggy.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Snaps'), 'photo': File(open("snaps.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Paarthurnax'), 'photo': File(open("paarthurnax.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Harry Potter'), 'photo': File(open("harrypotter.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Kaa'), 'photo': File(open("kaa.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Remy'), 'photo': File(open("remy.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Brian'), 'photo': File(open("brian.jpg",'rb'))},
         {'pet':Pet.objects.get(name='Nemo'), 'photo': File(open("nemo.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Dory'), 'photo': File(open("dory.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Marlin'), 'photo': File(open("marlin.jpg",'rb'))},
+        {'pet':Pet.objects.get(name='Bruce'), 'photo': File(open("bruce.jpg",'rb'))},
         ]
     
     #adds all pet photos
@@ -142,9 +163,8 @@ def add_pet_photo(pet, photo):
     return p_p
    
 #method that adds comments
-def add_comment(pet, name, email, created_on, body, active):
+def add_comment(pet, name, created_on, body, active):
     com = Comment.objects.get_or_create(pet=pet, name=name, body=body, created_on = created_on)[0]
-    com.email = email
     com.active = active
     com.save()
     return com
@@ -158,5 +178,5 @@ def add_user(user, email, password, first_name, last_name):
     return u
     
 if __name__ == '__main__':
-    print('Starting Rango population script...')
+    print('Starting Purrfect Pets population script...')
     populate()

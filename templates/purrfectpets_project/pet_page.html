@@ -5,7 +5,8 @@
  {% block body_block %}
         <title>Purrfect Pets | Pet Page</title>
 
-        <div class="container">
+        <div class="container" style="margin-top:30px">
+		<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
             <div class="center">
                  <div class="card" style="width:400px">
                       <div class="card-body">
@@ -20,17 +21,19 @@
                       <div>
                             <strong id="awwCount">{{ pet.awwCount }}</strong> Awws
                             <img id="myImage" src="/static/images/aww-empty.png" style="width:25px">
-                            <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}" class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart"></span>Aww!</button>
-                            <button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'" id='unlike_btn'data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class = "btn btn-primary btn-sm" type  = "button"><span data-feather="heart">Remove Aww</button>
+                            {% if user.is_authenticated %}
+                            <button onclick="document.getElementById('myImage').src='/static/images/aww-full.png'" id="like_btn" data-petid="{{ pet.id }}" data-userid="{{ user.id }}" class = "btn btn-primary btn-sm" type  = "button">Aww!</button>
+                            <button onclick="document.getElementById('myImage').src='/static/images/aww-empty.png'" id='unlike_btn'data-petid="{{ pet.id }}" data-userid="{{ user.id }}"class = "btn btn-primary btn-sm" type  = "button">Remove Aww</button>
                             <script>document.getElementById('like_btn').style.visibility = "hidden"</script>
                             <script>document.getElementById('unlike_btn').style.visibility = "hidden"</script>
-                            {% if user.is_authenticated %}
                             {% if user not in admirers %}
                             <script>document.getElementById('like_btn').style.visibility = "visible"</script>
                             {% else %}
                             <script>document.getElementById('myImage').src='/static/images/aww-full.png'</script>
                             <script>document.getElementById('unlike_btn').style.visibility = "visible"</script>
                             {% endif %}
+                            {% else %}
+                            <a href="{% url 'auth_login' %}"class = "btn btn-primary btn-sm" type  = "button">Aww!</a>
                             {% endif %}
 
                        </div>
@@ -47,8 +50,8 @@
 					  }
 					}
 					</script>
-						
-					<button onclick="myFunction()" >View Comments</button>	
+					</br>
+					<button onclick="myFunction()" class = "btn btn-primary btn-sm" >View Comments</button>	
 				<hr>
 					<div id="myDIV" style="display : none;">
 						{% if comments %}
@@ -63,12 +66,16 @@
 					</div>
 
 
-                    <a href="{% url 'purrfectpets_project:add_comment' pet.owner.username pet.slug %}" class="btn btn-primary">Add Comment</a>
+                    <a href="{% url 'purrfectpets_project:add_comment' pet.owner.username pet.slug %}" class="btn btn-primary">Add Comment</a> 
+                    {% if pet.owner == user %}
+                    <a href="{% url 'purrfectpets_project:add_photo' user.username pet.slug %}" class="btn btn-primary">Add Photo</a> 
+                    <a href="{% url 'purrfectpets_project:delete_pet' user.username pet.slug %}" class="btn btn-primary">Delete Pet</a>
+                    {% endif %}
 
-                  
                          </div>
                    
                  </div>
             </div> 
        </div>
+	   </div>
 {% endblock %}
