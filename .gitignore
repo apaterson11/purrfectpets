@@ -8,3 +8,4 @@ thumbs.db
 migrations/
 *.cpython-37.pyc
 media/
+*.jpg
